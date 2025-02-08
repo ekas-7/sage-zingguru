@@ -8,6 +8,8 @@ import AIAssistant from '../components/Dashboard/AIAssistant';
 import Notion from '../components/Dashboard/Notion';
 import CareerPath from '../components/Dashboard/CareerPath';
 import VideoSummarizer from '../components/Dashboard/VideoSummarizer'
+import MilestonePage from '../components/Dashboard/Milestones/MilestonePage';
+import MainStudio from '../components/studio/MainStudio';
 
 // Import icons
 import { Home as HomeIcon, Cpu, Notebook, Briefcase, PlaySquare } from 'lucide-react';
@@ -47,6 +49,18 @@ const Dashboard = () => {
       icon: PlaySquare, 
       label: "Video Summarizer", 
       component: VideoSummarizer 
+    },
+    { 
+      id: "milestones", 
+      icon: PlaySquare, 
+      label: "Milestones", 
+      component: MilestonePage 
+    },
+    { 
+      id: "studio", 
+      icon: PlaySquare, 
+      label: "Studio", 
+      component: MainStudio 
     },
   ];
 
