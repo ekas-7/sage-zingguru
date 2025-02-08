@@ -4,6 +4,7 @@ import { format, addDays, isBefore, isToday, isAfter } from "date-fns";
 import {useNavigate} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import { setUrl } from "../../../store/userSlice";
+import { setActiveItem } from "../../../store/navigationSlice";
 
 function Milestones() {
   const startDate = new Date(); // Today’s Date
@@ -16,7 +17,8 @@ function Milestones() {
     console.log("url : ",url);
     
      dispatch(setUrl(url));
-     navigate('/dashboard')
+     dispatch(setActiveItem('studio'))
+    //  navigate('/dashboard')
   }
 
   return (

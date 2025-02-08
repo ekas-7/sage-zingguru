@@ -1,11 +1,13 @@
-import { Home, Cpu, Notebook, Briefcase, PlaySquare, Menu, X } from "lucide-react";
+import { Home, Cpu, Notebook, Briefcase, PlaySquare, Menu, X, Milestone, KeyboardMusic } from "lucide-react";
 import { HeaderIcon } from "./HeaderIcon";
 import { UserProfile } from "./UserProfile";
 import { useState } from "react";
 import logo from "../../assets/logo.png";
 import DarkModeToggle from "../ui/DarkModeToggle";
 
-export const Header = ({ onNavItemClick, activePage }) => {
+import { useSelector } from "react-redux";
+
+export const Header = ({ onNavItemClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   
@@ -16,8 +18,8 @@ export const Header = ({ onNavItemClick, activePage }) => {
     { id: "notion", icon: Notebook, label: "Notion" },
     { id: "career-path", icon: Briefcase, label: "Career Path" },
     { id: "video-summarizer", icon: PlaySquare, label: "Video Summarizer" },
-    { id: "milestones", icon: PlaySquare, label: "Milestones" },
-    { id: "studio", icon: PlaySquare, label: "Studio" },
+    { id: "milestones", icon: Milestone, label: "Milestones" },
+    { id: "studio", icon: KeyboardMusic, label: "Studio" },
   ];
 
   const handleNavItemClick = (id) => {
