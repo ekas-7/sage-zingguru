@@ -10,7 +10,7 @@ const AIAssistant = () => {
       
 
       <iframe
-        src="http://localhost:8501?embed=true"
+        src="https://ekas-7-streamlit-app-g4fbyx.streamlit.app/?embed=true"
         style={{ height: "100%", width: "100%", border: "none" }}
       ></iframe>
       
