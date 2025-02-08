@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import React, { useState } from "react";
 import BookShell from "./BookShell";
 import Center from "./Center";
@@ -6,43 +7,83 @@ import Checklist from "./Checklist";
 import FocusTimer from "./FocusTimer";
 import VideosURLs from '../../assets/VideosURL.json';
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.3 }
+  }
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 }
+};
+
 function MainStudio() {
   const [date, setDate] = useState(new Date());
 
   return (
     <div className="relative overflow-hidden">
-      <div className="border border-gray-200 dark:border-gray-800 rounded-2xl p-6 h-full grid grid-cols-11 grid-rows-6 gap-6 dark:bg-gray-800 ">
+      <motion.div 
+        className="border border-gray-200 dark:border-gray-800 rounded-2xl p-6 h-full grid grid-cols-11 grid-rows-6 gap-6 dark:bg-gray-800"
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+      >
         {/* Bookshelf Section */}
-        
-        <div className="col-span-3 row-span-3 bg-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl">
+        <motion.div 
+          className="col-span-3 row-span-3 bg-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl"
+          variants={itemVariants}
+          transition={{ duration: 0.5 }}
+        >
           <BookShell />
-        </div>
+        </motion.div>
 
         {/* Center Section */}
-        <div className="col-span-5 row-span-6 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-3xl shadow-lg overflow-hidden">
+        <motion.div 
+          className="col-span-5 row-span-6 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-3xl shadow-lg overflow-hidden"
+          variants={itemVariants}
+          transition={{ duration: 0.5, delay: 0.2 }}
+        >
           <Center playlist={VideosURLs} />
-        </div>
+        </motion.div>
 
-        {/* Timer Section */}
-        <div className="col-span-3 row-span-3 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl relative overflow-hidden group">
-          {/* Accent decoration */}
+        {/* Checklist Section */}
+        <motion.div 
+          className="col-span-3 row-span-3 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl relative overflow-hidden group"
+          variants={itemVariants}
+          transition={{ duration: 0.5, delay: 0.4 }}
+        >
           <div className="absolute -right-4 -bottom-4 w-24 h-24 rounded-full opacity-20 group-hover:opacity-30 transition-opacity" />
           <Checklist />
-        </div>
+        </motion.div>
 
-
-        {/* Right Column Sections */}
-        <div className="col-span-3 row-span-3 bg-gradient-to-br dark:bg-gray-900 flex justify-center items-center  rounded-3xl shadow-lg transition-all hover:shadow-xl">
+        {/* Focus Timer Section */}
+        <motion.div 
+          className="col-span-3 row-span-3 bg-gradient-to-br dark:bg-gray-900 flex justify-center items-center rounded-3xl shadow-lg transition-all hover:shadow-xl"
+          variants={itemVariants}
+          transition={{ duration: 0.5, delay: 0.6 }}
+        >
           <FocusTimer />
-        </div>
+        </motion.div>
 
-        <div className="col-span-3 row-span-3 bg-gradient-to-br flex justify-center items-center dark:bg-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl">
+        {/* Calendar Section */}
+        <motion.div 
+          className="col-span-3 row-span-3 bg-gradient-to-br flex justify-center items-center dark:bg-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl"
+          variants={itemVariants}
+          transition={{ duration: 0.5, delay: 0.8 }}
+        >
           <Calendar date={date} setDate={setDate} />
-        </div>
+        </motion.div>
 
-        {/* Overlay gradient for depth */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/0 to-white/10 dark:via-gray-900/0 dark:to-gray-900/10 pointer-events-none" />
-      </div>
+        {/* Overlay gradient */}
+        <motion.div 
+          className="absolute inset-0 bg-gradient-to-tr from-transparent via-white/0 to-white/10 dark:via-gray-900/0 dark:to-gray-900/10 pointer-events-none"
+          variants={itemVariants}
+          transition={{ duration: 0.5, delay: 1 }}
+        />
+      </motion.div>
     </div>
   );
 }

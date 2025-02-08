@@ -154,7 +154,7 @@ const VideoSummarizer = () => {
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-y-auto">
         {/* Header */}
-        <div className="flex flex-col items-start sm:flex-row sm:items-center justify-between mb-6">
+        <div className="flex flex-col items-start sm:flex-row sm:items-center justify-between mb-6 animate-fade-in-up">
           <h1 className="text-2xl font-bold dark:text-white text-left">
             Video Summarizer
           </h1>
@@ -166,7 +166,7 @@ const VideoSummarizer = () => {
         </div>
 
         {/* Video Input Section */}
-        <div className="mb-8">
+        <div className="mb-8 animate-fade-in-up delay-100">
           <div className="flex gap-2 mb-4">
             <input
               type="text"
@@ -201,7 +201,7 @@ const VideoSummarizer = () => {
             onDrop={handleDrop}
             onDragOver={handleDragOver}
             onDragLeave={handleDragLeave}
-            className={`p-6 sm:p-8 border-2 border-dashed rounded-lg text-center transition-colors ${
+            className={`p-6 sm:p-8 border-2 animate-fade-in-up delay-200 border-dashed rounded-lg text-center transition-colors ${
               isDragging
                 ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
                 : "border-gray-300 dark:border-gray-600"
@@ -219,7 +219,7 @@ const VideoSummarizer = () => {
         </div>
 
         {/* Summary Section */}
-        <div className="bg-white dark:bg-gray-700 rounded-lg p-5 sm:p-6 mb-6">
+        <div className="bg-white dark:bg-gray-700 animate-fade-in-up delay-300 rounded-lg p-5 sm:p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4 dark:text-white">
             Summary
           </h2>
@@ -237,7 +237,7 @@ const VideoSummarizer = () => {
       </div>
 
       {/* Right Sidebar - Questions Generator */}
-      <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-gray-200 dark:border-gray-700 p-6 bg-white dark:bg-gray-700">
+      <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-gray-200 dark:border-gray-700 p-6 bg-white animate-fade-in-up delay-400 dark:bg-gray-700">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-semibold dark:text-white">Questions</h2>
         </div>
