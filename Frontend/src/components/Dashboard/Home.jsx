@@ -36,7 +36,7 @@ const Home = () => {
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
-                className={`bg-[#ADFF00] p-4 rounded-lg text-center`}
+                className={`bg-[#ADFF00] p-4 rounded-3xl text-center`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}

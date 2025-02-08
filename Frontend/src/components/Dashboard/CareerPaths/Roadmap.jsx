@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent } from "./Card";
 import { Search, ChevronDown, ChevronUp, Play, CheckCircle, Clock, Lock } from 'lucide-react';
+import { ReactComponent as EmptyStateSVG } from '../../assets/empty-state.svg';
 
 const MilestoneCard = ({ milestone, index, isCompleted, isOngoing, isLocked, shouldShow }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -153,41 +154,48 @@ const Roadmap = ({ path, title }) => {
       <div className="relative">
         <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gray-200 transform -translate-x-1/2" />
 
-        {path.roadmap.map((milestone, index) => {
-          const isCompleted = index < completedMilestones;
-          const isOngoing = index === completedMilestones;
-          const isLocked = index > completedMilestones + 1;
-          const shouldShow = visibleCards.includes(index);
+        {path.roadmap.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-full">
+            <EmptyStateSVG className="w-32 h-32 mb-4" />
+            <p className="text-gray-500">No milestones available.</p>
+          </div>
+        ) : (
+          path.roadmap.map((milestone, index) => {
+            const isCompleted = index < completedMilestones;
+            const isOngoing = index === completedMilestones;
+            const isLocked = index > completedMilestones + 1;
+            const shouldShow = visibleCards.includes(index);
 
-          return (
-            <div key={milestone.milestone} className="relative mb-8">
-              <div className={`flex flex-col md:flex-row items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                <div className={`w-full md:w-5/12 p-4 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
-                  <MilestoneCard 
-                    milestone={milestone}
-                    index={index}
-                    isCompleted={isCompleted}
-                    isOngoing={isOngoing}
-                    isLocked={isLocked}
-                    shouldShow={shouldShow}
-                  />
+            return (
+              <div key={milestone.milestone} className="relative mb-8">
+                <div className={`flex flex-col md:flex-row items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  <div className={`w-full md:w-5/12 p-4 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
+                    <MilestoneCard 
+                      milestone={milestone}
+                      index={index}
+                      isCompleted={isCompleted}
+                      isOngoing={isOngoing}
+                      isLocked={isLocked}
+                      shouldShow={shouldShow}
+                    />
+                  </div>
+
+                  {/* Timeline Node */}
+                  <div className="w-full md:w-2/12 flex justify-center my-4 md:my-0">
+                    <div className={`w-4 h-4 rounded-full relative z-10 transition-all duration-500
+                      ${shouldShow ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
+                      ${isCompleted ? 'bg-green-500' : 
+                      isOngoing ? 'bg-blue-500' : 
+                      isLocked ? 'bg-gray-400' : 'bg-yellow-500'}`} 
+                    />
+                  </div>
+
+                  <div className="hidden md:block w-5/12" />
                 </div>
-
-                {/* Timeline Node */}
-                <div className="w-full md:w-2/12 flex justify-center my-4 md:my-0">
-                  <div className={`w-4 h-4 rounded-full relative z-10 transition-all duration-500
-                    ${shouldShow ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
-                    ${isCompleted ? 'bg-green-500' : 
-                    isOngoing ? 'bg-blue-500' : 
-                    isLocked ? 'bg-gray-400' : 'bg-yellow-500'}`} 
-                  />
-                </div>
-
-                <div className="hidden md:block w-5/12" />
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </div>
   );
