@@ -75,7 +75,7 @@ const Home = () => {
         <div className="lg:col-span-2 mobile-order dark:bg-[#364153] h-auto lg:h-full overflow-y-auto scrollbar-hide">
           <div className="sticky top-0 z-10 bg-[#364153] p-4">
             <div className="flex justify-end">
-              <SearchBar />
+              
             </div>
           </div>
           
