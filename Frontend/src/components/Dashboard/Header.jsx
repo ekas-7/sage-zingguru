@@ -25,7 +25,6 @@ export const Header = ({ onNavItemClick }) => {
     { id: "notion", icon: Notebook, label: "Notion" },
     { id: "career-path", icon: Briefcase, label: "Career Path" },
     { id: "video-summarizer", icon: PlaySquare, label: "Video Summarizer" },
-    { id: "milestones", icon: Milestone, label: "Milestones" },
     { id: "studio", icon: KeyboardMusic, label: "Studio" },
   ];
 

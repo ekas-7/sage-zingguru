@@ -47,19 +47,13 @@ const Dashboard = () => {
       id: "career-path", 
       icon: Briefcase, 
       label: "Career Path", 
-      component: CareerPath 
+      component: MilestonePage
     },
     { 
       id: "video-summarizer", 
       icon: PlaySquare, 
       label: "Video Summarizer", 
       component: VideoSummarizer 
-    },
-    { 
-      id: "milestones", 
-      icon: Milestone, 
-      label: "Milestones", 
-      component: MilestonePage 
     },
     { 
       id: "studio", 
