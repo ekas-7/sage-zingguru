@@ -4,6 +4,8 @@ import Center from "./Center";
 import Calendar from "./Calendar";
 import Checklist from "./Checklist";
 
+import  FocusTimer from "./FocusTimer";
+
 import VideosURLs from '../../assets/VideosURL.json';
 
 function MainStudio() {
@@ -26,6 +28,9 @@ function MainStudio() {
 
       <div className="col-span-3 row-span-3 bg-gray-400 p-4">
         <Calendar date={date} setDate={setDate} />
+      </div>
+      <div className="col-span-3 row-span-3 bg-gray-400 p-4">
+        <FocusTimer />
       </div>
 
     </div>
