@@ -1,150 +1,191 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useRef, useEffect } from 'react';
+import { Upload, FileText, Maximize2, Minimize2, X } from 'lucide-react';
 
-function BookShell() {
-  const [pdfList, setPdfList] = useState([]);
-  const [viewPdf, setViewPdf] = useState(null);
-  const [modalPosition, setModalPosition] = useState({ x: 100, y: 100 });
-  const [modalSize, setModalSize] = useState({ width: 600, height: 400 });
-  const [isDragging, setIsDragging] = useState(false);
-  const [isResizing, setIsResizing] = useState(false);
-  const [offset, setOffset] = useState({ x: 0, y: 0 });
-
+const PDFViewer = () => {
+  const [pdfs, setPdfs] = useState([]);
+  const [selectedPdf, setSelectedPdf] = useState(null);
+  const [isFrameMaximized, setIsFrameMaximized] = useState(false);
+  const [position, setPosition] = useState({ x: 100, y: 100 });
+  const [size, setSize] = useState({ width: 600, height: 400 });
   const fileInputRef = useRef(null);
+  const frameRef = useRef(null);
+  const isDraggingRef = useRef(false);
+  const isResizingRef = useRef(false);
+  const dragStartRef = useRef({ x: 0, y: 0 });
+  const resizeStartRef = useRef({ width: 0, height: 0 });
 
-  useEffect(() => {
-    const storedPdfs = JSON.parse(localStorage.getItem("pdfFiles")) || [];
-    setPdfList(storedPdfs);
-  }, []);
-
-  const handleFileChange = (event) => {
+  const handleFileUpload = (event) => {
     const file = event.target.files[0];
-    if (file && file.type === "application/pdf") {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        const newPdf = {
-          id: pdfList.length + 1,
-          name: file.name,
-          url: e.target.result,
-        };
-
-        const updatedList = [...pdfList, newPdf];
-        setPdfList(updatedList);
-        localStorage.setItem("pdfFiles", JSON.stringify(updatedList));
+    if (file && file.type === 'application/pdf') {
+      const newPdf = {
+        id: Date.now(),
+        name: file.name,
+        url: URL.createObjectURL(file)
       };
-      reader.readAsDataURL(file);
-    } else {
-      alert("Please select a valid PDF file.");
+      setPdfs([...pdfs, newPdf]);
     }
   };
 
-  const triggerFileUpload = () => {
-    fileInputRef.current.click();
+  const handlePdfSelect = (pdf) => {
+    setSelectedPdf(pdf);
+    setIsFrameMaximized(false);
   };
 
-  // Dragging Logic
-  const startDragging = (e) => {
-    setIsDragging(true);
-    setOffset({ x: e.clientX - modalPosition.x, y: e.clientY - modalPosition.y });
-
-    window.addEventListener("mousemove", onDragging);
-    window.addEventListener("mouseup", stopDragging);
+  const handleFrameClose = () => {
+    setSelectedPdf(null);
   };
 
-  const onDragging = (e) => {
-    if (!isDragging) return;
-    setModalPosition({ x: e.clientX - offset.x, y: e.clientY - offset.y });
+  const toggleFrameSize = () => {
+    setIsFrameMaximized(!isFrameMaximized);
   };
 
-  const stopDragging = () => {
-    setIsDragging(false);
-    window.removeEventListener("mousemove", onDragging);
-    window.removeEventListener("mouseup", stopDragging);
+  const handleMouseDown = (e) => {
+    if (e.target.classList.contains('drag-handle')) {
+      isDraggingRef.current = true;
+      dragStartRef.current = {
+        x: e.clientX - position.x,
+        y: e.clientY - position.y
+      };
+    }
   };
 
-  // Resizing Logic
-  const startResizing = (e) => {
-    setIsResizing(true);
-    window.addEventListener("mousemove", onResizing);
-    window.addEventListener("mouseup", stopResizing);
+  const handleResizeMouseDown = (e) => {
+    isResizingRef.current = true;
+    resizeStartRef.current = {
+      width: size.width,
+      height: size.height,
+      x: e.clientX,
+      y: e.clientY
+    };
+    e.stopPropagation();
   };
 
-  const onResizing = (e) => {
-    if (!isResizing) return;
-    setModalSize({
-      width: Math.max(300, e.clientX - modalPosition.x),
-      height: Math.max(200, e.clientY - modalPosition.y),
-    });
+  const handleMouseMove = (e) => {
+    if (isDraggingRef.current) {
+      const newX = e.clientX - dragStartRef.current.x;
+      const newY = e.clientY - dragStartRef.current.y;
+      setPosition({ x: newX, y: newY });
+    }
+    
+    if (isResizingRef.current) {
+      const deltaWidth = e.clientX - resizeStartRef.current.x;
+      const deltaHeight = e.clientY - resizeStartRef.current.y;
+      setSize({
+        width: Math.max(300, resizeStartRef.current.width + deltaWidth),
+        height: Math.max(200, resizeStartRef.current.height + deltaHeight)
+      });
+    }
   };
 
-  const stopResizing = () => {
-    setIsResizing(false);
-    window.removeEventListener("mousemove", onResizing);
-    window.removeEventListener("mouseup", stopResizing);
+  const handleMouseUp = () => {
+    isDraggingRef.current = false;
+    isResizingRef.current = false;
   };
+
+  useEffect(() => {
+    document.addEventListener('mousemove', handleMouseMove);
+    document.addEventListener('mouseup', handleMouseUp);
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove);
+      document.removeEventListener('mouseup', handleMouseUp);
+    };
+  }, []);
 
   return (
-    <div className="h-full p-4 bg-white dark:bg-gray-900 rounded-3xl shadow-md relative">
-      <h2 className="text-lg font-bold mb-4 text-center text-white p-2 rounded-2xl">
-        BookShell
-      </h2>
+    <div className="p-6">
+      <div className="mb-6">
+        <input
+          type="file"
+          accept=".pdf"
+          className="hidden"
+          ref={fileInputRef}
+          onChange={handleFileUpload}
+        />
+        <button 
+          onClick={() => fileInputRef.current.click()}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+        >
+          <Upload size={16} />
+          Upload PDF
+        </button>
+      </div>
 
-      {/* Hidden File Input */}
-      <input type="file" accept="application/pdf" onChange={handleFileChange} className="hidden" ref={fileInputRef} />
-
-      {/* Add PDF Button */}
-      <button onClick={triggerFileUpload} className="bg-[#ADFF00] text-black font-bold w-full cursor-pointer rounded-2xl p-3 ">
-        Add PDF
-      </button>
-
-      {/* PDF List */}
-      {pdfList.length > 0 && (
-        <div className="mt-4 rounded-2xl p-3 bg-gray-100 dark:bg-[#2A3445]">
-          <h3 className="text-md font-bold mb-2 text-white p-2 text-center">Your Files</h3>
-          <div className="p-2 flex flex-col gap-3">
-            {pdfList.map((pdf) => (
-              <div key={pdf.id} className="mb-1 bg-white p-2 rounded-lg cursor-pointer">
-                <button onClick={() => setViewPdf(pdf.url)} className="text-black cursor-pointer">
-                  {pdf.name}
-                </button>
-              </div>
-            ))}
-          </div>
+      <div className="bg-white rounded-lg border p-4">
+        <h2 className="text-lg font-semibold mb-4">PDF Library</h2>
+        <div>
+          {pdfs.length === 0 ? (
+            <p className="text-gray-500">No PDFs uploaded yet</p>
+          ) : (
+            <ul className="space-y-2">
+              {pdfs.map((pdf) => (
+                <li key={pdf.id}>
+                  <button
+                    className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded text-left"
+                    onClick={() => handlePdfSelect(pdf)}
+                  >
+                    <FileText size={16} />
+                    {pdf.name}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
-      )}
+      </div>
 
-      {/* PDF Modal Viewer */}
-      {viewPdf && (
+      {selectedPdf && (
         <div
-          className="fixed bg-white dark:bg-gray-900 shadow-lg rounded-3xl border overflow-hidden"
+          ref={frameRef}
+          className="fixed bg-white rounded-lg shadow-lg overflow-hidden border"
           style={{
-            top: `${modalPosition.y}px`,
-            left: `${modalPosition.x}px`,
-            width: `${modalSize.width}px`,
-            height: `${modalSize.height}px`,
-            zIndex: 1000,
-            cursor: isDragging ? "grabbing" : "grab",
+            left: isFrameMaximized ? 0 : position.x,
+            top: isFrameMaximized ? 0 : position.y,
+            width: isFrameMaximized ? '100%' : size.width,
+            height: isFrameMaximized ? '100%' : size.height,
+            zIndex: 50
           }}
         >
-          {/* Drag Header */}
-          <div className="bg-gray-200 p-2 cursor-move flex justify-between" onMouseDown={startDragging}>
-            <span className="font-bold">PDF Viewer</span>
-            <button className="text-red-500" onClick={() => setViewPdf(null)}>
-              ✖
-            </button>
+          <div 
+            className="drag-handle bg-gray-100 p-2 cursor-move flex justify-between items-center border-b"
+            onMouseDown={handleMouseDown}
+          >
+            <span className="font-medium">{selectedPdf.name}</span>
+            <div className="flex gap-2">
+              <button
+                className="p-1 hover:bg-gray-200 rounded"
+                onClick={toggleFrameSize}
+              >
+                {isFrameMaximized ? <Minimize2 size={16} /> : <Maximize2 size={16} />}
+              </button>
+              <button
+                className="p-1 hover:bg-gray-200 rounded"
+                onClick={handleFrameClose}
+              >
+                <X size={16} />
+              </button>
+            </div>
           </div>
-
-          {/* PDF Content */}
-          <iframe src={viewPdf} title="PDF Viewer" className="w-full h-full"></iframe>
-
-          {/* Resizer Handle */}
-          <div
-            className="absolute bottom-0 right-0 w-4 h-4 bg-gray-400 cursor-se-resize"
-            onMouseDown={startResizing}
-          ></div>
+          
+          <iframe
+            src={selectedPdf.url}
+            className="w-full h-full"
+            style={{ height: 'calc(100% - 40px)' }}
+            title={selectedPdf.name}
+          />
+          
+          {!isFrameMaximized && (
+            <div
+              className="absolute bottom-0 right-0 w-4 h-4 cursor-se-resize"
+              onMouseDown={handleResizeMouseDown}
+              style={{
+                background: 'linear-gradient(135deg, transparent 50%, #666 50%)'
+              }}
+            />
+          )}
         </div>
       )}
     </div>
   );
-}
+};
 
-export default BookShell;
+export default PDFViewer;

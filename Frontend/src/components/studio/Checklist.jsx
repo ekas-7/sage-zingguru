@@ -56,7 +56,7 @@ const Checklist = () => {
       {/* Checklist Items */}
       <ul className="list-disc pl-5">
         {items.map((item) => (
-          <li key={item.id} className="text-gray-600 dark:text-gray-300">
+          <li key={item.id} className="text-gray-600 dark:text-gray-300 list-none">
             <input
               type="checkbox"
               checked={item.status}
