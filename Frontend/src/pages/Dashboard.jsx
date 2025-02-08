@@ -8,13 +8,20 @@ import AIAssistant from '../components/Dashboard/AIAssistant';
 import Notion from '../components/Dashboard/Notion';
 import CareerPath from '../components/Dashboard/CareerPath';
 import VideoSummarizer from '../components/Dashboard/VideoSummarizer'
+import MilestonePage from '../components/Dashboard/Milestones/MilestonePage';
+import MainStudio from '../components/studio/MainStudio';
+
+import { useSelector,useDispatch } from 'react-redux';
+import { setActiveItem } from '../store/navigationSlice';
 
 // Import icons
-import { Home as HomeIcon, Cpu, Notebook, Briefcase, PlaySquare } from 'lucide-react';
+import { Home as HomeIcon, Cpu, Notebook, Briefcase, PlaySquare,Milestone, KeyboardMusic } from 'lucide-react';
 
 const Dashboard = () => {
   // State to keep track of the current active page
-  const [activePage, setActivePage] = useState('home');
+  // const [activePage, setActivePage] = useState('home');
+  const activePage = useSelector((state) => state.navigation.activeItem);
+  const dispatch = useDispatch()
 
   // Navigation items with components
   const navItems = [
@@ -48,6 +55,18 @@ const Dashboard = () => {
       label: "Video Summarizer", 
       component: VideoSummarizer 
     },
+    { 
+      id: "milestones", 
+      icon: Milestone, 
+      label: "Milestones", 
+      component: MilestonePage 
+    },
+    { 
+      id: "studio", 
+      icon: KeyboardMusic, 
+      label: "Studio", 
+      component: MainStudio 
+    },
   ];
 
   // Find the current page component
@@ -58,8 +77,8 @@ const Dashboard = () => {
       {/* Header (Fixed at the Top) with page change functionality */}
       <nav className="fixed w-full top-0 z-50">
         <Header 
-          onNavItemClick={(id) => setActivePage(id)} 
-          activePage={activePage} 
+          onNavItemClick={(id) => dispatch(setActiveItem(id))} 
+          // activePage={activePage} 
         />
       </nav>
 
@@ -73,12 +92,11 @@ const Dashboard = () => {
         </div>
       </div>
 
-
       {/* Bottom Navigation (Fixed at Bottom) */}
       <BottomNav 
-        navItems={navItems} 
-        activePage={activePage} 
-        setActivePage={setActivePage} 
+        // navItems={navItems} 
+        // activePage={activePage} 
+        // setActivePage={setActivePage} 
       />
     </div>
   );
