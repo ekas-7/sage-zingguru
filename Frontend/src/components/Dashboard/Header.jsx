@@ -8,6 +8,8 @@ import DarkModeToggle from "../ui/DarkModeToggle";
 export const Header = ({ onNavItemClick, activePage }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const extension = {}
+
   const navItems = [
     { id: "home", icon: Home, label: "Home" },
     { id: "ai-assistant", icon: Cpu, label: "AI Assistant" },
@@ -59,6 +61,10 @@ export const Header = ({ onNavItemClick, activePage }) => {
           <div className="pr-5 flex justify-center items-center">
             <DarkModeToggle />
           </div>
+        </div>
+        
+        <div className="pr-5 text-xl cursor-pointer" onClick={extension()}>
+        <i className="ri-puzzle-line"></i>
         </div>
 
         {/* Mobile Menu */}
