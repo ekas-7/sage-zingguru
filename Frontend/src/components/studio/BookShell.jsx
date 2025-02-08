@@ -83,8 +83,8 @@ function BookShell() {
   };
 
   return (
-    <div className="h-full p-4 bg-white rounded-lg shadow-md relative">
-      <h2 className="text-lg font-bold mb-4 bg-black text-center text-white p-2 rounded-lg">
+    <div className="h-full p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md relative">
+      <h2 className="text-lg font-bold mb-4 text-center text-white p-2 rounded-2xl">
         BookShell
       </h2>
 
@@ -92,7 +92,7 @@ function BookShell() {
       <input type="file" accept="application/pdf" onChange={handleFileChange} className="hidden" ref={fileInputRef} />
 
       {/* Add PDF Button */}
-      <button onClick={triggerFileUpload} className="bg-blue-500 text-white w-full cursor-pointer px-4 py-2 rounded hover:bg-blue-600">
+      <button onClick={triggerFileUpload} className="bg-blue-500 text-white w-full cursor-pointer rounded-2xl p-3 hover:bg-blue-600">
         Add PDF
       </button>
 

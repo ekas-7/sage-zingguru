@@ -1,49 +1,81 @@
 import React from "react";
+import { Play, CheckCircle, Circle } from "lucide-react";
+import { useSelector } from "react-redux";
 
-function Playlist({ playlist, playVideo }) {
+function Playlist({ playlist, playVideo, completedVideos }) {
+  const currentVideo = useSelector((state) => state.user.url);
+
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md w-full h-1/2 overflow-hidden">
-      <h2 className="text-lg font-bold mb-4 bg-black text-white p-2 rounded-lg">
-        Playlist
-      </h2>
+    <div className="p-4 bg-white dark:bg-gray-900 rounded-xl shadow-md w-full max-h-full overflow-hidden">
+      {/* Playlist Header */}
+      <div className="flex items-center justify-between mb-4">
+        <h2 className="text-lg font-bold text-gray-800 dark:text-white">
+          Course Content
+        </h2>
+        <span className="text-sm text-gray-500 dark:text-gray-400">
+          {playlist.length} {playlist.length === 1 ? "lesson" : "lessons"}
+        </span>
+      </div>
 
-      <div className="h-[80%] overflow-y-auto scrollbar-thin scrollbar-thumb-gray-400 scrollbar-track-gray-200 space-y-4 pb-2">
+      {/* Video List */}
+      <div className="h-[75%] overflow-y-auto pr-2 custom-scrollbar">
         {playlist && playlist.length > 0 ? (
           playlist.map((item, index) => {
-            const videoId = new URL(item.url).searchParams.get("v"); // Extract video ID
+            const videoId = new URL(item.url).searchParams.get("v");
             const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/mqdefault.jpg`;
+            const isPlaying = item.url === currentVideo;
+            const isCompleted = completedVideos.includes(item.url);
+            const progress = isCompleted ? 100 : Math.floor(Math.random() * 80); // Simulated progress
 
             return (
               <div
                 key={index}
-                className="flex items-center p-2 bg-gray-100 rounded-lg shadow-md hover:bg-gray-200 transition"
+                onClick={() => playVideo(item.url)}
+                className={`flex flex-col p-3 rounded-lg transition cursor-pointer
+                  ${isPlaying ? "bg-blue-100 dark:bg-gray-800" : "hover:bg-gray-100 dark:hover:bg-gray-800"}`}
               >
-                {/* Video Thumbnail */}
-                <img
-                  src={thumbnailUrl}
-                  alt="Thumbnail"
-                  className="w-16 h-10 rounded-md mr-3"
-                />
+                {/* Video Row */}
+                <div className="flex items-center">
+                  {/* Thumbnail */}
+                  <img
+                    src={thumbnailUrl}
+                    alt="Thumbnail"
+                    className="w-16 h-10 rounded-md mr-3"
+                  />
 
-                {/* Video Title (Shortened) */}
-                <div className="flex-1 overflow-hidden">
-                  <span className="text-sm font-medium block truncate">
-                    {videoId}
+                  {/* Video Info */}
+                  <div className="flex-1 truncate">
+                    <p className="text-sm font-medium text-gray-800 dark:text-white truncate">
+                      {item.title || `Lesson ${index + 1}`}
+                    </p>
+                    <span className="text-xs text-gray-500 dark:text-gray-400">
+                      {videoId}
+                    </span>
+                  </div>
+
+                  {/* Completion Status */}
+                  <span className={`p-2 rounded-full transition-all 
+                    ${isCompleted ? "text-green-500" : "text-gray-400 dark:text-gray-500"}`}
+                  >
+                    {isCompleted ? <CheckCircle className="w-5 h-5" /> : <Circle className="w-5 h-5" />}
                   </span>
                 </div>
 
-                {/* Play Button */}
-                <button
-                  className="bg-blue-500 text-white px-3 py-1 text-xs rounded hover:bg-blue-600"
-                  onClick={() => playVideo(item.url)}
-                >
-                  Play
-                </button>
+                {/* Progress Bar */}
+                <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-md mt-2 overflow-hidden">
+                  <div
+                    className="h-full bg-blue-500 transition-all"
+                    style={{ width: `${progress}%` }}
+                  />
+                </div>
               </div>
             );
           })
         ) : (
-          <p className="text-gray-500 text-sm">No videos added yet.</p>
+          <div className="flex flex-col items-center text-gray-500 dark:text-gray-400 py-4">
+            <Circle className="w-10 h-10 mb-2" />
+            <p className="text-sm">No videos added yet.</p>
+          </div>
         )}
       </div>
     </div>
