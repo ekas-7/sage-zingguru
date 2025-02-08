@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 
-function Checklist() {
+const Checklist = () => {
   const [items, setItems] = useState([]);
   const [newItem, setNewItem] = useState("");
 
@@ -33,8 +33,8 @@ function Checklist() {
   };
 
   return (
-    <div className="p-4 bg-white rounded-lg shadow-md h-full">
-      <h2 className="text-lg font-bold mb-2">Checklist</h2>
+    <div className="bg-white h-full dark:bg-gray-800 rounded-3xl shadow-lg p-6 transition-all hover:shadow-xl">
+      <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-4">Checklist</h2>
       
       {/* Input and Button to Add New Checklist Item */}
       <div className="flex gap-2 mb-4">
@@ -43,7 +43,7 @@ function Checklist() {
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
           placeholder="Enter new item..."
-          className="border p-2 rounded w-full"
+          className="border p-2 dark:text-white rounded w-full"
         />
         <button
           onClick={addChecklistItem}
@@ -54,9 +54,9 @@ function Checklist() {
       </div>
 
       {/* Checklist Items */}
-      <ul>
+      <ul className="list-disc pl-5">
         {items.map((item) => (
-          <li key={item.id} className="flex items-center mb-2">
+          <li key={item.id} className="text-gray-600 dark:text-gray-300">
             <input
               type="checkbox"
               checked={item.status}
@@ -71,6 +71,6 @@ function Checklist() {
       </ul>
     </div>
   );
-}
+};
 
 export default Checklist;

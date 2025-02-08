@@ -83,8 +83,8 @@ function BookShell() {
   };
 
   return (
-    <div className="h-full p-4 bg-white rounded-lg shadow-md relative">
-      <h2 className="text-lg font-bold mb-4 bg-black text-center text-white p-2 rounded-lg">
+    <div className="h-full p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md relative">
+      <h2 className="text-lg font-bold mb-4 text-center text-white p-2 rounded-2xl">
         BookShell
       </h2>
 
@@ -92,14 +92,14 @@ function BookShell() {
       <input type="file" accept="application/pdf" onChange={handleFileChange} className="hidden" ref={fileInputRef} />
 
       {/* Add PDF Button */}
-      <button onClick={triggerFileUpload} className="bg-blue-500 text-white w-full cursor-pointer px-4 py-2 rounded hover:bg-blue-600">
+      <button onClick={triggerFileUpload} className="bg-blue-500 text-white w-full cursor-pointer rounded-2xl p-3 hover:bg-blue-600">
         Add PDF
       </button>
 
       {/* PDF List */}
       {pdfList.length > 0 && (
-        <div className="mt-4 border rounded-lg bg-gray-100">
-          <h3 className="text-md font-bold mb-2 bg-black text-white p-2 text-center">Your Files</h3>
+        <div className="mt-4 rounded-2xl p-3 bg-gray-100 dark:bg-[#2A3445]">
+          <h3 className="text-md font-bold mb-2 text-white p-2 text-center">Your Files</h3>
           <div className="p-2 flex flex-col gap-3">
             {pdfList.map((pdf) => (
               <div key={pdf.id} className="mb-1 bg-white p-2 rounded-lg cursor-pointer">
@@ -115,7 +115,7 @@ function BookShell() {
       {/* PDF Modal Viewer */}
       {viewPdf && (
         <div
-          className="fixed bg-white shadow-lg rounded-lg border overflow-hidden"
+          className="fixed bg-white dark:bg-gray-900 shadow-lg rounded-3xl border overflow-hidden"
           style={{
             top: `${modalPosition.y}px`,
             left: `${modalPosition.x}px`,

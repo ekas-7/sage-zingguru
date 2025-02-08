@@ -382,12 +382,7 @@ const MeditationWidget = () => {
         </button>
 
         {/* Stop Button */}
-        <button
-          onClick={handleStop}
-          className="mt-2 px-6 py-2 bg-red-500 hover:bg-red-600 rounded-full text-white font-medium transition-colors"
-        >
-          Stop
-        </button>
+        
       </div>
     </WidgetContainer>
   );

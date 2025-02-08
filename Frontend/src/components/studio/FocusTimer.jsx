@@ -75,13 +75,13 @@ const FocusTimer = () => {
 
   return (
     <div className={`transition-all duration-300 ${isFullscreen ? 'fixed inset-0 bg-black/95 flex items-center justify-center' : ''}`}>
-      <div className="w-full max-w-md mx-auto bg-white dark:bg-gray-800 rounded-lg shadow-lg overflow-hidden">
+      <div className="w-full max-w-md mx-auto bg-white dark:bg-gray-900 rounded-lg  overflow-hidden">
         <div className="p-6">
           <div className="flex items-center justify-between pb-4">
-            <h2 className="text-2xl font-bold">Focus Timer</h2>
+            <h2 className="text-2xl font-bold dark:text-white">Focus Timer</h2>
             <button
               onClick={toggleFullscreen}
-              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full"
+              className="p-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white rounded-full"
             >
               {isFullscreen ? (
                 <Minimize className="w-5 h-5" />
@@ -93,7 +93,7 @@ const FocusTimer = () => {
 
           <div className="space-y-6">
             <div className="text-center">
-              <div className="text-6xl font-bold mb-4">{formatTime(timeLeft)}</div>
+              <div className="text-6xl dark:text-white font-bold mb-4">{formatTime(timeLeft)}</div>
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div 
                   className="bg-green-500 h-2 rounded-full transition-all duration-300"
