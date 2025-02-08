@@ -48,8 +48,8 @@ const AIAssistant = () => {
       <div className="grid grid-cols-3 gap-4 mb-8">
         {stats.map((stat) => (
           <div key={stat.label} className={`bg-[#ADFF00] p-4 rounded-lg text-center`}>
-            <div className="text-2xl font-bold">{stat.value}</div>
-            <div className="text-sm text-gray-600 dark:text-gray-300">{stat.label}</div>
+            <div className="text-2xl font-bold text-black">{stat.value}</div>
+            <div className="text-sm text-gray-600">{stat.label}</div>
           </div>
         ))}
       </div>

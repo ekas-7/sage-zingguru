@@ -8,8 +8,8 @@ export const UserProfile = () => (
       <AvatarFallback>ET</AvatarFallback>
     </Avatar>
     <div className="text-sm">
-      <div>Ellington Thom</div>
-      <div className="text-xs text-gray-400">ellington@gmail.com</div>
+      <div>Sujal Kumar</div>
+      <div className="text-xs text-gray-400">sujal@gmail.com</div>
     </div>
   </div>
 )

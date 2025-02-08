@@ -122,11 +122,11 @@ const NotionHelp = () => {
 
 
   return (
-    <div className="w-full h-[calc(100vh-100px)]">
-      <div className="h-full bg-[#fffbea] border-2 border-black rounded-xl shadow-lg p-4 md:p-6">
+    <div className="w-full h-screen">
+      <div className="h-full bg-[#fffbea] dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6">
         <div className="flex flex-col lg:flex-row h-full gap-4">
           {/* Sidebar */}
-          <div className="w-full lg:w-72 flex flex-col gap-4 bg-[#d7e933] p-4 rounded-xl border-2 border-black">
+          <div className="w-full lg:w-72 flex flex-col gap-4 bg-[#d7e933] dark:bg-gray-900 dark:text-white p-4 rounded-xl shadow-lg">
             <div className="mb-2">
               <input
                 type="text"
@@ -169,7 +169,7 @@ const NotionHelp = () => {
             {selectedFile ? (
               <EditorComponent initialData={initialData} onSave={saveNote} />
             ) : (
-              <div className="w-full h-full p-4 border border-gray-600 bg-black rounded-lg shadow-lg flex flex-col overflow-hidden">
+              <div className="w-full h-full p-4 border border-gray-300 bg-black dark:bg-gray-800 rounded-lg shadow-lg flex flex-col overflow-hidden">
                 <p className="text-lg font-bold text-gray-600">Please select a file to edit</p>
               </div>
             )}
