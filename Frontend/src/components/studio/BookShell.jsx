@@ -103,7 +103,7 @@ const PDFViewer = () => {
         />
         <button 
           onClick={() => fileInputRef.current.click()}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+          className="flex w-full text-center items-center gap-2 px-4 py-2 bg-[#ADFF00] text-black rounded cursor-pointer font-bold"
         >
           <Upload size={16} />
           Upload PDF
