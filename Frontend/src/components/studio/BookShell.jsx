@@ -83,7 +83,7 @@ function BookShell() {
   };
 
   return (
-    <div className="h-full p-4 bg-white dark:bg-gray-900 rounded-lg shadow-md relative">
+    <div className="h-full p-4 bg-white dark:bg-gray-900 rounded-3xl shadow-md relative">
       <h2 className="text-lg font-bold mb-4 text-center text-white p-2 rounded-2xl">
         BookShell
       </h2>
