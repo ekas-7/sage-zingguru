@@ -1,4 +1,4 @@
-import { Home, Cpu, Notebook, Briefcase, PlaySquare, Menu, X, Milestone, KeyboardMusic } from "lucide-react";
+import { Home, Cpu, Notebook, Briefcase, PlaySquare, Menu, X, Milestone, KeyboardMusic,Pencil } from "lucide-react";
 import { HeaderIcon } from "./HeaderIcon";
 import { UserProfile } from "./UserProfile";
 import { useState } from "react";
@@ -7,7 +7,8 @@ import DarkModeToggle from "../ui/DarkModeToggle";
 import { Medal, Shield, Star, Gem } from "lucide-react";
 
 
-import { useSelector } from "react-redux";
+import { useSelector,useDispatch } from "react-redux";
+import { setActiveItem } from "../../store/navigationSlice";
 
 const badgeTiers = {
   gold: { color: "bg-yellow-500", icon: <Medal className="text-yellow-300" /> },
@@ -17,7 +18,11 @@ const badgeTiers = {
 };
 export const Header = ({ onNavItemClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [activePage, setActivePage] = useState('home'); // Add state for active page
+  // const [activePage, setActivePage] = useState('home'); // Add state for active page
+
+  const dispatch = useDispatch();
+  const activePage = useSelector((state) => state.navigation.activeItem);
+
   const badge = badgeTiers.gold;
   const navItems = [
     { id: "home", icon: Home, label: "Home" },
@@ -26,11 +31,12 @@ export const Header = ({ onNavItemClick }) => {
     { id: "career-path", icon: Briefcase, label: "Career Path" },
     { id: "video-summarizer", icon: PlaySquare, label: "Video Summarizer" },
     { id: "studio", icon: KeyboardMusic, label: "Studio" },
-    // { id: "whiteboard", icon: Pencil , label: "whiteboard" },
+    { id: "whiteboard", icon: Pencil , label: "whiteboard" },
+    {id:"Milestone",icon:Milestone,label:"Milestone"}
   ];
 
   const handleNavItemClick = (id) => {
-    setActivePage(id); // Update active page when clicking
+    dispatch(setActiveItem(id)); // Update active page when clicking
     onNavItemClick(id);
     setIsMobileMenuOpen(false);
   };
