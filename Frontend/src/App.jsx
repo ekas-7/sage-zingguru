@@ -7,19 +7,30 @@ import './index.css';
 
 import { useAuth0 } from "@auth0/auth0-react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import { useEffect, useState } from 'react';
+
 
 const App = () => {
-  const { isAuthenticated } = useAuth0();
+  const { isAuthenticated, user } = useAuth0();
+  const [isFirstTime, setIsFirstTime] = useState(false);
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      const firstTimeUser = localStorage.getItem(`firstTime_${user.sub}`);
+      if (!firstTimeUser) {
+        setIsFirstTime(true);
+        localStorage.setItem(`firstTime_${user.sub}`, "false");
+      }
+    }
+  }, [isAuthenticated, user]);
 
   return (
     <Router>
       <Provider store={store}>
         <Routes>
-          <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Landing />} />
+          <Route path="/" element={isAuthenticated ? (isFirstTime ? <Navigate to="/career" /> : <Navigate to="/dashboard" />) : <Landing />} />
           <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
-          <Route path="/store" element={<h1>Store</h1>} />
           <Route path="/career" element={<CareerPathApp />} />
-         
         </Routes>
       </Provider>
     </Router>
