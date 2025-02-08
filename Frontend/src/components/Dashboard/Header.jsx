@@ -7,8 +7,8 @@ import DarkModeToggle from "../ui/DarkModeToggle";
 
 export const Header = ({ onNavItemClick, activePage }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-
+ 
+  const extension = () => {}
 
   const navItems = [
     { id: "home", icon: Home, label: "Home" },
