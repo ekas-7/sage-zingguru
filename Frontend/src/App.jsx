@@ -1,18 +1,28 @@
-import React from 'react'
-import {Routes,Route} from 'react-router-dom'
+import "./App.css";
+import LoginButton from "./components/LoginButton.jsx";
+import Dashboard from "./pages/Dashboard.jsx";
+import { useAuth0 } from "@auth0/auth0-react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+// import Navbar from "./components/Navbar";
 
-import LandingPage from './pages/LandingPage'
-import Dashboard from './pages/Dashboard'
+const App = () => {
+  const { isAuthenticated } = useAuth0();
+  console.log(isAuthenticated);
 
-function App() {
   return (
-    <div className='h-screen w-full'>
-      <Routes>
-        <Route path='/landing-page' element={<LandingPage/>} />
-        <Route path='/dashboard/*' element={<Dashboard/>} />
-      </Routes> 
-    </div>
-  )
-}
+    <Router>
+      <div>
+        {/* <Navbar /> */}
+        {isAuthenticated ? (
+          <Routes>
+            <Route path="/" element={<Dashboard />} />
+          </Routes>
+        ) : (
+          <LoginButton />
+        )}
+      </div>
+    </Router>
+  );
+};
 
-export default App
+export default App;
