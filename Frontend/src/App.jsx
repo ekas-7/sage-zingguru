@@ -1,28 +1,23 @@
-import "./App.css";
-import LoginButton from "./components/LoginButton.jsx";
-import Dashboard from "./pages/Dashboard.jsx";
-import { useAuth0 } from "@auth0/auth0-react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-// import Navbar from "./components/Navbar";
+import { Routes,Route } from 'react-router-dom'
+import Dashboard from './Pages/Dashboard'
+import Landing from './Pages/Landing'
+import { Provider } from 'react-redux'
+import { store } from './store/store'
+import Login from './Pages/Login'
 
-const App = () => {
-  const { isAuthenticated } = useAuth0();
-  console.log(isAuthenticated);
 
+function App() {
   return (
-    <Router>
-      <div>
-        {/* <Navbar /> */}
-        {isAuthenticated ? (
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-          </Routes>
-        ) : (
-          <LoginButton />
-        )}
-      </div>
-    </Router>
-  );
-};
+    <div>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<Landing/>}/>
+          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/login" element={<Login/>} />
+        </Routes>
+      </Provider>
+    </div>
+  )
+}
 
 export default App;
