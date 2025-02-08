@@ -1,23 +1,35 @@
-import { Routes,Route } from 'react-router-dom'
-import Dashboard from './Pages/Dashboard'
-import Landing from './Pages/Landing'
-import { Provider } from 'react-redux'
-import { store } from './store/store'
-import Login from './Pages/Login'
+import Dashboard from './pages/Dashboard.jsx';
+import Landing from './pages/Landing';
+import { Provider } from 'react-redux';
+import { store } from './store/store';
+import './index.css';
 
+import LoginButton from "./components/LoginButton.jsx";
+import { useAuth0 } from "@auth0/auth0-react";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
+import MainStudio from './components/studio/MainStudio.jsx';
 
-function App() {
+const App = () => {
+  const { isAuthenticated } = useAuth0();
+  console.log("iss" + isAuthenticated);
+
   return (
-    <div>
-      <Provider store={store}>
-        <Routes>
-          <Route path="/" element={<Landing/>}/>
-          <Route path="/dashboard" element={<Dashboard/>} />
-          <Route path="/login" element={<Login/>} />
-        </Routes>
-      </Provider>
-    </div>
-  )
-}
+    <Router>
+      <div>
+        
+          <Provider store={store}>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route 
+                path="/dashboard" 
+                element={<MainStudio/>} 
+              />
+            </Routes>
+          </Provider>
+       
+      </div>
+    </Router>
+  );
+};
 
-export default App
+export default App;

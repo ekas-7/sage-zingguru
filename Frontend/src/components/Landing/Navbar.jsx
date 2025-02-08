@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import logo from "../../assets/logo.png"
 import DarkModeToggle from '../ui/DarkModeToggle';
+import  LoginButton  from '../LoginButton';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -73,15 +74,9 @@ export default function Navbar() {
           </div>
           <div className="flex items-center gap-4">
             <DarkModeToggle />
-            <button className={`
-              hidden md:block font-semibold transition-colors duration-300
-              ${isScrolled
-                ? 'text-gray-600 hover:text-black dark:text-gray-400 dark:hover:text-white'
-                : 'text-gray-800 hover:text-black dark:text-gray-200 dark:hover:text-white'
-              }
-            `}>
-              Sign up
-            </button>
+            
+              <LoginButton/>
+            
             <button className="bg-[#ADFF00] text-black px-6 py-2 rounded-2xl hover:bg-[#9EFF00] transition-colors duration-300">
               Free Trial
             </button>
