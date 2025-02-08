@@ -8,14 +8,10 @@ import {
   Minus,
   Divide,
   RefreshCw,
-<<<<<<< HEAD
   Circle,
-  X
-=======
   X,
-  Maximize,
-  Minimize
->>>>>>> 29cf23ef45bf2c76880ba405a69c7bac3da43f2d
+  Minimize,
+  Maximize
 } from "lucide-react";
 
 const BottomNav = () => {
