@@ -7,7 +7,7 @@ const Events = () => {
   // Define EventCard inside Events
   const EventCard = ({ type, description, time, date, icon: Icon }) => {
     return (
-      <div className="transition-all transform hover:scale-105 hover:shadow-lg bg-white hover:bg-yellow-100 dark:bg-gray-800 rounded-lg p-4 cursor-pointer">
+      <div className="transition-all transform hover:scale-105 hover:shadow-lg bg-white hover:bg-yellow-100 dark:bg-gray-800 rounded-3xl p-4 cursor-pointer">
         <div className="flex items-start gap-4">
           <div className="p-2 bg-purple-100 rounded-lg">
             <Icon className="w-4 h-4 text-purple-600" />

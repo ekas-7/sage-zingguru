@@ -19,6 +19,7 @@
     "@tailwindcss/vite": "^4.0.4",
     "axios": "^1.7.9",
     "firebase": "^11.3.0",
+    "framer-motion": "^12.4.1",
     "js-cookie": "^3.0.5",
     "lucide-react": "^0.475.0",
     "react": "^19.0.0",

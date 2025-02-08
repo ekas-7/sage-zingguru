@@ -49,7 +49,7 @@ const AIAssistant = () => {
         {stats.map((stat) => (
           <div key={stat.label} className={`bg-[#ADFF00] p-4 rounded-lg text-center`}>
             <div className="text-2xl font-bold text-black">{stat.value}</div>
-            <div className="text-sm text-gray-600">{stat.label}</div>
+            <div className="text-sm text-gray-600 dark:text-gray-300">{stat.label}</div>
           </div>
         ))}
       </div>
