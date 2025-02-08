@@ -22,7 +22,7 @@ const App = () => {
               <Route path="/" element={<Landing />} />
               <Route 
                 path="/dashboard" 
-                element={<MainStudio/>} 
+                element={<Dashboard/>} 
               />
             </Routes>
           </Provider>
