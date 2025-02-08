@@ -1,4 +1,4 @@
-import { Home, Cpu, Notebook, Briefcase, PlaySquare, Menu, X, Milestone, KeyboardMusic } from "lucide-react";
+import { Home, Cpu, Notebook, Briefcase, PlaySquare, Menu, X, Milestone, KeyboardMusic,Pencil } from "lucide-react";
 import { HeaderIcon } from "./HeaderIcon";
 import { UserProfile } from "./UserProfile";
 import { useState } from "react";
@@ -26,6 +26,7 @@ export const Header = ({ onNavItemClick }) => {
     { id: "career-path", icon: Briefcase, label: "Career Path" },
     { id: "video-summarizer", icon: PlaySquare, label: "Video Summarizer" },
     { id: "studio", icon: KeyboardMusic, label: "Studio" },
+    { id: "whiteboard", icon: Pencil , label: "whiteboard" },
   ];
 
   const handleNavItemClick = (id) => {

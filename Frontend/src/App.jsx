@@ -3,6 +3,7 @@ import Landing from './pages/Landing';
 import { Provider } from 'react-redux';
 import { store } from './store/store';
 import CareerPathApp from './components/Question/CareerPath.jsx';
+import Whiteboard from './components/Excal/WhiteBoard.jsx';
 import './index.css';
 
 import { useAuth0 } from "@auth0/auth0-react";
@@ -31,6 +32,8 @@ const App = () => {
           <Route path="/" element={isAuthenticated ? (isFirstTime ? <Navigate to="/career" /> : <Navigate to="/dashboard" />) : <Landing />} />
           <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
           <Route path="/career" element={<CareerPathApp />} />
+          <Route path="/whiteboard" element={<Whiteboard />} />
+         
         </Routes>
       </Provider>
     </Router>

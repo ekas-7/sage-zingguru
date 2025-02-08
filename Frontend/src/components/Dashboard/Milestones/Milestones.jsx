@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Milestone from "../../../assets/Milestone.json";
 import { format, addDays, isBefore, isToday, isAfter } from "date-fns";
 import {useNavigate} from 'react-router-dom'
@@ -13,6 +13,8 @@ function Milestones() {
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  
+  const [hoveredMilestone, setHoveredMilestone] = useState(null); // State to track hovered milestone
 
   const handleMilestoneClick = (url) => {
     console.log("url : ",url);
@@ -45,9 +47,9 @@ function Milestones() {
               key={index} 
               className="flex items-center space-x-6 cursor-pointer"
               onClick={() => handleMilestoneClick(milestone.link)}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.3 }}
+              initial={{ opacity: 0, y: 20 }} // Initial state for animation
+              animate={{ opacity: 1, y: 0 }} // Animate to this state
+              transition={{ duration: 0.3, delay: index * 0.1 }} // Delay for staggered loading
             >
               {/* Date Card */}
               <div className="flex-shrink-0 text-center text-white w-24">
@@ -80,6 +82,13 @@ function Milestones() {
                   )}
                 </p>
               </motion.div>
+
+              {/* Tooltip for extra details */}
+              {hoveredMilestone === milestone && (
+                <div className="absolute bg-gray-800 text-white text-sm rounded-lg p-2 shadow-lg z-10">
+                  <p>{milestone.extraDetails}</p> {/* Assuming extraDetails is a property in your milestone object */}
+                </div>
+              )}
             </motion.div>
           );
         })}
