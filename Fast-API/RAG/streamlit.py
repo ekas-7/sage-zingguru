@@ -3,6 +3,8 @@ import os
 import warnings
 import speech_recognition as sr
 import tempfile
+import time
+from gtts import gTTS  # ✅ Google Text-to-Speech
 from langchain_community.document_loaders import TextLoader
 from langchain_ollama import OllamaEmbeddings
 from langchain.text_splitter import RecursiveCharacterTextSplitter
@@ -12,7 +14,6 @@ from langchain.chains import create_retrieval_chain
 from langchain_community.vectorstores import FAISS
 from langchain_google_genai import ChatGoogleGenerativeAI
 from dotenv import load_dotenv
-import time
 
 # Suppress deprecated warnings
 warnings.filterwarnings("ignore", category=UserWarning, module="langchain")
@@ -71,10 +72,11 @@ Now, respond to the following user context and input :
     ("user", "{input}")
 ])
 
+
 # Create the document chain
 document_chain = create_stuff_documents_chain(llm, prompt)
 
-st.title("RAG Chatbot with Gemini API")
+st.title("Zing Sensei")
 
 # Sidebar for text addition
 st.sidebar.header("Add Text to Knowledge Base")
@@ -117,11 +119,12 @@ if audio_value:
         temp_audio.write(audio_value.read())  # ✅ Read bytes before writing
         temp_audio_path = temp_audio.name
 
-
     query = audio_to_text(temp_audio_path)
     st.write(f"Transcribed Text: {query}")
 
-if st.button("Get Response"):
+response_text = ""
+
+if st.button("Get Response & Read Aloud"):
     if not query:
         st.error("Please enter a text or audio query.")
     elif st.session_state.vector_store is None:
@@ -135,7 +138,18 @@ if st.button("Get Response"):
             response = retrieval_chain.invoke({"input": query})
             end = time.time()
             
-            st.success(response['answer'])
+            response_text = response['answer']
+            st.success(response_text)
             st.write(f"Response time: {end - start:.2f} seconds")
+
+            # Convert response text to speech using gTTS
+            if response_text:
+                tts = gTTS(response_text)
+                tts_audio_path = tempfile.NamedTemporaryFile(delete=False, suffix=".mp3").name
+                tts.save(tts_audio_path)
+
+                # Play the generated speech in Streamlit
+                st.audio(tts_audio_path, format="audio/mp3")
+
         except Exception as e:
             st.error(f"Error processing request: {e}")
