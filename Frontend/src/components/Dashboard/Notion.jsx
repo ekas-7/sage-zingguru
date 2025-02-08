@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import EditorComponent from "./Notion/EditorComponent";
-import { db, collection, addDoc, getDocs, setDoc, doc, updateDoc } from "../../config/firebase";
-import { DoorClosed } from "lucide-react";
+import Editor from "./Notion/Editor.jsx";
+import { db, collection, addDoc, getDocs, setDoc, doc, updateDoc } from "../../config/firebase.js";
+// import { DoorClosed } from "lucide-react";
 
-const NotionHelp = () => {
+const Notion = () => {
   const [fileName, setFileName] = useState(""); // To store filename
   const [notes, setNotes] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
@@ -14,7 +14,7 @@ const NotionHelp = () => {
       {
         type: "header",
         data: {
-          text: "hello.js",
+          text: "Start typing here...",
           level: 2,
         },
       },
@@ -31,8 +31,8 @@ const NotionHelp = () => {
       const querySnapshot = await getDocs(collection(db, "notionFiles"));
 
       querySnapshot.docs.forEach((doc) => {
-        console.log("Document ID:", doc.id);
-        console.log("Document Data:", doc.data()); // Using doc.data() to get the fields directly
+        // console.log("Document ID:", doc.id);
+        // console.log("Document Data:", doc); // Using doc.data() to get the fields directly
       });
 
       // console.log(querySnapshot.docs.data());
@@ -89,7 +89,7 @@ const NotionHelp = () => {
             {
               type: "header",
               data: {
-                text: "hello.js",
+                text: "Start Typing here",
                 level: 2,
               },
             },
@@ -97,10 +97,25 @@ const NotionHelp = () => {
           version: "2.11.10",
         },
       });
+      console.log("docref : ",docRef);
 
       setNotes([...notes, { id: docRef.id, fileName }]);
-      setSelectedFile(docRef.id);
-      alert("File created successfully!");
+      setSelectedFile(fileName)
+      setSelectedFileId(docRef.id)
+      setInitialData({
+        time: Date.now(),
+        blocks: [
+          {
+            type: "header",
+            data: {
+              text: "Start Typing here",
+              level: 2,
+            },
+          },
+        ],
+        version: "2.11.10",
+      })
+      setFileName('');
     } catch (error) {
       console.error("Error creating file:", error);
       alert("Error creating file, please try again.");
@@ -122,11 +137,11 @@ const NotionHelp = () => {
 
 
   return (
-    <div className="w-full h-screen">
-      <div className="h-full bg-[#fffbea] dark:bg-gray-800 rounded-xl shadow-lg p-4 md:p-6">
+    <div className="w-full h-[calc(100vh-100px)]">
+      <div className="h-full bg-[#fffbea] border-2 border-black rounded-xl shadow-lg p-4 md:p-6">
         <div className="flex flex-col lg:flex-row h-full gap-4">
           {/* Sidebar */}
-          <div className="w-full lg:w-72 flex flex-col gap-4 bg-[#d7e933] dark:bg-gray-900 dark:text-white p-4 rounded-xl shadow-lg">
+          <div className="w-full lg:w-72 flex flex-col gap-4 bg-[#d7e933] p-4 rounded-xl border-2 border-black">
             <div className="mb-2">
               <input
                 type="text"
@@ -137,7 +152,7 @@ const NotionHelp = () => {
               />
               <button
                 onClick={createFile}
-                className="w-full mt-2 p-2 bg-blue-500 text-white rounded-md"
+                className="w-full mt-2 p-2 bg-blue-500 text-white rounded-md cursor-pointer"
               >
                 Create File
               </button>
@@ -167,9 +182,9 @@ const NotionHelp = () => {
           {/* Main Editor */}
           <div className="flex-1 flex flex-col gap-4 h-[60vh] lg:h-full">
             {selectedFile ? (
-              <EditorComponent initialData={initialData} onSave={saveNote} />
+              <Editor initialData={initialData} onSave={saveNote} />
             ) : (
-              <div className="w-full h-full p-4 border border-gray-300 bg-black dark:bg-gray-800 rounded-lg shadow-lg flex flex-col overflow-hidden">
+              <div className="w-full h-full p-4 border border-gray-600 bg-black rounded-lg shadow-lg flex flex-col overflow-hidden">
                 <p className="text-lg font-bold text-gray-600">Please select a file to edit</p>
               </div>
             )}
@@ -181,4 +196,4 @@ const NotionHelp = () => {
   );
 };
 
-export default NotionHelp;
+export default Notion;
