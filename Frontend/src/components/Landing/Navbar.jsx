@@ -2,9 +2,12 @@ import { useState, useEffect } from 'react';
 import logo from "../../assets/logo.png"
 import DarkModeToggle from '../ui/DarkModeToggle';
 import  LoginButton  from '../LoginButton';
+import { useAuth0 } from '@auth0/auth0-react';
+import LogoutButton from '../LogoutButton';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const {isAuthenticated } = useAuth0();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -75,7 +78,7 @@ export default function Navbar() {
           <div className="flex items-center gap-4">
             <DarkModeToggle />
             
-              <LoginButton/>
+              {!isAuthenticated? <LoginButton/> : <LogoutButton/>}
             
             <button className="bg-[#ADFF00] text-black px-6 py-2 rounded-2xl hover:bg-[#9EFF00] transition-colors duration-300">
               Free Trial

@@ -4,7 +4,7 @@ import MainStudio from '../components/studio/MainStudio';
 
 function Dashboard() {
   return (
-    <Routes>P=
+    <Routes>
       <Route path="/studio" element={<MainStudio />} />
     </Routes>
   );
