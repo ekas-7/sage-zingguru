@@ -4,13 +4,21 @@ import { UserProfile } from "./UserProfile";
 import { useState } from "react";
 import logo from "../../assets/logo.png";
 import DarkModeToggle from "../ui/DarkModeToggle";
+import { Medal, Shield, Star, Gem } from "lucide-react";
+
 
 import { useSelector } from "react-redux";
 
+const badgeTiers = {
+  gold: { color: "bg-yellow-500", icon: <Medal className="text-yellow-300" /> },
+  silver: { color: "bg-gray-400", icon: <Shield className="text-gray-200" /> },
+  iron: { color: "bg-gray-600", icon: <Star className="text-gray-400" /> },
+  wood: { color: "bg-orange-700", icon: <Gem className="text-orange-500" /> },
+};
 export const Header = ({ onNavItemClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activePage, setActivePage] = useState('home'); // Add state for active page
-
+  const badge = badgeTiers.gold;
   const navItems = [
     { id: "home", icon: Home, label: "Home" },
     { id: "ai-assistant", icon: Cpu, label: "AI Assistant" },
@@ -67,9 +75,10 @@ export const Header = ({ onNavItemClick }) => {
           </div>
         </div>
         
-        <div className="pr-5 text-xl cursor-pointer">
-          <i className="ri-puzzle-line"></i>
-        </div>
+        <div className={`flex items-center gap-2 p-2 mr-2 rounded-lg ${badge.color}`}> 
+        {badge.icon}
+        <span className="text-white font-bold mr-2 capitalize">Gold</span>
+       </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
