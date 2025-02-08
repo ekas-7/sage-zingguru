@@ -2,11 +2,24 @@ import React from "react";
 import Milestone from "../../../assets/Milestone.json";
 import { format, addDays, isBefore, isToday, isAfter } from "date-fns";
 import {useNavigate} from 'react-router-dom'
+import {useDispatch} from 'react-redux'
+import { setUrl } from "../../../store/userSlice";
+import { setActiveItem } from "../../../store/navigationSlice";
 
 function Milestones() {
   const startDate = new Date(); // Today’s Date
   const today = new Date(); // Current Date
   const navigate = useNavigate();
+
+  const dispatch = useDispatch();
+
+  const handleMilestoneClick = (url) => {
+    console.log("url : ",url);
+    
+     dispatch(setUrl(url));
+     dispatch(setActiveItem('studio'))
+    //  navigate('/dashboard')
+  }
 
   return (
     <div className="w-full h-full p-4 border border-gray-600 bg-black rounded-lg shadow-lg flex flex-col overflow-hidden">
@@ -30,7 +43,7 @@ function Milestones() {
             <div 
               key={index} 
               className="flex items-center space-x-6 cursor-pointer"
-              onClick={() => navigate(`/dashboard/studio?video=${encodeURIComponent(milestone.videoURL)}`)}
+              onClick={() => handleMilestoneClick(milestone.link)}
             >
               {/* Date Card */}
               <div className="flex-shrink-0 text-center text-white w-24">

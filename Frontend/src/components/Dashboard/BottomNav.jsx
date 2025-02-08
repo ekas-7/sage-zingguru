@@ -8,15 +8,44 @@ import {
   Minus,
   Divide,
   RefreshCw,
-  X
+  Circle,
+  X,
+  Minimize,
+  Maximize
 } from "lucide-react";
 
 const BottomNav = () => {
   const [activeTool, setActiveTool] = useState(null);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const handleToolClick = (tool) => {
     setActiveTool(activeTool === tool ? null : tool);
   };
+
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().then(() => {
+        setIsFullScreen(true);
+      }).catch((err) => {
+        console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsFullScreen(false);
+      }).catch((err) => {
+        console.error(`Error attempting to exit full-screen mode: ${err.message}`);
+      });
+    }
+  };
+
+  useEffect(() => {
+    const handleFullScreenChange = () => {
+      setIsFullScreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullScreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullScreenChange);
+  }, []);
 
   return (
     <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 z-50">
@@ -30,8 +59,15 @@ const BottomNav = () => {
         <NavButton onClick={() => handleToolClick('calendar')}>
           <Calendar className="w-5 h-5 text-black dark:text-white" />
         </NavButton>
-        <NavButton onClick={() => handleToolClick('settings')}>
-          <Settings className="w-5 h-5 text-black dark:text-white" />
+        <NavButton onClick={() => handleToolClick('meditation')}>
+          <Circle className="w-5 h-5 text-black dark:text-white" />
+        </NavButton>
+        <NavButton onClick={toggleFullScreen}>
+          {isFullScreen ? (
+            <Minimize className="w-5 h-5 text-black dark:text-white" />
+          ) : (
+            <Maximize className="w-5 h-5 text-black dark:text-white" />
+          )}
         </NavButton>
       </div>
 
@@ -39,6 +75,7 @@ const BottomNav = () => {
       {activeTool === 'timer' && <TimerWidget />}
       {activeTool === 'calendar' && <CalendarWidget />}
       {activeTool === 'settings' && <SettingsWidget />}
+      {activeTool === 'meditation' && <MeditationWidget />}
     </div>
   );
 };
@@ -216,6 +253,140 @@ const CalculatorWidget = () => {
         </button>
         <button onClick={() => handleEqual()} className="p-3 cursor-pointer bg-[#ADFF00] rounded-full">
           =
+        </button>
+      </div>
+    </WidgetContainer>
+  );
+};
+
+const MeditationWidget = () => {
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(120);
+  const [breathPhase, setBreathPhase] = useState('in');
+  const [audioContext, setAudioContext] = useState(null);
+  const [oscillator, setOscillator] = useState(null);
+
+  // Initialize Audio Context
+  useEffect(() => {
+    if (isPlaying) {
+      const context = new (window.AudioContext || window.webkitAudioContext)();
+      setAudioContext(context);
+      return () => context.close();
+    }
+  }, [isPlaying]);
+
+  // Handle sound generation
+  const startSound = () => {
+    if (audioContext) {
+      const osc = audioContext.createOscillator();
+      const gainNode = audioContext.createGain();
+      
+      osc.frequency.setValueAtTime(800, audioContext.currentTime);
+      osc.connect(gainNode);
+      gainNode.connect(audioContext.destination);
+      
+      // Set initial volume
+      gainNode.gain.setValueAtTime(0.1, audioContext.currentTime);
+      
+      osc.start();
+      setOscillator(osc);
+    }
+  };
+
+  const stopSound = () => {
+    if (oscillator) {
+      oscillator.stop();
+      setOscillator(null);
+    }
+  };
+
+  // Handle meditation timer
+  useEffect(() => {
+    let timer;
+    let breathTimer;
+
+    if (isPlaying && timeLeft > 0) {
+      // Main timer
+      timer = setInterval(() => {
+        setTimeLeft(prev => prev - 1);
+      }, 1000);
+
+      // Breath phase timer
+      breathTimer = setInterval(() => {
+        setBreathPhase(prev => prev === 'in' ? 'out' : 'in');
+      }, 4000); // 4 seconds per breath phase
+
+      startSound();
+    } else if (timeLeft === 0 || !isPlaying) {
+      stopSound();
+    }
+
+    return () => {
+      clearInterval(timer);
+      clearInterval(breathTimer);
+      if (oscillator) {
+        stopSound();
+      }
+    };
+  }, [isPlaying, timeLeft]);
+
+  const togglePlay = () => {
+    if (!isPlaying && timeLeft === 0) {
+      setTimeLeft(120); // Reset time when starting
+    }
+    setIsPlaying(!isPlaying);
+  };
+
+  const handleStop = () => {
+    setIsPlaying(false);
+    setTimeLeft(120); // Reset time when stopping
+  };
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = seconds % 60;
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  return (
+    <WidgetContainer title="Meditation">
+      <div className="flex flex-col items-center justify-center p-6">
+        {/* Expanding and contracting breathing animation */}
+        <div className="relative mb-6">
+          <div 
+            className={`w-32 h-32 rounded-full bg-white/20 absolute 
+              ${breathPhase === 'out' ? 'animate-[ping_4s_ease-in-out_infinite]' : 'animate-[ping_4s_ease-in-out_infinite]'}`}
+          />
+          <div 
+            className={`w-32 h-32 rounded-full bg-white/40 flex items-center justify-center 
+              transition-transform duration-1000 transform
+              ${breathPhase === 'in' ? 'scale-100' : 'scale-90'}`}
+          >
+            <span className="text-black text-xl font-medium">
+              Breathe
+            </span>
+          </div>
+        </div>
+
+        {/* Timer */}
+        <div className="text-black dark:text-white text-2xl font-bold mb-4">
+          {formatTime(timeLeft)}
+        </div>
+
+        {/* Start/Pause Button */}
+        <button
+          onClick={togglePlay}
+          className="px-6 py-2 bg-[#ADFF00] hover:bg-green-600 rounded-full text-black font-medium transition-colors"
+        >
+          {isPlaying ? 'Pause' : timeLeft === 0 ? 'Restart' : 'Start'}
+        </button>
+
+        {/* Stop Button */}
+        <button
+          onClick={handleStop}
+          className="mt-2 px-6 py-2 bg-red-500 hover:bg-red-600 rounded-full text-white font-medium transition-colors"
+        >
+          Stop
         </button>
       </div>
     </WidgetContainer>

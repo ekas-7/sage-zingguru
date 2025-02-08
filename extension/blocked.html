@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Site Blocked</title>
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-family: 'Segoe UI', Roboto, sans-serif;
+      background: #111827;
+      color: #E0E0E0;
+      text-align: center;
+    }
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+    .header img {
+      width: 40px;
+      height: 40px;
+    }
+    .header h1 {
+      font-size: 24px;
+      color: #22C55E;
+      font-weight: bold;
+    }
+    .container {
+      padding: 20px;
+      background: #1F2937;
+      border-radius: 12px;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2);
+      max-width: 550px;
+      width: 100%;
+      margin: 16px;
+    }
+    p {
+      font-size: 16px;
+      margin-bottom: 24px;
+      color: #E0E0E0;
+      line-height: 1.6;
+    }
+    .button {
+      padding: 12px 24px;
+      background: #22C55E;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: 0.3s ease;
+    }
+    .button:hover {
+      background: #16A34A;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>Zing-Blocker</h1>
+  </div>
+  <div class="container">
+    <h1>Site Blocked</h1>
+    <p>This site has been blocked to help you stay focused. You can manage your blocked sites through the management dashboard.</p>
+    <a href="http://localhost:5173/dashboard" class="button">Manage Blocked Sites</a>
+  </div>
+</body>
+</html>

@@ -1,29 +1,12 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Roadmap from "../Dashboard/CareerPaths/Roadmap";
 import { SearchBar } from "./SearchBar";
 import ProgressBar from "./ProgressBar";
 import Events from "./Events";
-import VoiceAssistant from './VoiceAssistant'
-import {Plus,Minus} from 'lucide-react'
-
-const careerData = {
-  "Software Developer": {
-    roadmap: [
-      {
-        milestone: "Learn Programming Basics",
-        description: "Start with fundamental programming concepts.",
-        details: [
-          "Choose a language: Python, JavaScript, Java, C++",
-          "Learn variables, loops, functions, and OOP",
-          "Practice basic problems on platforms like LeetCode, CodeChef",
-        ],
-        resources: ["CS50 Harvard", "Python Crash Course", "freeCodeCamp"],
-      },
-      // ... rest of the data
-    ],
-  },
-  // ... rest of the careers
-}
+import VoiceAssistant from "./VoiceAssistant";
+import { Plus, Minus } from "lucide-react";
+import { careerData } from "./CareerPaths/careerData";
+import { motion } from "framer-motion";
 
 const Home = () => {
   const stats = [
@@ -33,63 +16,96 @@ const Home = () => {
   ];
 
   return (
-    <div className="max-w-full p-4 md:p-6 mt-1 rounded-3xl bg-[#FEFCE8] dark:bg-gray-800 dark:text-white shadow-lg transition-all">
-      {/* Header */}
-      <div className="flex items-center justify-between mb-6">
-        <div className="flex items-center gap-3">
-          <h1 className="text-2xl font-bold">Dashboard</h1>
-        </div>
-        <div className="flex items-center gap-3">
-          <SearchBar />
-        </div>
-      </div>
+    <div className="max-w-full rounded-3xl bg-[#FEFCE8] dark:bg-gray-800 dark:text-white shadow-lg transition-all h-screen">
+      {/* Main Grid Layout */}
+      <div className="grid grid-cols-5 gap-6 h-full">
+        {/* Main Content (3/5 width) */}
+        <div className="col-span-3 p-4 md:p-6 overflow-y-auto">
+          {/* Header */}
+          <div className="flex items-center justify-between mb-6">
+            <h1 className="text-2xl font-bold">Dashboard</h1>
+          </div>
 
-      <div className="fixed bottom-0 right-0">
-      <VoiceAssistant/>
-      </div>
-
-      {/* Floating Actions */}
-            <div className="fixed bottom-5 left-7 z-50 flex flex-col gap-2">
-              <button className="p-3 rounded-full bg-white dark:bg-gray-900 text-black dark:text-white shadow-lg hover:bg-blue-600 dark:hover:bg-blue-800 transition">
-                <Plus className="w-5 h-5" />
-              </button>
-              <button className="p-3 rounded-full bg-white dark:bg-gray-900 text-black dark:text-white shadow-lg hover:bg-red-600 dark:hover:bg-red-800 transition">
-                <Minus className="w-5 h-5" />
-              </button>
-            </div>
-
-      {/* Stats */}
-      <div className="grid grid-cols-3 gap-4 mb-8">
-        {stats.map((stat) => (
-          <div
-            key={stat.label}
-            className={`bg-[#ADFF00] p-4 rounded-lg text-center`}
+          {/* Stats Grid */}
+          <motion.div 
+            className="grid grid-cols-3 gap-4 mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
           >
-            <div className="text-2xl text-black font-bold">{stat.value}</div>
-            <div className="text-sm text-gray-600 ">
-              {stat.label}
-            </div>
-          </div>
-        ))}
-      </div>
+            {stats.map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                className={`bg-[#ADFF00] p-4 rounded-lg text-center`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: index * 0.1 }}
+              >
+                <div className="text-2xl text-black font-bold">{stat.value}</div>
+                <div className="text-sm text-gray-600">{stat.label}</div>
+              </motion.div>
+            ))}
+          </motion.div>
 
-      {/* Main Content Grid */}
-      <div className="flex flex-col md:flex-row justify-evenly gap-8">
-        {/* Roadmap Section */}
-        <div className="flex flex-col">
-          <Roadmap careers={careerData}/>
-
-          {/* Progress Bar */}
-          <div className="mt-6">
-            <ProgressBar />
+          {/* Roadmap with stagger animation */}
+          <div className="w-full">
+            <Roadmap
+              path={careerData["Machine Learning Engineer"]}
+              title="Software Developer Career Path"
+            />
           </div>
         </div>
 
-        {/* Events Section */}
-        <Events />
+        {/* Scrollable Sidebar Content (2/5 width) */}
+        <div className="col-span-2 dark:bg-[#364153] relative h-screen">
+          <div className="h-full overflow-y-auto scrollbar-hide">
+            <div className="sticky top-0 z-10 bg-[#364153] p-4">
+              <div className="flex justify-end">
+                <SearchBar />
+              </div>
+            </div>
+            
+            <div className="space-y-6 p-4">
+              {/* Events */}
+              <motion.div 
+                className="bg-white dark:bg-gray-900 rounded-4xl p-4 shadow-md"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5 }}
+              >
+                <Events />
+              </motion.div>
+
+              {/* Progress Bar */}
+              <motion.div 
+                className="bg-white dark:bg-gray-900 rounded-4xl p-4 shadow-md"
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+              >
+                <ProgressBar />
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Fixed Position Elements */}
+      <div className="fixed bottom-0 right-0">
+        <VoiceAssistant />
+      </div>
+
+      <div className="fixed bottom-5 left-7 z-50 flex flex-col gap-2">
+        <button className="p-3 rounded-full bg-white dark:bg-gray-900 text-black dark:text-white shadow-lg hover:bg-blue-600 dark:hover:bg-blue-800 transition">
+          <Plus className="w-5 h-5" />
+        </button>
+        <button className="p-3 rounded-full bg-white dark:bg-gray-900 text-black dark:text-white shadow-lg hover:bg-red-600 dark:hover:bg-red-800 transition">
+          <Minus className="w-5 h-5" />
+        </button>
       </div>
     </div>
   );
 };
+
 
 export default Home;

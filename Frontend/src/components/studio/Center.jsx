@@ -1,14 +1,19 @@
 import React, { useState } from "react";
 import ReactPlayer from "react-player/youtube";
 import Playlist from "./Playlist";
+import {useSelector,useDispatch} from 'react-redux'
+import { setUser, clearUser,setUrl,clearUrl } from '../../store/userSlice'
 
 function Center({ playlist }) {
-  const [currentVideo, setCurrentVideo] = useState(
-    ""
-  );
+  // const [currentVideo, setCurrentVideo] = useState(
+  //   ""
+  // );
+  const dispatch = useDispatch();
+
+  const currentVideo = useSelector((state) => state.user.url)
 
   const playVideo = (url) => {
-    setCurrentVideo(url);
+    dispatch(setUrl(url));
   };
 
   return (
