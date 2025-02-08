@@ -1,16 +1,21 @@
-import React from 'react'
-import {Routes,Route} from 'react-router-dom'
+import { Routes,Route } from 'react-router-dom'
+import Dashboard from './Pages/Dashboard'
+import Landing from './Pages/Landing'
+import { Provider } from 'react-redux'
+import { store } from './store/store'
+import Login from './Pages/Login'
 
-import LandingPage from './pages/LandingPage'
-import Dashboard from './pages/Dashboard'
 
 function App() {
   return (
-    <div className='h-screen w-full'>
-      <Routes>
-        <Route path='/landing-page' element={<LandingPage/>} />
-        <Route path='/dashboard/*' element={<Dashboard/>} />
-      </Routes> 
+    <div>
+      <Provider store={store}>
+        <Routes>
+          <Route path="/" element={<Landing/>}/>
+          <Route path="/dashboard" element={<Dashboard/>} />
+          <Route path="/login" element={<Login/>} />
+        </Routes>
+      </Provider>
     </div>
   )
 }
