@@ -92,7 +92,7 @@ function BookShell() {
       <input type="file" accept="application/pdf" onChange={handleFileChange} className="hidden" ref={fileInputRef} />
 
       {/* Add PDF Button */}
-      <button onClick={triggerFileUpload} className="bg-blue-500 text-white w-full cursor-pointer rounded-2xl p-3 hover:bg-blue-600">
+      <button onClick={triggerFileUpload} className="bg-[#ADFF00] text-black font-bold w-full cursor-pointer rounded-2xl p-3 ">
         Add PDF
       </button>
 

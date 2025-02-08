@@ -43,11 +43,11 @@ const Checklist = () => {
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
           placeholder="Enter new item..."
-          className="border p-2 dark:text-white rounded w-full"
+          className="border p-2 dark:text-white rounded-xl w-full"
         />
         <button
           onClick={addChecklistItem}
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+          className="bg-[#ADFF00] text-black px-4 py-2 rounded-xl cursor-pointer"
         >
           Add
         </button>
