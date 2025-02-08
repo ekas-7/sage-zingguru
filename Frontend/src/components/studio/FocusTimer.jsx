@@ -96,7 +96,7 @@ const FocusTimer = () => {
               <div className="text-6xl dark:text-white font-bold mb-4">{formatTime(timeLeft)}</div>
               <div className="w-full bg-gray-200 rounded-full h-2">
                 <div 
-                  className="bg-green-500 h-2 rounded-full transition-all duration-300"
+                  className="bg-[#ADFF00] h-2 rounded-full transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -107,9 +107,9 @@ const FocusTimer = () => {
                 <button
                   key={minutes}
                   onClick={() => handleDurationSelect(minutes)}
-                  className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors
+                  className={`px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors
                     ${selectedDuration === minutes 
-                      ? 'bg-green-500 text-white' 
+                      ? 'bg-[#ADFF00] text-black' 
                       : 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
                     }`}
                 >
@@ -121,7 +121,7 @@ const FocusTimer = () => {
             <div className="flex justify-center gap-4">
               <button
                 onClick={toggleTimer}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-green-500 text-white hover:bg-green-600 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-green-500 text-white hover:bg-green-600 cursor-pointer transition-colors"
               >
                 {isRunning ? (
                   <>
@@ -130,14 +130,14 @@ const FocusTimer = () => {
                   </>
                 ) : (
                   <>
-                    <Play className="w-5 h-5" />
+                    <Play className="w-5 h-5 " />
                     Start
                   </>
                 )}
               </button>
               <button
                 onClick={resetTimer}
-                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+                className="flex items-center gap-2 px-6 py-3 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-red-600 hover:text-white transition-colors"
               >
                 <X className="w-5 h-5" />
                 Reset

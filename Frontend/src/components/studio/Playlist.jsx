@@ -64,7 +64,7 @@ function Playlist({ playlist, playVideo, completedVideos }) {
                 {/* Progress Bar */}
                 <div className="w-full h-2 bg-gray-200 dark:bg-gray-700 rounded-md mt-2 overflow-hidden">
                   <div
-                    className="h-full bg-blue-500 transition-all"
+                    className="h-full bg-[#ADFF00] transition-all"
                     style={{ width: `${progress}%` }}
                   />
                 </div>

@@ -11,7 +11,7 @@ function MainStudio() {
 
   return (
     <div className="relative overflow-hidden">
-      <div className="border border-gray-200 dark:border-gray-800 rounded-2xl p-6 h-full grid grid-cols-11 grid-rows-6 gap-6 bg-white/50 dark:bg-gray-900/50 backdrop-blur-sm">
+      <div className="border border-gray-200 dark:border-gray-800 rounded-2xl p-6 h-full grid grid-cols-11 grid-rows-6 gap-6 dark:bg-gray-800 ">
         {/* Bookshelf Section */}
         
         <div className="col-span-3 row-span-3 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl">
@@ -36,7 +36,7 @@ function MainStudio() {
           <FocusTimer />
         </div>
 
-        <div className="col-span-3 row-span-3 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl">
+        <div className="col-span-3 row-span-3 bg-gradient-to-br flex justify-center items-center dark:bg-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl">
           <Calendar date={date} setDate={setDate} />
         </div>
 
