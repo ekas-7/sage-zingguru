@@ -18,11 +18,15 @@ function shouldBlock(url) {
 
 // Listen for tab updates and redirect to `blocked.html`
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
-  if (changeInfo.status === "loading" && shouldBlock(tab.url)) {
-    chrome.tabs.update(tabId, {
-      url: chrome.runtime.getURL("blocked.html") // Redirect to a custom block page
-    });
-  }
+  chrome.storage.local.get('blockerEnabled', (data) => {
+    const isEnabled = data.blockerEnabled !== undefined ? data.blockerEnabled : true;
+
+    if (isEnabled && changeInfo.status === "loading" && shouldBlock(tab.url)) {
+      chrome.tabs.update(tabId, {
+        url: chrome.runtime.getURL("blocked.html") // Redirect to a custom block page
+      });
+    }
+  });
 });
 
 // Restore blocked sites from storage (not needed but kept for future expansion)
