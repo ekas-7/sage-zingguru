@@ -26,7 +26,7 @@ function MainStudio() {
         {/* Timer Section */}
         <div className="col-span-3 row-span-3 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl relative overflow-hidden group">
           {/* Accent decoration */}
-          <div className="absolute -right-4 -bottom-4 w-24 h-24 bg-[#ADFF00] rounded-full opacity-20 group-hover:opacity-30 transition-opacity" />
+          <div className="absolute -right-4 -bottom-4 w-24 h-24 rounded-full opacity-20 group-hover:opacity-30 transition-opacity" />
           <Checklist />
         </div>
 

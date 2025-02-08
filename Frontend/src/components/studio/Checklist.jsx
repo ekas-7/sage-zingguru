@@ -33,8 +33,8 @@ const Checklist = () => {
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-3xl shadow-lg p-4 transition-all hover:shadow-xl">
-      <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-2">Checklist</h2>
+    <div className="bg-white h-full dark:bg-gray-800 rounded-3xl shadow-lg p-6 transition-all hover:shadow-xl">
+      <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-4">Checklist</h2>
       
       {/* Input and Button to Add New Checklist Item */}
       <div className="flex gap-2 mb-4">
@@ -43,7 +43,7 @@ const Checklist = () => {
           value={newItem}
           onChange={(e) => setNewItem(e.target.value)}
           placeholder="Enter new item..."
-          className="border p-2 rounded w-full"
+          className="border p-2 dark:text-white rounded w-full"
         />
         <button
           onClick={addChecklistItem}

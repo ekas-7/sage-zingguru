@@ -98,8 +98,8 @@ function BookShell() {
 
       {/* PDF List */}
       {pdfList.length > 0 && (
-        <div className="mt-4 border rounded-lg bg-gray-100">
-          <h3 className="text-md font-bold mb-2 bg-black text-white p-2 text-center">Your Files</h3>
+        <div className="mt-4 rounded-2xl p-3 bg-gray-100 dark:bg-[#2A3445]">
+          <h3 className="text-md font-bold mb-2 text-white p-2 text-center">Your Files</h3>
           <div className="p-2 flex flex-col gap-3">
             {pdfList.map((pdf) => (
               <div key={pdf.id} className="mb-1 bg-white p-2 rounded-lg cursor-pointer">
@@ -115,7 +115,7 @@ function BookShell() {
       {/* PDF Modal Viewer */}
       {viewPdf && (
         <div
-          className="fixed bg-white shadow-lg rounded-lg border overflow-hidden"
+          className="fixed bg-white dark:bg-gray-900 shadow-lg rounded-3xl border overflow-hidden"
           style={{
             top: `${modalPosition.y}px`,
             left: `${modalPosition.x}px`,
