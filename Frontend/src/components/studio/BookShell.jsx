@@ -101,26 +101,19 @@ const PDFViewer = () => {
           ref={fileInputRef}
           onChange={handleFileUpload}
         />
-        <button 
-          onClick={() => fileInputRef.current.click()}
-          className="flex w-full text-center items-center gap-2 px-4 py-2 bg-[#ADFF00] text-black rounded cursor-pointer font-bold"
-        >
-          <Upload size={16} />
-          Upload PDF
-        </button>
       </div>
 
-      <div className="bg-white rounded-lg border p-4">
-        <h2 className="text-lg font-semibold mb-4">PDF Library</h2>
+      <div className="bg-[#2B3646] rounded-2xl border border-white p-4">
         <div>
           {pdfs.length === 0 ? (
             <p className="text-gray-500">No PDFs uploaded yet</p>
+            
           ) : (
             <ul className="space-y-2">
               {pdfs.map((pdf) => (
                 <li key={pdf.id}>
                   <button
-                    className="w-full flex items-center gap-2 px-3 py-2 hover:bg-gray-100 rounded text-left"
+                    className="w-full flex items-center gap-2 px-3 py-2 cursor-pointer dark:text-white rounded text-left"
                     onClick={() => handlePdfSelect(pdf)}
                   >
                     <FileText size={16} />
@@ -133,10 +126,18 @@ const PDFViewer = () => {
         </div>
       </div>
 
+      <button 
+          onClick={() => fileInputRef.current.click()}
+          className="flex items-center gap-2 px-4 py-2 bg-[#ADFF00] text-black rounded-xl mt-3"
+        >
+          <Upload size={16} />
+          Upload PDF
+        </button>
+
       {selectedPdf && (
         <div
           ref={frameRef}
-          className="fixed bg-white rounded-lg shadow-lg overflow-hidden border"
+          className="fixed bg-white dark:bg-[#2B3646] rounded-lg shadow-lg overflow-hidden border"
           style={{
             left: isFrameMaximized ? 0 : position.x,
             top: isFrameMaximized ? 0 : position.y,

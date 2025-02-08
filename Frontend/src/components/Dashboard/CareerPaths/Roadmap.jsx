@@ -13,6 +13,7 @@ const MilestoneCard = ({ milestone, index, isCompleted, isOngoing, isLocked, sho
     return "bg-yellow-500";
   };
 
+
   const getStatusText = () => {
     if (isCompleted) return "Completed";
     if (isOngoing) return "In Progress";
@@ -138,6 +139,11 @@ const Roadmap = ({ path, title }) => {
     });
   }, [path]);
 
+  const getImageNumber = (index) => {
+    // Cycle through 1-9 based on index
+    return (index % 9) + 1;
+  };
+
   return (
     <div className="w-full max-w-6xl p-4 md:p-6 mx-auto">
       <style jsx global>{`
@@ -153,44 +159,71 @@ const Roadmap = ({ path, title }) => {
       <div className="relative">
         <div className="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 bg-gray-200 transform -translate-x-1/2" />
 
-        {path.roadmap.map((milestone, index) => {
-          const isCompleted = index < completedMilestones;
-          const isOngoing = index === completedMilestones;
-          const isLocked = index > completedMilestones + 1;
-          const shouldShow = visibleCards.includes(index);
+        {path.roadmap.length === 0 ? (
+          <div className="flex flex-col items-center justify-center h-full">
+            
+            <p className="text-gray-500">No milestones available.</p>
+          </div>
+        ) : (
+          path.roadmap.map((milestone, index) => {
+            const imageNumber = getImageNumber(index);
+            const isCompleted = index < completedMilestones;
+            const isOngoing = index === completedMilestones;
+            const isLocked = index > completedMilestones + 1;
+            const shouldShow = visibleCards.includes(index);
 
-          return (
-            <div key={milestone.milestone} className="relative mb-8">
-              <div className={`flex flex-col md:flex-row items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                <div className={`w-full md:w-5/12 p-4 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
-                  <MilestoneCard 
-                    milestone={milestone}
-                    index={index}
-                    isCompleted={isCompleted}
-                    isOngoing={isOngoing}
-                    isLocked={isLocked}
-                    shouldShow={shouldShow}
-                  />
+            return (
+              <div key={milestone.milestone} className="relative mb-8">
+                <div className={`flex flex-col md:flex-row items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  {/* Milestone Card */}
+                  <div className={`w-full md:w-5/12 p-4 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
+                    <MilestoneCard 
+                      milestone={milestone}
+                      index={index}
+                      isCompleted={isCompleted}
+                      isOngoing={isOngoing}
+                      isLocked={isLocked}
+                      shouldShow={shouldShow}
+                    />
+                  </div>
+
+                  {/* Timeline Node */}
+                  <div className="w-full md:w-2/12 flex justify-center my-4 md:my-0">
+                    <div className={`w-4 h-4 rounded-full relative z-10 transition-all duration-500
+                      ${shouldShow ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
+                      ${isCompleted ? 'bg-green-500' : 
+                      isOngoing ? 'bg-blue-500' : 
+                      isLocked ? 'bg-gray-400' : 'bg-yellow-500'}`} 
+                    />
+                  </div>
+
+                  {/* Image Container */}
+                  <div className={`w-5/12 p-4 hidden md:block ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
+                    {(
+                      <div className={`relative h-full flex justify-center items-center transform transition-all duration-500 delay-300 ${
+                        shouldShow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+                      }`}>
+                        <img 
+                          src={`/${imageNumber}.png`}  
+                          alt={milestone.milestone} 
+                          className="w-48 object-contain "
+                        />
+                        {milestone.imageCaption && (
+                          <p className="mt-2 text-sm text-gray-600 text-center">
+                            {milestone.imageCaption}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
-
-                {/* Timeline Node */}
-                <div className="w-full md:w-2/12 flex justify-center my-4 md:my-0">
-                  <div className={`w-4 h-4 rounded-full relative z-10 transition-all duration-500
-                    ${shouldShow ? 'opacity-100 scale-100' : 'opacity-0 scale-0'}
-                    ${isCompleted ? 'bg-green-500' : 
-                    isOngoing ? 'bg-blue-500' : 
-                    isLocked ? 'bg-gray-400' : 'bg-yellow-500'}`} 
-                  />
-                </div>
-
-                <div className="hidden md:block w-5/12" />
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </div>
   );
 };
 
-export default Roadmap;
+export default Roadmap
