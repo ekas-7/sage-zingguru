@@ -4,7 +4,7 @@ import Center from "./Center";
 import Calendar from "./Calendar";
 import Checklist from "./Checklist";
 
-import VideosURLs from '../../../public/VideosURL.json'
+import VideosURLs from '../../assets/VideosURL.json';
 
 function MainStudio() {
   const [date,setDate] = useState(new Date());

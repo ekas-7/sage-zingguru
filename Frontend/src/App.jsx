@@ -7,28 +7,26 @@ import './index.css';
 import LoginButton from "./components/LoginButton.jsx";
 import { useAuth0 } from "@auth0/auth0-react";
 import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
-
-const PrivateRoute = ({ element }) => {
-  const { isAuthenticated } = useAuth0();
-  return isAuthenticated ? element : <Navigate to="/" />;
-};
+import MainStudio from './components/studio/MainStudio.jsx';
 
 const App = () => {
-  const { isAuthenticated, loginWithRedirect } = useAuth0();
+  const { isAuthenticated } = useAuth0();
+  console.log("iss" + isAuthenticated);
 
   return (
     <Router>
       <div>
-        <Routes>
-          {/* Landing page accessible without login */}
-          <Route path="/" element={<Landing login={loginWithRedirect} />} />
-          
-          {/* Dashboard is a private route */}
-          <Route path="/dashboard" element={<PrivateRoute element={<Dashboard />} />} />
-        </Routes>
-
-        {/* Show login button if not authenticated */}
-        {!isAuthenticated && <LoginButton />}
+        
+          <Provider store={store}>
+            <Routes>
+              <Route path="/" element={<Landing />} />
+              <Route 
+                path="/dashboard" 
+                element={<MainStudio/>} 
+              />
+            </Routes>
+          </Provider>
+       
       </div>
     </Router>
   );
