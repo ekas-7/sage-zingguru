@@ -27,6 +27,7 @@ export const Header = ({ onNavItemClick }) => {
     { id: "video-summarizer", icon: PlaySquare, label: "Video Summarizer" },
     { id: "studio", icon: KeyboardMusic, label: "Studio" },
     { id: "whiteboard", icon: Pencil , label: "whiteboard" },
+    {id:"Milestone",icon:Milestone,label:"Milestone"}
   ];
 
   const handleNavItemClick = (id) => {
