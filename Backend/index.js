@@ -1,73 +1,113 @@
-const express = require("express");
-const { GoogleGenerativeAI } = require("@google/generative-ai");
-const dotenv = require("dotenv");
+import express from "express";
+import { GoogleGenerativeAI } from "@google/generative-ai";
+import dotenv from "dotenv";
+import cors from "cors";
+
 dotenv.config();
 
 const app = express();
 const port = 3000;
 
-// Initialize Gemini API
+if (!process.env.GEMINI_API_KEY) {
+  throw new Error("GEMINI_API_KEY environment variable is required");
+}
+
 const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
 
+app.use(cors());
 app.use(express.json());
 
-// Route to generate career path based on questions
 app.post("/career-path", async (req, res) => {
-    const { questions } = req.body;
+  const { questions, responses } = req.body;
+
+  if (!questions || !responses || questions.length !== 6 || responses.length !== 6) {
+    return res.status(400).json({ error: "Exactly 6 questions and responses are required." });
+  }
+
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const prompt = `Based on the following questions and responses, generate a detailed career path recommendation in JSON format. Include a title, description, and an array of milestones. Each milestone should have a title, description, timeframe, and relevant learning resources (including URLs to real courses, books, or tutorials).
+
+Questions and Responses:
+${questions.map((q, i) => `Q: ${q}\nA: ${responses[i]}`).join("\n\n")}
+
+Response Format:
+{
+  "title": "Career Path Title",
+  "description": "Detailed description of the career path",
+  "milestones": [
+    {
+      "title": "Milestone Title",
+      "description": "Detailed description of the milestone",
+      "timeframe": "Expected duration or timeline",
+      "resources": [
+        {
+          "title": "Resource Title",
+          "url": "Resource URL",
+          "type": "Course/Book/Tutorial/etc"
+        }
+      ]
+    }
+  ]
+}`;
     
-    if (!questions || questions.length !== 6) {
-        return res.status(400).json({ error: "Exactly 6 questions are required." });
-    }
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const text = response.text();
 
-    try {
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-        const prompt = `Based on the following questions and responses, generate a career path JSON with milestones, descriptions, details, and resources: ${JSON.stringify(questions)}`;
-        
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const text = response.text();
+    // Validate JSON structure
+    JSON.parse(text);
 
-        res.json({ career_path: text });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+    res.json({ career_path: text });
+  } catch (error) {
+    console.error("Error generating career path:", error);
+    res.status(500).json({ error: "Failed to generate career path. Please try again." });
+  }
 });
 
-// Route to suggest follow-up questions based on user responses
-app.post("/suggest-questions", async (req, res) => {
-    const { questions, responses } = req.body;
+app.post("/next-question", async (req, res) => {
+  const { questions, responses } = req.body;
+
+  if (!questions || !responses || questions.length !== responses.length) {
+    return res.status(400).json({ error: "Questions and responses should have equal length." });
+  }
+
+  if (questions.length >= 6) {
+    return res.status(400).json({ error: "Maximum of 6 questions allowed." });
+  }
+
+  try {
+    const model = genAI.getGenerativeModel({ model: "gemini-pro" });
+    const prompt = `Based on these previous questions and responses:
+${questions.map((q, i) => `Q: ${q}\nA: ${responses[i]}`).join("\n\n")}
+
+Generate the next career-focused question that will help understand the user's:
+- Skills and experience
+- Work preferences
+- Learning style
+- Career goals
+- Values and motivations
+
+Make the question specific and thought-provoking. Format it as a complete question (not fill-in-the-blank).`;
     
-    if (!questions || !responses || questions.length !== responses.length) {
-        return res.status(400).json({ error: "Questions and responses are required and should be of equal length." });
-    }
+    const result = await model.generateContent(prompt);
+    const response = await result.response;
+    const nextQuestion = response.text();
 
-    try {
-        const model = genAI.getGenerativeModel({ model: "gemini-pro" });
-        const prompt = `Given these previous questions and responses: ${JSON.stringify(questions.map((q, i) => ({ question: q, response: responses[i] })))}, suggest the next relevant question to guide career exploration along with 5 multiple-choice options. Stop at 6 questions.`;
-        
-        const result = await model.generateContent(prompt);
-        const response = await result.response;
-        const nextQuestionWithOptions = response.text();
-        
-        const updatedQuestions = [...questions, nextQuestionWithOptions];
-        const updatedResponses = [...responses, "Pending Response"];
+    const updatedQuestions = [...questions, nextQuestion];
+    const updatedResponses = [...responses, ""];
 
-        if (updatedQuestions.length === 6) {
-            const careerResponse = await fetch("http://localhost:3000/career-path", {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ questions: updatedQuestions, responses: updatedResponses })
-            });
-            const careerPath = await careerResponse.json();
-            return res.json({ questions: updatedQuestions, responses: updatedResponses, career_path: careerPath });
-        }
-
-        res.json({ questions: updatedQuestions, responses: updatedResponses });
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
+    res.json({
+      next_question: nextQuestion,
+      questions: updatedQuestions,
+      responses: updatedResponses
+    });
+  } catch (error) {
+    console.error("Error generating next question:", error);
+    res.status(500).json({ error: "Failed to generate next question. Please try again." });
+  }
 });
 
 app.listen(port, () => {
-    console.log(`Server running on http://localhost:${port}`);
+  console.log(`Server running on http://localhost:${port}`);
 });
