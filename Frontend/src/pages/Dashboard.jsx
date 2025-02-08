@@ -85,7 +85,7 @@ const Dashboard = () => {
       {/* Main Content Container */}
       <div className="pt-17 w-full px-4 rounded-3xl">
         {/* Scrollable content container */}
-        <div className="h-[calc(100vh-80px)] overflow-y-auto scrollbar-hidden rounded-2xl bg-black dark:bg-gray-800">
+        <div className="h-[calc(100vh-80px)] overflow-y-auto scrollbar-hidden rounded-4xl bg-black dark:bg-gray-800">
           <div className="grid grid-cols-1 gap-8">
             <ActivePageComponent />
           </div>

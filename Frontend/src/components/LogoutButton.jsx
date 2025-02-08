@@ -7,10 +7,10 @@ const LogoutButton = () => {
     return (
       <>
         <button
-          className="btn btn-primary logoutBtn"
+          className="btn btn-primary logoutBtn text-xl pl-5 hover:text-red-600 cursor-pointer rounded-full "
           onClick={() => logout({ returnTo: window.location.origin })}
         >
-          Log Out
+          <i className="ri-logout-box-r-line"></i>
         </button>
         <br />
       </>
