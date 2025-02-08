@@ -16,6 +16,8 @@ const App = () => {
         <Routes>
           <Route path="/" element={isAuthenticated ? <Navigate to="/dashboard" /> : <Landing />} />
           <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
+          <Route path="/store" element={<h1>Store</h1>} />
+         
         </Routes>
       </Provider>
     </Router>
