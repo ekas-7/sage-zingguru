@@ -8,19 +8,12 @@ import {
   Minus,
   Divide,
   RefreshCw,
-<<<<<<< HEAD
   Circle,
   X
-=======
-  X,
-  Maximize,
-  Minimize
->>>>>>> 29cf23ef45bf2c76880ba405a69c7bac3da43f2d
 } from "lucide-react";
 
 const BottomNav = () => {
   const [activeTool, setActiveTool] = useState(null);
-  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const handleToolClick = (tool) => {
     setActiveTool(activeTool === tool ? null : tool);
@@ -65,13 +58,6 @@ const BottomNav = () => {
         </NavButton>
         <NavButton onClick={() => handleToolClick('meditation')}>
           <Circle className="w-5 h-5 text-black dark:text-white" />
-        </NavButton>
-        <NavButton onClick={toggleFullScreen}>
-          {isFullScreen ? (
-            <Minimize className="w-5 h-5 text-black dark:text-white" />
-          ) : (
-            <Maximize className="w-5 h-5 text-black dark:text-white" />
-          )}
         </NavButton>
       </div>
 
@@ -384,14 +370,6 @@ const MeditationWidget = () => {
         >
           {isPlaying ? 'Pause' : timeLeft === 0 ? 'Restart' : 'Start'}
         </button>
-
-        {/* Stop Button */}
-        <button
-          onClick={handleStop}
-          className="mt-2 px-6 py-2 bg-red-500 hover:bg-red-600 rounded-full text-white font-medium transition-colors"
-        >
-          Stop
-        </button>
       </div>
     </WidgetContainer>
   );
@@ -425,7 +403,7 @@ const TimerWidget = () => {
       }, 1000);
     }
     return () => clearInterval(timer);
-  }, [isRunning]);
+  }, [isRunning, timeLeft]);
 
   const playAlarm = () => {
     // Create and play a simple beep sound
@@ -453,6 +431,11 @@ const TimerWidget = () => {
   const handleReset = () => {
     setTimeLeft(selectedPreset || 0);
     setIsRunning(false);
+  };
+
+  const handleStop = () => {
+    setIsRunning(false);
+    setTimeLeft(0); // Reset time when stopping
   };
 
   const formatTime = (totalSeconds) => {
@@ -497,8 +480,10 @@ const TimerWidget = () => {
         >
           {isRunning ? 'Pause' : 'Start'}
         </button>
+        
+        {/* Stop Button */}
         <button
-          onClick={handleReset}
+          onClick={handleStop}
           disabled={!selectedPreset}
           className={`p-3 rounded-full transition-colors ${
             selectedPreset 
@@ -506,7 +491,7 @@ const TimerWidget = () => {
               : 'bg-gray-300 dark:bg-gray-700'
           }`}
         >
-          <RefreshCw className="w-4 h-4 dark:text-white" />
+          Stop
         </button>
       </div>
     </WidgetContainer>

@@ -3,7 +3,6 @@ import BookShell from "./BookShell";
 import Center from "./Center";
 import Calendar from "./Calendar";
 import Checklist from "./Checklist";
-
 import VideosURLs from '../../assets/VideosURL.json';
 
 function MainStudio() {
