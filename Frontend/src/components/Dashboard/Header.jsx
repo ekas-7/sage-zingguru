@@ -95,6 +95,8 @@ export const Header = ({ onNavItemClick, activePage }) => {
           </div>
         )}
 
+        
+
         {/* Desktop Profile */}
         <div className="hidden md:flex">
           <UserProfile />

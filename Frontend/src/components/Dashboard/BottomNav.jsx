@@ -8,15 +8,43 @@ import {
   Minus,
   Divide,
   RefreshCw,
-  X
+  X,
+  Maximize,
+  Minimize
 } from "lucide-react";
 
 const BottomNav = () => {
   const [activeTool, setActiveTool] = useState(null);
+  const [isFullScreen, setIsFullScreen] = useState(false);
 
   const handleToolClick = (tool) => {
     setActiveTool(activeTool === tool ? null : tool);
   };
+
+  const toggleFullScreen = () => {
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().then(() => {
+        setIsFullScreen(true);
+      }).catch((err) => {
+        console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+      });
+    } else {
+      document.exitFullscreen().then(() => {
+        setIsFullScreen(false);
+      }).catch((err) => {
+        console.error(`Error attempting to exit full-screen mode: ${err.message}`);
+      });
+    }
+  };
+
+  useEffect(() => {
+    const handleFullScreenChange = () => {
+      setIsFullScreen(!!document.fullscreenElement);
+    };
+
+    document.addEventListener('fullscreenchange', handleFullScreenChange);
+    return () => document.removeEventListener('fullscreenchange', handleFullScreenChange);
+  }, []);
 
   return (
     <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 z-50">
@@ -32,6 +60,13 @@ const BottomNav = () => {
         </NavButton>
         <NavButton onClick={() => handleToolClick('settings')}>
           <Settings className="w-5 h-5 text-black dark:text-white" />
+        </NavButton>
+        <NavButton onClick={toggleFullScreen}>
+          {isFullScreen ? (
+            <Minimize className="w-5 h-5 text-black dark:text-white" />
+          ) : (
+            <Maximize className="w-5 h-5 text-black dark:text-white" />
+          )}
         </NavButton>
       </div>
 
