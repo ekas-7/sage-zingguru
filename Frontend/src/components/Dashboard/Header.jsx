@@ -9,10 +9,7 @@ import { useSelector } from "react-redux";
 
 export const Header = ({ onNavItemClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const activePage = useSelector((state) => state.navigation.activeItem);
- 
-  const extension = () => {}
+  const [activePage, setActivePage] = useState('home'); // Add state for active page
 
   const navItems = [
     { id: "home", icon: Home, label: "Home" },
@@ -25,6 +22,7 @@ export const Header = ({ onNavItemClick }) => {
   ];
 
   const handleNavItemClick = (id) => {
+    setActivePage(id); // Update active page when clicking
     onNavItemClick(id);
     setIsMobileMenuOpen(false);
   };
@@ -69,8 +67,9 @@ export const Header = ({ onNavItemClick }) => {
           </div>
         </div>
         
- 
-        
+        <div className="pr-5 text-xl cursor-pointer" >
+        <i className="ri-puzzle-line"></i>
+        </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (

@@ -10,6 +10,9 @@ import {
   RefreshCw,
   Circle,
   X
+  X,
+  Minimize,
+  Maximize
 } from "lucide-react";
 
 const BottomNav = () => {
