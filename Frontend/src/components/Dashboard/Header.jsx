@@ -26,6 +26,7 @@ export const Header = ({ onNavItemClick }) => {
     { id: "career-path", icon: Briefcase, label: "Career Path" },
     { id: "video-summarizer", icon: PlaySquare, label: "Video Summarizer" },
     { id: "studio", icon: KeyboardMusic, label: "Studio" },
+    // { id: "whiteboard", icon: Pencil , label: "whiteboard" },
   ];
 
   const handleNavItemClick = (id) => {

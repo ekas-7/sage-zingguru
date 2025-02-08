@@ -10,12 +10,12 @@ import CareerPath from '../components/Dashboard/CareerPath';
 import VideoSummarizer from '../components/Dashboard/VideoSummarizer'
 import MilestonePage from '../components/Dashboard/Milestones/MilestonePage';
 import MainStudio from '../components/studio/MainStudio';
-
+import Whiteboard from '../components/Excal/WhiteBoard';
 import { useSelector,useDispatch } from 'react-redux';
 import { setActiveItem } from '../store/navigationSlice';
 
 // Import icons
-import { Home as HomeIcon, Cpu, Notebook, Briefcase, PlaySquare,Milestone, KeyboardMusic } from 'lucide-react';
+import { Home as HomeIcon, Cpu, Notebook, Briefcase, PlaySquare,Milestone, KeyboardMusic ,Pencil } from 'lucide-react';
 
 const Dashboard = () => {
   // State to keep track of the current active page
@@ -61,6 +61,12 @@ const Dashboard = () => {
       label: "Studio", 
       component: MainStudio 
     },
+    // {
+    //   id : "whiteboard",
+    //   icon : Pencil,
+    //   label : "whiteboard",
+    //   component : Whiteboard
+    // }
   ];
 
   // Find the current page component
