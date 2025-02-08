@@ -75,10 +75,10 @@ export const Header = ({ onNavItemClick }) => {
           </div>
         </div>
         
-        <div className={`flex items-center gap-2 p-2 rounded-lg ${badge.color}`}> 
-      {badge.icon}
-      <span className="text-white font-bold capitalize">Gold</span>
-    </div>
+        <div className={`flex items-center gap-2 p-2 mr-2 rounded-lg ${badge.color}`}> 
+        {badge.icon}
+        <span className="text-white font-bold mr-2 capitalize">Gold</span>
+       </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
