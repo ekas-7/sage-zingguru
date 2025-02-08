@@ -1,0 +1,57 @@
+[
+  {
+    "milestone": "Learn Programming Basics",
+    "description": "Start with fundamental programming concepts.",
+    "details": [
+      "Choose a language: Python, JavaScript, Java, C++",
+      "Learn variables, loops, functions, and OOP",
+      "Practice basic problems on platforms like LeetCode, CodeChef"
+    ],
+    "resources": ["CS50 Harvard", "Python Crash Course", "freeCodeCamp"],
+    "link" : "https://www.youtube.com/watch?v=X8ipUgXH6jw"
+  },
+  {
+    "milestone": "Master Data Structures & Algorithms",
+    "description": "Understand how data structures and algorithms work.",
+    "details": [
+      "Study Arrays, Linked Lists, Stacks, Queues, Trees, Graphs",
+      "Learn sorting, searching, dynamic programming",
+      "Solve at least 100 problems on LeetCode"
+    ],
+    "resources": ["NeetCode", "GeeksforGeeks", "Cracking the Coding Interview"],
+    "link" : "https://www.youtube.com/watch?v=X8ipUgXH6jw"
+  },
+  {
+    "milestone": "Learn Version Control",
+    "description": "Understand how to manage code versions and collaborate with Git.",
+    "details": [
+      "Learn Git basics: commit, push, pull, branches",
+      "Use GitHub for project management",
+      "Contribute to open-source projects"
+    ],
+    "resources": ["Pro Git Book", "GitHub Docs", "Try Git by Atlassian"],
+    "link" : "https://www.youtube.com/watch?v=X8ipUgXH6jw"
+  },
+  {
+    "milestone": "Understand System Design Basics",
+    "description": "Learn how to design scalable applications.",
+    "details": [
+      "Understand databases (SQL vs NoSQL)",
+      "Learn about caching, load balancing, and microservices",
+      "Read system design case studies"
+    ],
+    "resources": ["System Design Primer", "Grokking the System Design Interview"],
+    "link" : "https://www.youtube.com/watch?v=X8ipUgXH6jw"
+  },
+  {
+    "milestone": "Build Real-World Projects",
+    "description": "Apply your knowledge by building software projects.",
+    "details": [
+      "Create a portfolio website",
+      "Develop a CRUD-based application",
+      "Contribute to open-source repositories"
+    ],
+    "resources": ["Frontend Mentor", "Dev.to", "Hackathons"],
+    "link" : "https://www.youtube.com/watch?v=X8ipUgXH6jw"
+  }
+]
