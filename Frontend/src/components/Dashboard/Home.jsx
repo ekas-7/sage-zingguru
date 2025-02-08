@@ -1,10 +1,29 @@
 import React from "react";
-import Roadmap from "./Roadmap";
+import Roadmap from "../Dashboard/CareerPaths/Roadmap";
 import { SearchBar } from "./SearchBar";
 import ProgressBar from "./ProgressBar";
 import Events from "./Events";
 import VoiceAssistant from './VoiceAssistant'
 import {Plus,Minus} from 'lucide-react'
+
+const careerData = {
+  "Software Developer": {
+    roadmap: [
+      {
+        milestone: "Learn Programming Basics",
+        description: "Start with fundamental programming concepts.",
+        details: [
+          "Choose a language: Python, JavaScript, Java, C++",
+          "Learn variables, loops, functions, and OOP",
+          "Practice basic problems on platforms like LeetCode, CodeChef",
+        ],
+        resources: ["CS50 Harvard", "Python Crash Course", "freeCodeCamp"],
+      },
+      // ... rest of the data
+    ],
+  },
+  // ... rest of the careers
+}
 
 const Home = () => {
   const stats = [
@@ -58,7 +77,7 @@ const Home = () => {
       <div className="flex flex-col md:flex-row justify-evenly gap-8">
         {/* Roadmap Section */}
         <div className="flex flex-col">
-          <Roadmap />
+          <Roadmap careers={careerData}/>
 
           {/* Progress Bar */}
           <div className="mt-6">

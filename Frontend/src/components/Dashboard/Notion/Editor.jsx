@@ -1,12 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import EditorJS from "@editorjs/editorjs";
 
-const EditorComponent = ({ initialData, onSave }) => {
+const Editor = ({ initialData, onSave }) => {
   const editorInstance = useRef(null);
 
   console.log(initialData);
   
-
   useEffect(() => {
     const initEditor = async () => {
       const Header = (await import("@editorjs/header")).default;
@@ -79,4 +78,4 @@ const EditorComponent = ({ initialData, onSave }) => {
   );
 };
 
-export default EditorComponent;
+export default Editor;
