@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Milestone from "../../../assets/Milestone.json";
 import { format, addDays, isBefore, isToday, isAfter } from "date-fns";
-import {useNavigate} from 'react-router-dom'
 import {useDispatch} from 'react-redux'
 import { setUrl } from "../../../store/userSlice";
 import { setActiveItem } from "../../../store/navigationSlice";
@@ -10,7 +9,6 @@ import { motion } from 'framer-motion';
 function Milestones() {
   const startDate = new Date(); // Today's Date
   const today = new Date(); // Current Date
-  const navigate = useNavigate();
 
   const dispatch = useDispatch();
   
