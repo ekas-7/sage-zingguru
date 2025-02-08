@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, CardHeader, CardContent } from "./Card";
 import { Search, ChevronDown, ChevronUp, Play, CheckCircle, Clock, Lock } from 'lucide-react';
-import { ReactComponent as EmptyStateSVG } from '../../assets/empty-state.svg';
 
 const MilestoneCard = ({ milestone, index, isCompleted, isOngoing, isLocked, shouldShow }) => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -13,6 +12,7 @@ const MilestoneCard = ({ milestone, index, isCompleted, isOngoing, isLocked, sho
     if (isLocked) return "bg-gray-400";
     return "bg-yellow-500";
   };
+
 
   const getStatusText = () => {
     if (isCompleted) return "Completed";
@@ -139,6 +139,11 @@ const Roadmap = ({ path, title }) => {
     });
   }, [path]);
 
+  const getImageNumber = (index) => {
+    // Cycle through 1-9 based on index
+    return (index % 9) + 1;
+  };
+
   return (
     <div className="w-full max-w-6xl p-4 md:p-6 mx-auto">
       <style jsx global>{`
@@ -156,11 +161,12 @@ const Roadmap = ({ path, title }) => {
 
         {path.roadmap.length === 0 ? (
           <div className="flex flex-col items-center justify-center h-full">
-            <EmptyStateSVG className="w-32 h-32 mb-4" />
+            
             <p className="text-gray-500">No milestones available.</p>
           </div>
         ) : (
           path.roadmap.map((milestone, index) => {
+            const imageNumber = getImageNumber(index);
             const isCompleted = index < completedMilestones;
             const isOngoing = index === completedMilestones;
             const isLocked = index > completedMilestones + 1;
@@ -169,6 +175,7 @@ const Roadmap = ({ path, title }) => {
             return (
               <div key={milestone.milestone} className="relative mb-8">
                 <div className={`flex flex-col md:flex-row items-center ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
+                  {/* Milestone Card */}
                   <div className={`w-full md:w-5/12 p-4 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
                     <MilestoneCard 
                       milestone={milestone}
@@ -190,7 +197,25 @@ const Roadmap = ({ path, title }) => {
                     />
                   </div>
 
-                  <div className="hidden md:block w-5/12" />
+                  {/* Image Container */}
+                  <div className={`w-5/12 p-4 hidden md:block ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
+                    {(
+                      <div className={`relative h-full flex justify-center items-center transform transition-all duration-500 delay-300 ${
+                        shouldShow ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+                      }`}>
+                        <img 
+                          src={`/${imageNumber}.png`}  
+                          alt={milestone.milestone} 
+                          className="w-48 object-contain "
+                        />
+                        {milestone.imageCaption && (
+                          <p className="mt-2 text-sm text-gray-600 text-center">
+                            {milestone.imageCaption}
+                          </p>
+                        )}
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             );
@@ -201,4 +226,4 @@ const Roadmap = ({ path, title }) => {
   );
 };
 
-export default Roadmap;
+export default Roadmap
