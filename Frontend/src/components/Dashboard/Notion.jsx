@@ -211,9 +211,7 @@ const Notion = () => {
               >
                 <div className="bg-gray-200 dark:bg-gray-900 px-5 py-3 rounded-3xl flex items-center justify-between">
                   <h3 className="font-semibold text-black dark:text-white">{selectedFile}</h3>
-                  <button onClick={() => saveNote(initialData)} className="px-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] text-black rounded-full hover:bg-[#c0d32a]">
-                    Save
-                  </button> */}
+                  
                 </div>
                 <Editor initialData={initialData} onSave={saveNote} />
               </motion.div>
