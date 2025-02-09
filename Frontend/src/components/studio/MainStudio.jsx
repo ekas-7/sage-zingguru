@@ -10,7 +10,7 @@ function MainStudio() {
   const [date, setDate] = useState(new Date());
 
   return (
-    <div className="relative overflow-hidden">
+    <div className="relative overflow-hidden h-full">
       <div className="border border-gray-200 dark:border-gray-800 rounded-2xl p-6 h-full grid grid-cols-11 grid-rows-6 gap-6 dark:bg-gray-800 ">
         {/* Bookshelf Section */}
         

@@ -10,7 +10,8 @@ import CareerPath from '../components/Dashboard/CareerPath';
 import VideoSummarizer from '../components/Dashboard/VideoSummarizer'
 import MilestonePage from '../components/Dashboard/Milestones/MilestonePage';
 import MainStudio from '../components/studio/MainStudio';
-import Whiteboard from '../components/Excal/WhiteBoard';
+import WhiteBoard from '../components/Excal/WhiteBoard'
+
 import { useSelector,useDispatch } from 'react-redux';
 import { setActiveItem } from '../store/navigationSlice';
 
@@ -61,12 +62,12 @@ const Dashboard = () => {
       label: "Studio", 
       component: MainStudio 
     },
-    // {
-    //   id : "whiteboard",
-    //   icon : Pencil,
-    //   label : "whiteboard",
-    //   component : Whiteboard
-    // }
+    {
+      id : "whiteboard",
+      icon : Pencil,
+      label : "whiteboard",
+      component : WhiteBoard
+    }
   ];
 
   // Find the current page component
