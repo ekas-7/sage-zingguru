@@ -28,7 +28,7 @@ const App = () => {
     <Router>
       <Provider store={store}>
         <Routes>
-          <Route path="/" element={isAuthenticated ? (isFirstTime ? <Navigate to="/career" /> : <Navigate to="/dashboard" />) : <Landing />} />
+          <Route path="/" element={isAuthenticated ?  <Navigate to="/dashboard" /> : <Landing />} />
           <Route path="/dashboard" element={isAuthenticated ? <Dashboard /> : <Navigate to="/" />} />
           <Route path="/whiteboard" element={<Whiteboard />} />
          
