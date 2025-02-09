@@ -112,16 +112,6 @@ python app.py
 ```
 
 ---
-
-## 📡 API Endpoints  
-
-### 🔹 Authentication  
-```http
-POST /api/auth/register  
-POST /api/auth/login  
-POST /api/auth/logout  
-```
-
 ## 🏗️ System Architecture  
 
 ```plaintext
@@ -129,15 +119,6 @@ User Request ➝ Frontend (React) ➝ API Gateway ➝ Backend (Node.js, Express)
 ➝ Database (PostgreSQL) ➝ AI Services (OpenAI, TensorFlow, LangChain)  
 ➝ Caching (Redis) ➝ Storage (AWS S3)  
 ``` 
-
----
-
-## 🔒 Security & Compliance  
-
-✅ **JWT-based authentication** for secure logins.  
-✅ **OAuth 2.0 integration** for third-party logins.  
-✅ **Rate limiting & DDoS protection** for API security.  
-✅ **GDPR & COPPA compliance** for user data protection.  
 
 ---
 
