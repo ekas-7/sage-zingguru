@@ -101,14 +101,14 @@ npm install
 
 ### 🔹 Start the Development Server  
 ```bash
-npm start
+npm run dev
 ```
 
 ### 🔹 Backend Setup  
 ```bash
 cd backend
-npm install
-node server.js
+pip install -r requirements.txt
+python app.py
 ```
 
 ---
