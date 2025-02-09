@@ -10,6 +10,11 @@ const Notion = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFileId, setSelectedFileId] = useState(null);
   const [creatingFile, setCreatingFile] = useState(false);
+  const [currData,setCurrData] = useState({
+    time: Date.now(),
+    blocks: [{ type: "header", data: { text: "Start typing here...", level: 2 } }],
+    version: "2.11.10",
+  })
   const [initialData, setInitialData] = useState({
     time: Date.now(),
     blocks: [{ type: "header", data: { text: "Start typing here...", level: 2 } }],
@@ -35,13 +40,21 @@ const Notion = () => {
 
   /** 🔹 Save Note to Firestore **/
   const saveNote = async (data) => {
-    if (!selectedFileId) {
-      alert("Please select a file first.");
+    if (!selectedFile) {
+      alert("Please create or select a file first.");
       return;
     }
+    console.log(data);
+
     try {
+      // Update the document in the "notionFiles" collection with the selected file ID
       const noteRef = doc(db, "notionFiles", selectedFileId);
-      await updateDoc(noteRef, { data });
+
+      await updateDoc(noteRef, {
+        data:data  // Update the 'data' field with the new content
+      });
+
+      console.log("Saved Note:", data);
       alert("Note saved successfully!");
     } catch (error) {
       console.error("Error saving note:", error);
@@ -94,8 +107,8 @@ const Notion = () => {
 
       const newNotes = notes.filter(note => note.id !== file.id)
       setNotes(newNotes)
-      selectedFile('')
-      selectedFileId('');
+      setSelectedFile('')
+      setSelectedFileId('');
     }
     catch(err){
       console.log("Error in deleting the notion : ",err);
@@ -172,9 +185,9 @@ const Notion = () => {
               <div className="h-full flex flex-col rounded-3xl shadow-lg overflow-hidden">
                 <div className="bg-gray-200 dark:bg-gray-900 px-5 py-3 flex items-center justify-between">
                   <h3 className="font-semibold text-black dark:text-white">{selectedFile}</h3>
-                  <button onClick={() => saveNote(initialData)} className="px-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] text-black rounded-full hover:bg-[#c0d32a]">
+                  {/* <button onClick={() => saveNote(initialData)} className="px-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] text-black rounded-full hover:bg-[#c0d32a]">
                     Save
-                  </button>
+                  </button> */}
                 </div>
                 <Editor initialData={initialData} onSave={saveNote} />
               </div>
