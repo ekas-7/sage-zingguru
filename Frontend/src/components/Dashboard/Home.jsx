@@ -7,6 +7,8 @@ import VoiceAssistant from "./VoiceAssistant";
 import { Plus, Minus } from "lucide-react";
 import { careerData } from "./CareerPaths/careerData";
 import { motion } from "framer-motion";
+import Leaderboard from "./Leaderboard";
+import NFTStore from "./NFTStore";
 
 const Home = () => {
   const stats = [
@@ -77,12 +79,31 @@ const Home = () => {
           </div>
           
           <div className="space-y-6 p-4">
-            {/* Events */}
+            {/* Leaderboard */}
             <motion.div 
               className="bg-white dark:bg-gray-900 rounded-4xl p-4 shadow-md"
               initial={{ opacity: 0, x: 20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5 }}
+            >
+              <Leaderboard />
+            </motion.div>
+
+            <motion.div 
+              className="bg-white dark:bg-gray-900 rounded-4xl p-4 shadow-md"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5 }}
+            >
+              <NFTStore />
+            </motion.div>
+
+            {/* Events */}
+            <motion.div 
+              className="bg-white dark:bg-gray-900 rounded-4xl p-4 shadow-md"
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.5,delay:0.1 }}
             >
               <Events />
             </motion.div>

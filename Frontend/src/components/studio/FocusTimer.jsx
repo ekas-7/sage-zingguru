@@ -1,13 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { Timer, X, Play, PauseCircle, Coins, Maximize, Minimize } from 'lucide-react';
+import { useDispatch,useSelector } from 'react-redux';
+import { setNft } from '../../store/userSlice';
 
 const FocusTimer = () => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(false);
-  const [coins, setCoins] = useState(0);
+  // const [coins, setCoins] = useState(0);
   const [selectedDuration, setSelectedDuration] = useState(25);
   const [sessionCount, setSessionCount] = useState(0);
+
+  const dispatch = useDispatch();
+  const coins = useSelector((state) => state.user.nft);
 
   const durations = [
     { minutes: 25, coins: 50 },
@@ -51,7 +56,7 @@ const FocusTimer = () => {
 
   const handleSessionComplete = () => {
     const reward = durations.find(d => d.minutes === selectedDuration)?.coins || 0;
-    setCoins(prev => prev + reward);
+    dispatch(setCoins(prev => prev + reward));
     setSessionCount(prev => prev + 1);
     setIsRunning(false);
     playCompletionSound();
