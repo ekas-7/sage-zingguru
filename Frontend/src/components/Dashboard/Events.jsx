@@ -1,6 +1,7 @@
 import React from "react";
 import { events } from '../../data/mockData';
 import { Clock } from "lucide-react";
+import eventIcon from '../../../public/7.png'
 
 const Events = () => {
 
@@ -31,12 +32,16 @@ const Events = () => {
   return (
     <div className="bg-gray-200 dark:bg-gray-900 rounded-2xl shadow-lg p-4 md:p-6 px-auto h-fit lg:h-[63%] max-w-2xl">
       <div className="flex justify-between">
-      <h2 className="text-2xl font-bold flex items-center gap-2 mb-6">
-        My Events
-      </h2>
-      <div className="hover:scale-110 transition-transform cursor-pointer">
-      <Clock/>
-      </div>
+        <div className="flex gap-2">
+          <img src={eventIcon} alt="" className="w-10 h-10" />
+          <h2 className="text-2xl font-bold flex items-center gap-2 mb-6">
+            My Events
+          </h2>
+        </div>
+
+        <div className="hover:scale-110 transition-transform cursor-pointer">
+          <Clock />
+        </div>
       </div>
       <div className="grid grid-cols-1 gap-6">
         {events.map((event, index) => (

@@ -13,7 +13,7 @@ function Center({ playlist }) {
   };
 
   return (
-    <div className="flex flex-col bg-gray-200 dark:from-gray-900 dark:to-gray-800 rounded-xl overflow-hidden">
+    <div className="flex flex-col bg-gray-200 dark:bg-gray-900 rounded-xl overflow-hidden">
       {/* Video Player Section */}
       <div className="w-full p-6 flex-grow flex flex-col">
         {currentVideo ? (
