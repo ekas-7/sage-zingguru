@@ -26,14 +26,14 @@ function MainStudio() {
   return (
     <div className="relative overflow-hidden">
       <motion.div 
-        className="border border-gray-200 dark:border-gray-800 rounded-2xl p-6 h-full grid grid-cols-11 grid-rows-6 gap-6 dark:bg-gray-800"
+        className="border border-gray-200 dark:border-gray-800 rounded-2xl p-3 grid grid-cols-11 grid-rows-2 gap-3 dark:bg-gray-800"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
         {/* Bookshelf Section */}
         <motion.div 
-          className="col-span-3 row-span-3 bg-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl"
+          className="col-span-3 row-span-1 bg-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl"
           variants={itemVariants}
           transition={{ duration: 0.5 }}
         >
@@ -42,7 +42,7 @@ function MainStudio() {
 
         {/* Center Section */}
         <motion.div 
-          className="col-span-5 row-span-6 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-3xl shadow-lg overflow-hidden"
+          className="col-span-5 row-span-2 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-3xl shadow-lg "
           variants={itemVariants}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
@@ -51,7 +51,7 @@ function MainStudio() {
 
         {/* Checklist Section */}
         <motion.div 
-          className="col-span-3 row-span-3 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl relative overflow-hidden group"
+          className="col-span-3 row-span-1 bg-gradient-to-br from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl relative overflow-hidden group"
           variants={itemVariants}
           transition={{ duration: 0.5, delay: 0.4 }}
         >
@@ -61,7 +61,7 @@ function MainStudio() {
 
         {/* Focus Timer Section */}
         <motion.div 
-          className="col-span-3 row-span-3 bg-gradient-to-br dark:bg-gray-900 flex justify-center items-center rounded-3xl shadow-lg transition-all hover:shadow-xl"
+          className="col-span-3 row-span-1 bg-gradient-to-br dark:bg-gray-900 flex justify-center items-center rounded-3xl shadow-lg transition-all hover:shadow-xl"
           variants={itemVariants}
           transition={{ duration: 0.5, delay: 0.6 }}
         >
@@ -70,7 +70,7 @@ function MainStudio() {
 
         {/* Calendar Section */}
         <motion.div 
-          className="col-span-3 row-span-3 bg-gradient-to-br flex justify-center items-center dark:bg-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl"
+          className="col-span-3 row-span-1 bg-gradient-to-br flex justify-center items-center dark:bg-gray-900 rounded-3xl shadow-lg transition-all hover:shadow-xl"
           variants={itemVariants}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
