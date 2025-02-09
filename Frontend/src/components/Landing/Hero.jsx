@@ -30,7 +30,7 @@ export default function Hero() {
       <div className="max-w-full flex flex-col md:flex-row items-center gap-8 relative z-10">
         <div>
           <h1 className="text-6xl font-bold leading-tight mb-6 dark:text-white">
-            Learn Smarter with AI, <span className="bg-[#ADFF00] px-2 font-['Dancing_Script']">achieve</span> more together.
+            Learn Smarter with AI, <span className="bg-[#FFD700] dark:bg-[#ADFF00] text-black px-2 font-['Dancing_Script']">achieve</span> more together.
           </h1>
           <p className="text-gray-600 dark:text-gray-500 text-xl mb-12">
             Experience personalized learning with AI-driven paths, multilingual support, and 

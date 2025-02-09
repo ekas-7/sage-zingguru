@@ -15,7 +15,7 @@ export const UserProfile = () => {
       </Avatar>
       <div className="text-sm">
         <div>{user.name}</div>
-        <div className="text-xs text-gray-400">{user.email}</div>
+        <div className="text-xs text-gray-700 dark:text-gray-400">{user.email}</div>
       </div>
       <div><LogoutButton/></div>
     </div>

@@ -29,7 +29,7 @@ const Events = () => {
   };
 
   return (
-    <div className="bg-[#FEFCE8] dark:bg-gray-900 rounded-2xl shadow-lg p-4 md:p-6 px-auto h-fit lg:h-[63%] max-w-2xl">
+    <div className="bg-gray-200 dark:bg-gray-900 rounded-2xl shadow-lg p-4 md:p-6 px-auto h-fit lg:h-[63%] max-w-2xl">
       <div className="flex justify-between">
       <h2 className="text-2xl font-bold flex items-center gap-2 mb-6">
         My Events

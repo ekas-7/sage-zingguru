@@ -145,7 +145,7 @@ const Roadmap = ({ path, title }) => {
   };
 
   return (
-    <div className="w-full max-w-6xl p-4 md:p-6 mx-auto">
+    <div className="w-full max-w-6xl h-auto p-4 md:p-6 mx-auto">
       <style jsx global>{`
         .scrollbar-hide {
           -ms-overflow-style: none;  /* IE and Edge */

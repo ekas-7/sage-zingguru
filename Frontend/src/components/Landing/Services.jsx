@@ -47,7 +47,7 @@ export default function Services() {
     return (
       <div id="features" className="max-w-7xl mx-auto px-4 py-20">
         <h2 className="text-4xl font-bold mb-16 dark:text-white">
-          Our <span className="bg-[#ADFF00] px-2 font-['Dancing_Script']">Core</span> Features
+          Our <span className="bg-[#FFD700] dark:bg-[#ADFF00] px-2 font-['Dancing_Script']">Core</span> Features
         </h2>
         <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
           {services.map((service, index) => (
@@ -57,7 +57,7 @@ export default function Services() {
                 p-6 rounded-lg h-[280px] flex flex-col
                 transform transition-all duration-300
                 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700
-                hover:scale-105 hover:bg-[#ADFF00] hover:border-transparent
+                hover:scale-105 hover:bg-[#FFD700] dark:hover:bg-[#ADFF00] hover:border-transparent
                 group cursor-pointer
                 ${service.highlight 
                   ? "hover:shadow-[0_0_20px_rgba(173,255,0,0.3)]" 

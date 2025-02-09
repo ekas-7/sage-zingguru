@@ -23,8 +23,8 @@ function Milestones() {
   }
 
   return (
-    <div className="w-full h-full p-4 border border-gray-600 rounded-2xl shadow-lg flex flex-col overflow-hidden">
-      <h1 className="text-2xl font-bold mb-6 text-center text-white">
+    <div className="w-full h-full p-4 border bg-gray-100 dark:bg-gray-800 border-gray-300 dark:border-gray-600 rounded-2xl shadow-lg flex flex-col overflow-hidden">
+      <h1 className="text-2xl font-bold mb-6 text-center text-black dark:text-white">
         Software Developer Roadmap
       </h1>
       <div className="space-y-6 overflow-y-auto h-full scrollbar-hide">
@@ -50,7 +50,7 @@ function Milestones() {
               transition={{ duration: 0.3, delay: index * 0.1 }} // Delay for staggered loading
             >
               {/* Date Card */}
-              <div className="flex-shrink-0 text-center text-white w-24">
+              <div className="flex-shrink-0 text-center text-black dark:text-white w-24">
                 <p className="text-lg font-bold">{format(milestoneDate, "dd")}</p>
                 <p className="text-sm uppercase">{format(milestoneDate, "MMM yyyy")}</p>
               </div>
@@ -83,7 +83,7 @@ function Milestones() {
 
               {/* Tooltip for extra details */}
               {hoveredMilestone === milestone && (
-                <div className="absolute bg-gray-800 text-white text-sm rounded-lg p-2 shadow-lg z-10">
+                <div className="absolute bg-gray-200 dark:bg-gray-800 text-white text-sm rounded-lg p-2 shadow-lg z-10">
                   <p>{milestone.extraDetails}</p> {/* Assuming extraDetails is a property in your milestone object */}
                 </div>
               )}

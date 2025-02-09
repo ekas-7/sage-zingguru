@@ -65,21 +65,21 @@ const Whiteboard = () => {
   ];
 
   return (
-    <div className="relative w-full max-h-full bg-[#151515] rounded-2xl overflow-hidden">
+    <div className="relative w-full max-h-full bg-white dark:bg-[#151515] rounded-2xl overflow-hidden">
       {/* Floating Navigation Bar */}
       <div className="absolute top-4 left-1/2 transform -translate-x-1/2 z-10 w-auto">
-        <div className="bg-gray-700/80 backdrop-blur-sm p-1.5 rounded-xl shadow-lg">
+        <div className="bg-[#50A8FF] dark:bg-gray-700/80 backdrop-blur-sm p-1.5 px-2 rounded-full shadow-lg">
           <div className="flex items-center gap-5">
             {/* Tools Group */}
-            <div className="flex items-center space-x-3 bg-gray-600/50 p-1 rounded-lg">
+            <div className="flex items-center space-x-3 bg-gray-200 dark:bg-gray-600/50 p-1 rounded-full">
               {tools.map(({ name, icon: Icon }) => (
                 <button
                   key={name}
                   onClick={() => setTool(name)}
-                  className={`p-1 rounded-lg transition-all ${
+                  className={`p-1 rounded-full transition-all ${
                     tool === name 
                       ? 'bg-blue-500 text-white shadow-lg' 
-                      : 'text-gray-300 hover:bg-gray-500/80'
+                      : ' text-black dark:text-gray-300 hover:bg-gray-500/80'
                   }`}
                 >
                   <Icon size={16} />
@@ -88,32 +88,32 @@ const Whiteboard = () => {
             </div>
 
             {/* Color Picker */}
-            <div className="flex items-center space-x-3 bg-gray-600/50 p-1 rounded-lg">
-              <Palette size={16} className="text-gray-300" />
+            <div className="flex items-center space-x-3 bg-gray-200 dark:bg-gray-600/50 p-1 px-2 rounded-full">
+              <Palette size={16} className="text-black dark:text-gray-300" />
               <input
                 type="color"
                 value={color}
                 onChange={(e) => setColor(e.target.value)}
-                className="w-8 h-8 rounded border-0 bg-transparent cursor-pointer"
+                className="w-6 h-6 rounded-full border-0 bg-transparent  cursor-pointer"
               />
             </div>
 
             {/* Divider */}
-            <div className="h-8 w-px bg-gray-500"></div>
+            <div className="h-8 w-px bg-white dark:bg-gray-500"></div>
 
             {/* Actions Group */}
             <div className="flex items-center space-x-2">
               <button
                 onClick={undo}
                 disabled={elements.length === 0}
-                className="p-1 text-gray-300 hover:bg-gray-600/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-1 text-black dark:text-gray-300 hover:bg-gray-600/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <Undo2 size={16} />
               </button>
               <button
                 onClick={redo}
                 disabled={history.length < 1}
-                className="p-1 text-gray-300 hover:bg-gray-600/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="p-1 text-black dark:text-gray-300 hover:bg-gray-600/50 rounded-lg disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
               >
                 <Redo2 size={16} />
               </button>

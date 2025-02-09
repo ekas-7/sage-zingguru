@@ -16,7 +16,7 @@ const Home = () => {
   ];
 
   return (
-    <div className="max-w-full rounded-3xl bg-[#FEFCE8] dark:bg-gray-800 dark:text-white shadow-lg transition-all min-h-screen">
+    <div className="max-w-full rounded-3xl bg-white dark:bg-gray-800 dark:text-white shadow-lg transition-all min-h-screen">
       <style jsx global>{`
         .scrollbar-hide {
           -ms-overflow-style: none;
@@ -51,7 +51,7 @@ const Home = () => {
             {stats.map((stat, index) => (
               <motion.div
                 key={stat.label}
-                className={`bg-[#ADFF00] p-4 rounded-3xl text-center`}
+                className={`bg-[#FFD700] dark:bg-[#ADFF00] p-4 rounded-3xl text-center`}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.1 }}
@@ -63,7 +63,7 @@ const Home = () => {
           </motion.div>
 
           {/* Roadmap */}
-          <div className="w-full">
+          <div className="w-full h-full">
             <Roadmap
               path={careerData["Machine Learning Engineer"]}
               title="Software Developer Career Path"
@@ -72,11 +72,8 @@ const Home = () => {
         </div>
 
         {/* Scrollable Sidebar Content (2/5 width on desktop) */}
-        <div className="lg:col-span-2 mobile-order dark:bg-[#364153] h-auto lg:h-full overflow-y-auto scrollbar-hide">
-          <div className="sticky top-0 z-10 bg-[#364153] p-4">
-            <div className="flex justify-end">
-              
-            </div>
+        <div className="lg:col-span-2 mobile-order bg-white dark:bg-[#364153] h-auto lg:h-full overflow-y-auto scrollbar-hide">
+          <div className="sticky top-0 z-10 bg-white dark:bg-[#364153] p-4 pt-0">
           </div>
           
           <div className="space-y-6 p-4">
@@ -103,19 +100,8 @@ const Home = () => {
         </div>
       </div>
 
-      {/* Fixed Position Elements */}
-      <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6">
-        <VoiceAssistant />
-      </div>
 
-      <div className="fixed bottom-4 left-4 md:bottom-5 md:left-7 z-50 flex flex-col gap-2">
-        <button className="p-2 md:p-3 rounded-full bg-white dark:bg-gray-900 text-black dark:text-white shadow-lg hover:bg-blue-600 dark:hover:bg-blue-800 transition">
-          <Plus className="w-4 h-4 md:w-5 md:h-5" />
-        </button>
-        <button className="p-2 md:p-3 rounded-full bg-white dark:bg-gray-900 text-black dark:text-white shadow-lg hover:bg-red-600 dark:hover:bg-red-800 transition">
-          <Minus className="w-4 h-4 md:w-5 md:h-5" />
-        </button>
-      </div>
+     
     </div>
   );
 };

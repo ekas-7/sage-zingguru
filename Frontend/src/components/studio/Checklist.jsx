@@ -33,7 +33,7 @@ const Checklist = () => {
   };
 
   return (
-    <div className="bg-white h-full dark:bg-gray-900 rounded-3xl shadow-lg p-6 transition-all hover:shadow-xl">
+    <div className="bg-gray-200 h-full dark:bg-gray-900 rounded-3xl shadow-lg p-6 transition-all hover:shadow-xl">
       <h2 className="text-lg font-bold text-gray-800 dark:text-white mb-4">Checklist</h2>
       
       {/* Input and Button to Add New Checklist Item */}

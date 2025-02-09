@@ -56,7 +56,7 @@ export default function Contact() {
   return (
     <div id='contact' className="max-w-7xl mx-auto px-4 py-20">
       <h2 className="text-4xl font-bold mb-16 dark:text-white">
-        Get in <span className="bg-[#ADFF00] px-2 font-['Dancing_Script']">Touch</span>
+        Get in <span className="bg-[#FFD700] dark:bg-[#ADFF00] px-2 font-['Dancing_Script']">Touch</span>
       </h2>
       
       <div className="grid md:grid-cols-2 gap-16">
@@ -76,7 +76,7 @@ export default function Contact() {
                     type={FORM_FIELDS[field].type}
                     id={FORM_FIELDS[field].id}
                     placeholder={FORM_FIELDS[field].placeholder}
-                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#ADFF00] focus:border-transparent dark:bg-gray-700 dark:text-white"
+                    className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFD700] dark:focus:ring-[#ADFF00] focus:border-transparent dark:bg-gray-700 dark:text-white"
                   />
                 </div>
               ))}
@@ -93,7 +93,7 @@ export default function Contact() {
                 type={FORM_FIELDS.email.type}
                 id={FORM_FIELDS.email.id}
                 placeholder={FORM_FIELDS.email.placeholder}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#ADFF00] focus:border-transparent dark:bg-gray-700 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-[#FFD700] dark:focus:ring-[#ADFF00] focus:border-transparent dark:bg-gray-700 dark:text-white"
               />
             </div>
             
@@ -108,7 +108,7 @@ export default function Contact() {
                 id={FORM_FIELDS.message.id}
                 rows={FORM_FIELDS.message.rows}
                 placeholder={FORM_FIELDS.message.placeholder}
-                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg h-50 resize-none focus:ring-2 focus:ring-[#ADFF00] focus:border-transparent dark:bg-gray-700 dark:text-white"
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg h-50 resize-none focus:ring-2 focus:ring-[#FFD700] dark:focus:ring-[#ADFF00] focus:border-transparent dark:bg-gray-700 dark:text-white"
               />
             </div>
             
@@ -126,7 +126,7 @@ export default function Contact() {
           {Object.entries(CONTACT_INFO).map(([key, info]) => (
             <div key={key} className="bg-white dark:bg-gray-900 p-6 rounded-2xl shadow-lg transform transition-all duration-300 hover:scale-105">
               <div className="flex items-center gap-4">
-                <div className="bg-[#ADFF00] p-4 rounded-lg">
+                <div className="bg-[#FFD700] dark:bg-[#ADFF00] p-4 rounded-lg">
                   <info.icon className="h-6 w-6" />
                 </div>
                 <div>

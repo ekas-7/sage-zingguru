@@ -138,7 +138,7 @@ const VideoSummarizer = () => {
     <select
         value={selectedLanguage}
         onChange={(e) => setSelectedLanguage(e.target.value)}
-        className="p-3 rounded-lg bg-white dark:bg-gray-700 dark:text-white border border-gray-200 dark:border-gray-600"
+        className="p-3 rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white border border-gray-200 dark:border-gray-600"
     >
         <option value="en">English</option>
         <option value="hi">Hindi</option>
@@ -150,7 +150,7 @@ const VideoSummarizer = () => {
 );
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen bg-[#FEFCE8] dark:bg-gray-800">
+    <div className="flex flex-col lg:flex-row h-screen bg-white dark:bg-gray-800">
       {/* Main Content */}
       <div className="flex-1 p-6 overflow-y-auto">
         {/* Header */}
@@ -158,7 +158,7 @@ const VideoSummarizer = () => {
           <h1 className="text-2xl font-bold dark:text-white text-left">
             Video Summarizer
           </h1>
-          <div className="px-4 py-2 bg-[#ADFF00] rounded-lg mt-3 sm:mt-0">
+          <div className="px-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] rounded-lg mt-3 sm:mt-0">
             <span className="text-sm font-medium">
               Videos Analyzed: {analyzedCount}
             </span>
@@ -173,7 +173,7 @@ const VideoSummarizer = () => {
               value={videoUrl}
               onChange={(e) => setVideoUrl(e.target.value)}
               placeholder="Paste YouTube URL here..."
-              className="flex-1 p-3 rounded-lg bg-white dark:bg-gray-700 dark:text-white border border-gray-200 dark:border-gray-600"
+              className="flex-1 p-3 rounded-lg bg-gray-100 dark:bg-gray-700 dark:text-white border border-gray-200 dark:border-gray-600"
             />
             {renderLanguageSelector()}
             <button
@@ -212,14 +212,14 @@ const VideoSummarizer = () => {
               Drop your video file here
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-400">or</p>
-            <button className="mt-2 px-4 py-2 bg-[#ADFF00] rounded-lg hover:bg-[#9EE800]">
+            <button className="mt-2 px-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] rounded-lg">
               Browse Files
             </button>
           </div>
         </div>
 
         {/* Summary Section */}
-        <div className="bg-white dark:bg-gray-700 animate-fade-in-up delay-300 rounded-lg p-5 sm:p-6 mb-6">
+        <div className="bg-gray-100 dark:bg-gray-700 animate-fade-in-up delay-300 rounded-lg p-5 sm:p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4 dark:text-white">
             Summary
           </h2>
@@ -237,7 +237,7 @@ const VideoSummarizer = () => {
       </div>
 
       {/* Right Sidebar - Questions Generator */}
-      <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-gray-200 dark:border-gray-700 p-6 bg-white animate-fade-in-up delay-400 dark:bg-gray-700">
+      <div className="w-full md:w-80 border-t md:border-t-0 md:border-l border-gray-200 dark:border-gray-700 p-6 bg-gray-100 animate-fade-in-up delay-400 dark:bg-gray-700">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-lg font-semibold dark:text-white">Questions</h2>
         </div>
@@ -288,7 +288,7 @@ const VideoSummarizer = () => {
               <button
                 onClick={handleQuestions}
                 disabled={loadingQuestions}
-                className={`flex items-center justify-center gap-2 text-black bg-[#ADFF00] w-full rounded-xl p-3 mb-3 ${
+                className={`flex items-center justify-center gap-2 text-black bg-[#FFD700] dark:bg-[#ADFF00] w-full rounded-xl p-3 mb-3 ${
                   loadingQuestions
                     ? "cursor-not-allowed opacity-75"
                     : "cursor-pointer hover:scale-110"

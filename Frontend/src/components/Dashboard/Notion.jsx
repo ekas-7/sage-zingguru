@@ -86,11 +86,11 @@ const Notion = () => {
   };
 
   return (
-    <div className="w-full h-[calc(100vh-100px)] font-inter">
-      <div className="h-full bg-[#fffbea] dark:bg-gray-800 rounded-3xl p-4 md:p-6">
+    <div className="w-full h-full font-inter">
+      <div className="h-full bg-white dark:bg-gray-800 rounded-3xl p-4 md:p-6">
         <div className="flex flex-col lg:flex-row h-full gap-4">
           {/* Sidebar (Now Scrollable) */}
-          <div className="w-full lg:w-80 flex flex-col bg-gradient-to-b dark:bg-gray-900 dark:text-white p-5 rounded-3xl shadow-lg">
+          <div className="w-full lg:w-80 flex flex-col bg-gray-200  dark:bg-gray-900 dark:text-white p-5 rounded-3xl shadow-lg">
             <div className="mb-2 space-y-3">
               <div className="flex items-center gap-2 mb-4">
                 <h2 className="text-xl font-bold text-black dark:text-white">My Notes</h2>
@@ -102,13 +102,13 @@ const Notion = () => {
                   value={fileName}
                   onChange={(e) => setFileName(e.target.value)}
                   placeholder="New note name..."
-                  className="w-full p-3 bg-[#364153] rounded-2xl shadow-sm focus:outline-none"
+                  className="w-full p-3 bg-gray-100 dark:bg-[#364153] rounded-2xl shadow-sm focus:outline-none"
                 />
                 <button
                   onClick={createFile}
                   disabled={creatingFile}
-                  className={`w-full mt-2 p-3 bg-[#ADFF00] text-black rounded-2xl font-semibold flex items-center justify-center gap-2
-                    ${creatingFile ? "cursor-not-allowed opacity-90" : "hover:bg-gray-900 active:scale-95 transition-transform"}`}
+                  className={`w-full mt-2 p-3 bg-[#FFD700] dark:bg-[#ADFF00] text-black rounded-2xl font-semibold flex items-center justify-center gap-2
+                    ${creatingFile ? "cursor-not-allowed opacity-90" : "cursor-pointer active:scale-95 transition-transform"}`}
                 >
                   {creatingFile ? <Loader2 className="w-5 h-5 animate-spin" /> : <><Plus className="w-5 h-5" /> Create New</>}
                 </button>
@@ -135,12 +135,12 @@ const Notion = () => {
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.98 }}
                       className={`group p-3 cursor-pointer m-2 rounded-lg flex items-center gap-3 transition-all
-                        ${selectedFileId === note.id ? "bg-black dark:bg-gray-950 shadow-lg text-[#ADFF00]" : "bg-white shadow-lg dark:bg-gray-800 "}`}
+                        ${selectedFileId === note.id ? "bg-black dark:bg-gray-950 shadow-lg text-[#FFD700] dark:text-[#ADFF00]" : "bg-white shadow-lg dark:bg-gray-800 "}`}
                       onClick={() => handleNotionClick(note)}
                     >
-                      <FileText className={`w-5 h-5 ${selectedFileId === note.id ? "text-[#ADFF00]" : "text-black/60 dark:text-white/50"}`} />
+                      <FileText className={`w-5 h-5 ${selectedFileId === note.id ? "text-[#FFD700] dark:text-[#ADFF00]" : "text-black/60 dark:text-white/50"}`} />
                       <span className="truncate flex-1">{note.fileName}</span>
-                      <Edit className="w-4 h-4 text-black/50 dark:text-white/50" />
+                      <Edit className="w-4 h-4 text-[#FFD700] dark:text-white/50" />
                     </motion.li>
                   ))}
                 </ul>
@@ -154,7 +154,7 @@ const Notion = () => {
               <div className="h-full flex flex-col rounded-3xl shadow-lg overflow-hidden">
                 <div className="bg-black dark:bg-gray-900 px-5 py-3 flex items-center justify-between">
                   <h3 className="font-semibold text-white">{selectedFile}</h3>
-                  <button onClick={() => saveNote(initialData)} className="px-4 py-2 bg-[#ADFF00] text-black rounded-full hover:bg-[#c0d32a]">
+                  <button onClick={() => saveNote(initialData)} className="px-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] text-black rounded-full hover:bg-[#c0d32a]">
                     Save
                   </button>
                 </div>

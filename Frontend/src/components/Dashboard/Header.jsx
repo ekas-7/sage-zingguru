@@ -42,7 +42,7 @@ export const Header = ({ onNavItemClick }) => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-black dark:bg-gray-900 text-white px-6 py-4">
+    <header className="sticky top-0 z-50 bg-[#50A8FF] dark:bg-gray-900 dark:text-white px-6 py-4">
       <nav className="flex items-center justify-between max-w-7xl mx-auto">
         <img
           src={logo}
@@ -58,7 +58,7 @@ export const Header = ({ onNavItemClick }) => {
               onClick={() => handleNavItemClick(id)}
               className={`cursor-pointer transition-all duration-300 ease-in-out ${
                 activePage === id
-                  ? "bg-[#ADFF00] font-bold text-black px-4 py-2 rounded-lg"
+                  ? "bg-[#FFD700] dark:bg-[#ADFF00] font-bold text-black px-4 py-2 rounded-lg"
                   : ""
               }`}
             >

@@ -32,7 +32,7 @@ const CalendarComponent = ({ date, setDate }) => {
   };
 
   const WidgetContainer = ({ title, icon, children }) => (
-    <div className="w-68 right-0 bg-[#FEFCE8] dark:bg-gray-800 shadow-lg p-4 rounded-3xl z-50 border border-[#ADFF00]">
+    <div className="w-68 right-0 bg-gray-200 dark:bg-gray-800 shadow-lg p-4 rounded-3xl z-50 border border-[#FFD700] dark:border-[#ADFF00]">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-xl font-bold dark:text-white">{title}</h2>
         {icon}
@@ -50,15 +50,15 @@ const CalendarComponent = ({ date, setDate }) => {
   };
 
   return (
-    <div className="bg-white w-full h-full flex flex-col justify-center items-center dark:bg-gray-900 rounded-3xl p-6 transition-all hover:shadow-2xl 
+    <div className="bg-gray-200 w-full h-full flex flex-col justify-center items-center dark:bg-gray-900 rounded-3xl p-6 transition-all hover:shadow-2xl 
       backdrop-blur-md bg-opacity-80 dark:bg-opacity-60 border border-gray-200 dark:border-gray-700">
 
-      <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4 text-center">
+      <h2 className="text-xl font-bold text-black dark:text-white mb-4 text-center">
         Mark your date
       </h2>
 
-      <WidgetContainer title="Calendar" icon={<Calendar className="w-5 h-5 dark:text-white" />}>
-        <div className="grid grid-cols-7 gap-1">
+      <WidgetContainer title="Calendar" icon={<Calendar className="w-5s h-5 dark:text-white" />}>
+        <div className="grid grid-cols-7 gap-1 w-full">
           {['S', 'M', 'T', 'W', 'T', 'F', 'S'].map((day) => (
             <div key={day} className="text-center font-bold dark:text-white">
               {day}
@@ -67,7 +67,7 @@ const CalendarComponent = ({ date, setDate }) => {
           {Array(31).fill(null).map((_, i) => (
             <div 
               key={i} 
-              className="relative text-center p-2 hover:bg-[#ADFF00] rounded-full cursor-pointer transition-colors dark:text-white"
+              className="relative text-center p-2 hover:bg-[#FFD700] dark:hover:bg-[#ADFF00] rounded-full cursor-pointer transition-colors dark:text-white"
               onClick={() => handleCalendar(new Date(date.getFullYear(), date.getMonth(), i + 1))}
             >
               {i + 1}
@@ -87,7 +87,7 @@ const CalendarComponent = ({ date, setDate }) => {
       {/* Note Modal */}
       {showNoteModal && (
         <div className="fixed inset-0 bg-black dark:bg-gray-900 bg-opacity-50 flex items-center justify-center z-50 ">
-          <div className="bg-white dark:bg-gray-800 p-6 rounded-3xl w-96 max-w-full border border-[#ADFF00]">
+          <div className="bg-white dark:bg-gray-800 p-6 rounded-3xl w-96 max-w-full border border-[#FFD700] dark:border-[#ADFF00]">
             <div className="flex justify-between items-center mb-4 ">
               <h3 className="text-lg font-semibold dark:text-white">
                 Note for {selectedDateForNote?.toDateString()}

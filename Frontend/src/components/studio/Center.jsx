@@ -13,7 +13,7 @@ function Center({ playlist }) {
   };
 
   return (
-    <div className="flex flex-col bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 rounded-xl overflow-hidden">
+    <div className="flex flex-col bg-gray-200 dark:from-gray-900 dark:to-gray-800 rounded-xl overflow-hidden">
       {/* Video Player Section */}
       <div className="w-full p-6 flex-grow flex flex-col">
         {currentVideo ? (
@@ -32,7 +32,7 @@ function Center({ playlist }) {
             />
           </div>
         ) : (
-          <div className="w-full aspect-video rounded-xl bg-gradient-to-br from-gray-100 to-gray-200 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
+          <div className="w-full aspect-video rounded-xl bg-gradient-to-br bg-gray-100 dark:from-gray-800 dark:to-gray-700 flex items-center justify-center">
             <div className="text-center">
               <div className="mb-4">
                 <svg 

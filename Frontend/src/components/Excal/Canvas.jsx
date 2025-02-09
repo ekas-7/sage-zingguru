@@ -144,7 +144,7 @@ const Canvas = ({ canvasRef, ctx, color, setElements, elements, tool }) => {
       onMouseMove={handleMouseMove}
       onMouseUp={handleMouseUp}
     >
-      <canvas ref={canvasRef} className="bg-[#151515] rounded-2xl" />
+      <canvas ref={canvasRef} className="bg-white dark:bg-gray-800 rounded-3xl" />
     </div>
   );
 };

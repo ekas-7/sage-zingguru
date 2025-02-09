@@ -80,7 +80,7 @@ export default function Navbar() {
             
               {!isAuthenticated? <LoginButton/> : <LogoutButton/>}
             
-            <button className="bg-[#ADFF00] text-black px-6 py-2 rounded-2xl hover:bg-[#9EFF00] transition-colors duration-300">
+            <button className="bg-[#FFD700] dark:bg-[#ADFF00] text-black px-6 py-2 rounded-2xl transition-colors duration-300">
               Free Trial
             </button>
           </div>

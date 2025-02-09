@@ -93,6 +93,7 @@ const PDFViewer = () => {
 
   return (
     <div className="p-6">
+      <h1 className='text-xl pl-2 dark:text-white font-bold'>Bookshell</h1>
       <div className="mb-6">
         <input
           type="file"
@@ -103,7 +104,7 @@ const PDFViewer = () => {
         />
       </div>
 
-      <div className="bg-[#2B3646] rounded-2xl border border-white p-4">
+      <div className="bg-gray-100 dark:bg-[#2B3646] rounded-2xl border border-white p-4">
         <div>
           {pdfs.length === 0 ? (
             <p className="text-gray-500">No PDFs uploaded yet</p>
@@ -128,7 +129,7 @@ const PDFViewer = () => {
 
       <button 
           onClick={() => fileInputRef.current.click()}
-          className="flex items-center gap-2 px-4 py-2 bg-[#ADFF00] text-black rounded-xl mt-3"
+          className="flex items-center gap-2 px-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] text-black rounded-xl mt-3"
         >
           <Upload size={16} />
           Upload PDF

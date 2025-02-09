@@ -81,7 +81,7 @@ const Dashboard = () => {
   const ActivePageComponent = navItems.find(item => item.id === activePage)?.component || Home;
 
   return (
-    <div className="min-h-screen bg-black dark:bg-gray-900">
+    <div className="min-h-screen bg-[#50A8FF] dark:bg-gray-900">
       {/* Header (Fixed at the Top) with page change functionality */}
       <nav className="fixed w-full top-0 z-50">
         <Header 

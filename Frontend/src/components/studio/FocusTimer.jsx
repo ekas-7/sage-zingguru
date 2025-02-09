@@ -75,7 +75,7 @@ const FocusTimer = () => {
 
   return (
     <div className={`transition-all duration-300 ${isFullscreen ? 'fixed inset-0 bg-black/95 flex items-center justify-center' : ''}`}>
-      <div className="w-full max-w-md mx-auto bg-white dark:bg-gray-900 rounded-lg  overflow-hidden">
+      <div className="w-full max-w-md mx-auto bg-gray-200 dark:bg-gray-900 rounded-lg  overflow-hidden">
         <div className="p-6">
           <div className="flex items-center justify-between pb-4">
             <h2 className="text-2xl font-bold dark:text-white">Focus Timer</h2>
@@ -94,9 +94,9 @@ const FocusTimer = () => {
           <div className="space-y-6">
             <div className="text-center">
               <div className="text-6xl dark:text-white font-bold mb-4">{formatTime(timeLeft)}</div>
-              <div className="w-full bg-gray-200 rounded-full h-2">
+              <div className="w-full bg-black dark:bg-gray-200 rounded-full h-2">
                 <div 
-                  className="bg-[#ADFF00] h-2 rounded-full transition-all duration-300"
+                  className="bg-[#FFD700] dark:bg-[#ADFF00] h-2 rounded-full transition-all duration-300"
                   style={{ width: `${progress}%` }}
                 />
               </div>
@@ -109,8 +109,8 @@ const FocusTimer = () => {
                   onClick={() => handleDurationSelect(minutes)}
                   className={`px-4 py-2 rounded-lg text-sm font-medium cursor-pointer transition-colors
                     ${selectedDuration === minutes 
-                      ? 'bg-[#ADFF00] text-black' 
-                      : 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600'
+                      ? 'bg-[#FFD700] dark:bg-[#ADFF00] text-black' 
+                      : 'bg-gray-100 dark:bg-gray-700 hover:bg-gray-300 dark:hover:bg-gray-600'
                     }`}
                 >
                   {minutes}m ({coins} coins)
