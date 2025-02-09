@@ -86,7 +86,7 @@ const Notion = () => {
   };
 
   return (
-    <div className="w-full h-full font-inter">
+    <div className="w-full h-screen font-inter">
       <div className="h-full bg-white dark:bg-gray-800 rounded-3xl p-4 md:p-6">
         <div className="flex flex-col lg:flex-row h-full gap-4">
           {/* Sidebar (Now Scrollable) */}
@@ -152,8 +152,8 @@ const Notion = () => {
           <div className="flex-1 flex flex-col gap-4 h-[60vh] lg:h-full">
             {selectedFile ? (
               <div className="h-full flex flex-col rounded-3xl shadow-lg overflow-hidden">
-                <div className="bg-black dark:bg-gray-900 px-5 py-3 flex items-center justify-between">
-                  <h3 className="font-semibold text-white">{selectedFile}</h3>
+                <div className="bg-gray-200 dark:bg-gray-900 px-5 py-3 flex items-center justify-between">
+                  <h3 className="font-semibold text-black dark:text-white">{selectedFile}</h3>
                   <button onClick={() => saveNote(initialData)} className="px-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] text-black rounded-full hover:bg-[#c0d32a]">
                     Save
                   </button>

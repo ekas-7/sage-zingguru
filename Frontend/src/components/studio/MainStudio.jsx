@@ -42,7 +42,7 @@ function MainStudio() {
 
         {/* Center Section */}
         <motion.div 
-          className="col-span-5 row-span-2 bg-gray-200 dark:from-gray-900 dark:to-gray-800 rounded-3xl shadow-lg "
+          className="col-span-5 row-span-2 bg-gray-200 dark:bg-gray-900 rounded-3xl shadow-lg "
           variants={itemVariants}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
