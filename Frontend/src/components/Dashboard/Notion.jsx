@@ -162,8 +162,8 @@ const Notion = () => {
               </div>
             ) : (
               <div className="w-full h-full flex flex-col items-center justify-center p-8 rounded-3xl">
-                <Folder className="w-16 h-16 text-black/40" />
-                <h3 className="text-2xl font-bold text-black/60">Welcome to Notes</h3>
+                <Folder className="w-16 h-16 dark:text-gray-400 text-black/40" />
+                <h3 className="text-2xl font-bold dark:text-gray-400 text-black/60">Welcome to Notes</h3>
               </div>
             )}
           </div>

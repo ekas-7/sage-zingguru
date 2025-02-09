@@ -68,35 +68,35 @@ const CareerPathApp = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 md:p-8">
-      <div className="max-w-3xl mx-auto">
+    <div className="min-h-screen bg-gradient-to-br bg-white rounded-3xl dark:bg-gray-800 p-4 md:p-8">
+      <div className="max-w-4xl mx-auto">
         <header className="text-center mb-12">
           <div className="flex items-center justify-center mb-4">
-            <Sparkles className="w-8 h-8 text-indigo-600 mr-2" />
-            <h1 className="text-3xl font-bold text-gray-900">Career Path Generator</h1>
+            <Sparkles className="w-8 h-8 text-[#FFD700] dark:text-[#ADFF00] mr-2" />
+            <h1 className="text-3xl font-bold text-black dark:text-white">Career Path Generator</h1>
           </div>
-          <p className="text-gray-600">Discover your ideal career path through AI-powered guidance</p>
+          <p className="dark:text-gray-400 text-gray-600">Discover your ideal career path through AI-powered guidance</p>
         </header>
 
-        <div className="bg-white rounded-xl shadow-lg p-6 md:p-8">
+        <div className="bg-gray-100 dark:bg-gray-900 dark:text-white rounded-3xl shadow-lg p-6 md:p-8">
           {careerPath ? (
             <div className="space-y-8">
               <div className="border-b pb-6">
-                <h2 className="text-2xl font-bold text-gray-900 mb-4 flex items-center">
-                  <GraduationCap className="w-6 h-6 mr-2 text-indigo-600" />
+                <h2 className="text-2xl font-bold text-black dark:text-white mb-4 flex items-center">
+                  <GraduationCap className="w-6 h-6 mr-2 text-[#FFD700] dark:text-[#ADFF00]" />
                   {careerPath.title || "Your Career Path"}
                 </h2>
-                <p className="text-gray-700">{careerPath.description || "AI-generated career guidance based on your responses."}</p>
+                <p className="text-gray-700 dark:text-gray-400">{careerPath.description || "AI-generated career guidance based on your responses."}</p>
               </div>
 
               <div className="space-y-6">
-                <h3 className="text-xl font-semibold text-gray-900 flex items-center">
-                  <BookOpen className="w-5 h-5 mr-2 text-indigo-600" />
+                <h3 className="text-xl font-semibold text-black dark:text-gray-300 flex items-center">
+                  <BookOpen className="w-5 h-5 mr-2 text-[#FFD700] dark:text-[#ADFF00]" />
                   Career Milestones
                 </h3>
                 {Array.isArray(careerPath.milestones) &&
                   careerPath.milestones.map((milestone, index) => (
-                    <div key={index} className="bg-gray-50 rounded-lg p-6">
+                    <div key={index} className="bg-white rounded-lg p-6">
                       <h4 className="font-semibold text-gray-900 mb-2">{milestone.title}</h4>
                       <p className="text-gray-700 mb-4">{milestone.description}</p>
                       <div className="text-sm text-gray-500 mb-4">Timeline: {milestone.timeframe || "Varies"}</div>
@@ -111,7 +111,7 @@ const CareerPathApp = () => {
                                   href={resource.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="text-indigo-600 hover:text-indigo-800"
+                                  className="text-[#FFD700] dark:text-[#ADFF00]"
                                 >
                                   {resource.title}
                                 </a>
@@ -128,8 +128,8 @@ const CareerPathApp = () => {
           ) : (
             <div className="space-y-6">
               <div className="space-y-4">
-                <h2 className="text-xl font-semibold text-gray-900">Question {currentIndex + 1} of 6</h2>
-                <p className="text-gray-700">{questions[currentIndex]}</p>
+                <h2 className="text-xl font-semibold text-black dark:text-white">Question {currentIndex + 1} of 6</h2>
+                <p className="dark:text-gray-400 text-gray-700">{questions[currentIndex]}</p>
               </div>
 
               <div className="space-y-4">
@@ -137,7 +137,7 @@ const CareerPathApp = () => {
                   value={responses[currentIndex]}
                   onChange={(e) => handleResponseChange(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  className="w-full p-4 bg-gray-50 text-gray-900 rounded-lg border border-gray-200 focus:ring-2 focus:ring-indigo-500 focus:border-transparent transition-all resize-none"
+                  className="w-full p-4 bg-gray-50 text-gray-900 rounded-3xl border border-gray-200 focus:ring-2 focus:border-transparent transition-all resize-none"
                   placeholder="Type your response..."
                   rows={4}
                 />
@@ -147,7 +147,7 @@ const CareerPathApp = () => {
                 <button
                   onClick={handleNextQuestion}
                   disabled={loading}
-                  className="w-full flex items-center justify-center px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  className="w-full flex items-center justify-center text-black px-6 py-3 bg-[#FFD700] dark:bg-[#ADFF00] rounded-2xl font-semibold  disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                 >
                   {loading ? (
                     <Loader2 className="w-5 h-5 animate-spin" />
