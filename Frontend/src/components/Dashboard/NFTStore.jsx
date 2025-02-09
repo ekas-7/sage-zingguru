@@ -54,10 +54,10 @@ function NFTStore() {
                             animation: animate ? 'countUp 1s ease-out 0.7s forwards' : 'none',
                             opacity: 0,
                         }}>
-                        1000
+                        2322
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                        (0.00000016 ETH)
+                        (0.00000038 ETH)
                     </p>
                 </div>
 
@@ -76,10 +76,10 @@ function NFTStore() {
                             animation: animate ? 'countUp 1s ease-out 0.7s forwards' : 'none',
                             opacity: 0,
                         }}>
-                        500
+                        981
                     </p>
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
-                        (0.00000008 ETH)
+                        (0.00000016 ETH)
                     </p>
                 </div>
             </div>
