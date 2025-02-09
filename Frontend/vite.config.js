@@ -10,6 +10,13 @@ export default defineConfig({
   //     cert: './localhost.pem'
   //   }
   // },
+  base:'/',
+  build: {
+    outDir: 'dist'
+  },
+  server: {
+    historyApiFallback: true // Ensures proper routing fallback
+  },
   plugins: [
     react(),
     tailwindcss(),
