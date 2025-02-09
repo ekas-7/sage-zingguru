@@ -6,7 +6,6 @@ import { Header } from "../components/Dashboard/Header";
 import Home from '../components/Dashboard/Home';
 import AIAssistant from '../components/Dashboard/AIAssistant';
 import Notion from '../components/Dashboard/Notion';
-import CareerPath from '../components/Dashboard/CareerPath';
 import VideoSummarizer from '../components/Dashboard/VideoSummarizer'
 import MilestonePage from '../components/Dashboard/Milestones/MilestonePage';
 import MainStudio from '../components/studio/MainStudio';
