@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Editor from "./Notion/Editor.jsx";
-import { db, collection, addDoc, getDocs, updateDoc, doc } from "../../config/firebase.js";
-import { Plus, FileText, Folder, FolderPlus, Edit, Save, Loader2 } from "lucide-react";
+import { db, collection, addDoc, getDocs, updateDoc, doc,deleteDoc } from "../../config/firebase.js";
+import { Plus, FileText, Folder, FolderPlus, Edit, Save, Loader2,Trash } from "lucide-react";
 import { motion } from "framer-motion";
 
 const Notion = () => {
@@ -85,6 +85,23 @@ const Notion = () => {
     setInitialData(file.data);
   };
 
+  const handleDeleteNotion = async(file) => {
+    console.log("i am clicked");
+    
+    try{
+      await deleteDoc(doc(db,'notionFiles',file.id));
+      console.log(`deleted the file with ${file.id} id successfully`);
+
+      const newNotes = notes.filter(note => note.id !== file.id)
+      setNotes(newNotes)
+      selectedFile('')
+      selectedFileId('');
+    }
+    catch(err){
+      console.log("Error in deleting the notion : ",err);
+    }
+  }
+
   return (
     <div className="w-full h-screen font-inter">
       <div className="h-full bg-white dark:bg-gray-800 rounded-3xl p-4 md:p-6">
@@ -141,6 +158,7 @@ const Notion = () => {
                       <FileText className={`w-5 h-5 ${selectedFileId === note.id ? "text-[#FFD700] dark:text-[#ADFF00]" : "text-black/60 dark:text-white/50"}`} />
                       <span className="truncate flex-1">{note.fileName}</span>
                       <Edit className="w-4 h-4 text-[#FFD700] dark:text-white/50" />
+                      <Trash className="w-4 h-4 text-[#FFD700] dark:text-white/50" onClick={() => handleDeleteNotion(note)}/>
                     </motion.li>
                   ))}
                 </ul>
