@@ -42,23 +42,22 @@ function NFTStore() {
                 {/* Total Earned */}
                 <div className="bg-white dark:bg-gray-800 p-4 rounded-xl shadow-md text-center relative overflow-hidden"
                     style={{
-                        animation: animate ? 'slideIn 0.5s ease-out 0.2s forwards' : 'none',
+                        animation: animate ? 'slideIn 0.5s ease-out 0.4s forwards' : 'none',
                         opacity: 0,
                     }}>
                     <div className="shine-effect" />
-                    <div>
-                    
-                        <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 flex items-center justify-center gap-2">
-                            Total NFTs Earned
-                        </h3>
-                    </div>
-
+                    <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 flex items-center justify-center gap-2">
+                        Total NFTs Earned
+                    </h3>
                     <p className="text-xl font-bold text-blue-600 dark:text-blue-400 mt-2"
                         style={{
-                            animation: animate ? 'countUp 1s ease-out 0.5s forwards' : 'none',
+                            animation: animate ? 'countUp 1s ease-out 0.7s forwards' : 'none',
                             opacity: 0,
                         }}>
                         1000
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                        (0.00000016 ETH)
                     </p>
                 </div>
 
@@ -77,7 +76,10 @@ function NFTStore() {
                             animation: animate ? 'countUp 1s ease-out 0.7s forwards' : 'none',
                             opacity: 0,
                         }}>
-                        100
+                        500
+                    </p>
+                    <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">
+                        (0.00000008 ETH)
                     </p>
                 </div>
             </div>

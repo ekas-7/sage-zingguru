@@ -1,29 +1,27 @@
-import { Home, Cpu, Notebook, Briefcase, PlaySquare, Menu, X, Milestone, KeyboardMusic,Pencil } from "lucide-react";
+import { Home, Cpu, Notebook, Briefcase, PlaySquare, Menu, X, Milestone, KeyboardMusic, Pencil } from "lucide-react";
 import { HeaderIcon } from "./HeaderIcon";
 import { UserProfile } from "./UserProfile";
 import { useState } from "react";
 import logo from "../../assets/logo.png";
 import DarkModeToggle from "../ui/DarkModeToggle";
 import { Medal, Shield, Star, Gem } from "lucide-react";
-
-
-import { useSelector,useDispatch } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { setActiveItem } from "../../store/navigationSlice";
 
 const badgeTiers = {
-  gold: { color: "bg-yellow-500", icon: <Medal className="text-yellow-300" /> },
-  silver: { color: "bg-gray-400", icon: <Shield className="text-gray-200" /> },
-  iron: { color: "bg-gray-600", icon: <Star className="text-gray-400" /> },
-  wood: { color: "bg-orange-700", icon: <Gem className="text-orange-500" /> },
+  gold: { color: "bg-yellow-500", icon: <Medal className="text-yellow-300" />, name: "Gold", points: "2000+" },
+  silver: { color: "bg-gray-400", icon: <Shield className="text-gray-200" />, name: "Silver", points: "1000 - 1999" },
+  bronze: { color: "bg-orange-600", icon: <Star className="text-orange-400" />, name: "Bronze", points: "500 - 999" },
 };
+
 export const Header = ({ onNavItemClick }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  // const [activePage, setActivePage] = useState('home'); // Add state for active page
+  const [isBadgeHovered, setIsBadgeHovered] = useState(false); // Hover state for badge
 
   const dispatch = useDispatch();
   const activePage = useSelector((state) => state.navigation.activeItem);
+  const badge = badgeTiers.gold; // Currently achieved badge
 
-  const badge = badgeTiers.gold;
   const navItems = [
     { id: "home", icon: Home, label: "Home" },
     { id: "ai-assistant", icon: Cpu, label: "AI Assistant" },
@@ -31,12 +29,12 @@ export const Header = ({ onNavItemClick }) => {
     { id: "career-path", icon: Briefcase, label: "Career Path" },
     { id: "video-summarizer", icon: PlaySquare, label: "Video Summarizer" },
     { id: "studio", icon: KeyboardMusic, label: "Studio" },
-    { id: "whiteboard", icon: Pencil , label: "whiteboard" },
-    {id:"Milestone",icon:Milestone,label:"Milestone"}
+    { id: "whiteboard", icon: Pencil, label: "Whiteboard" },
+    { id: "Milestone", icon: Milestone, label: "Milestone" }
   ];
 
   const handleNavItemClick = (id) => {
-    dispatch(setActiveItem(id)); // Update active page when clicking
+    dispatch(setActiveItem(id)); 
     onNavItemClick(id);
     setIsMobileMenuOpen(false);
   };
@@ -57,9 +55,7 @@ export const Header = ({ onNavItemClick }) => {
               key={id}
               onClick={() => handleNavItemClick(id)}
               className={`cursor-pointer transition-all duration-300 ease-in-out ${
-                activePage === id
-                  ? "bg-[#FFD700] dark:bg-[#ADFF00] font-bold text-black px-4 py-2 rounded-lg"
-                  : ""
+                activePage === id ? "bg-[#FFD700] dark:bg-[#ADFF00] font-bold text-black px-4 py-2 rounded-lg" : ""
               }`}
             >
               <Icon className="w-5 h-5" />
@@ -80,11 +76,34 @@ export const Header = ({ onNavItemClick }) => {
             <DarkModeToggle />
           </div>
         </div>
-        
-        <div className={`flex items-center gap-2 p-2 mr-2 rounded-lg ${badge.color}`}> 
-        {badge.icon}
-        <span className="text-white font-bold mr-2 capitalize">Gold</span>
-       </div>
+
+        {/* Badge Section */}
+        <div
+          className={`relative flex items-center gap-2 p-2 mr-2 rounded-lg cursor-pointer ${badge.color}`}
+          onMouseEnter={() => setIsBadgeHovered(true)}
+          onMouseLeave={() => setIsBadgeHovered(false)}
+        >
+          {badge.icon}
+          <span className="text-white font-bold mr-2 capitalize">{badge.name}</span>
+
+          {/* Hover Box for Badge Info */}
+          {isBadgeHovered && (
+            <div className="absolute top-10 right-0 bg-white dark:bg-gray-800 text-black dark:text-white shadow-lg rounded-lg p-4 w-52">
+              <h3 className="font-semibold mb-2">Badge Tiers</h3>
+              <div className="flex flex-col gap-2">
+                {Object.values(badgeTiers).map(({ name, color, icon, points }) => (
+                  <div key={name} className={`flex items-center gap-2 p-2 rounded-md ${color} text-white`}>
+                    {icon}
+                    <div>
+                      <span className="font-bold">{name}</span>
+                      <p className="text-xs">Points: {points}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
