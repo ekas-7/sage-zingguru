@@ -62,7 +62,7 @@ const Editor = ({ initialData, onSave }) => {
       {/* Editor */}
       <div
         id="editorjs"
-        className="flex-1 min-h-[300px] p-4 rounded-lg border border-gray-500 dark:border-gray-700 bg-gray-200 dark:bg-gray-950 dark:text-white overflow-auto"
+        className="flex-1 min-h-[300px] p-4 rounded-lg border border-gray-300 dark:border-gray-700 bg-gray-100 dark:bg-gray-950 dark:text-white overflow-auto"
       ></div>
 
       {/* Save Button (Stays Inside the Box) */}

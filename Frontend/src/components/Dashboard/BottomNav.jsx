@@ -49,7 +49,7 @@ const BottomNav = () => {
 
   return (
     <div className="fixed bottom-5 left-1/2 transform -translate-x-1/2 z-50">
-      <div className="p-2 bg-white dark:bg-gray-900 rounded-full shadow-lg flex items-center gap-2">
+      <div className="p-2 bg-[#50A8FF] dark:text-white dark:bg-gray-900 rounded-full shadow-lg flex items-center gap-2">
         <NavButton onClick={() => handleToolClick('calculator')}>
           <Calculator className="w-5 h-5 text-black dark:text-white" />
         </NavButton>
@@ -83,14 +83,14 @@ const BottomNav = () => {
 const NavButton = ({ onClick, children }) => (
   <button
     onClick={onClick}
-    className="p-3 rounded-full hover:bg-[#ADFF00] transition-colors"
+    className="p-3 rounded-full hover:bg-white dark:hover:bg-[#ADFF00] transition-colors"
   >
     {children}
   </button>
 );
 
 const WidgetContainer = ({ title, icon, children }) => (
-  <div className="fixed bottom-20 w-68 right-0 bg-[#FEFCE8] dark:bg-gray-800 shadow-lg p-4 rounded-3xl z-50 border border-[#ADFF00]">
+  <div className="fixed bottom-20 w-68 right-0 bg-white dark:bg-gray-800 shadow-lg p-4 rounded-3xl z-50 border border-[#FFD700] dark:border-[#ADFF00]">
     <div className="flex justify-between items-center mb-4">
       <h2 className="text-xl font-bold dark:text-white">{title}</h2>
       {icon}
@@ -197,11 +197,11 @@ const CalculatorWidget = () => {
 
   return (
     <WidgetContainer title="Calculator" >
-      <div className="bg-white dark:bg-gray-900 p-3 rounded-2xl mb-4">
+      <div className="bg-gray-200 dark:bg-gray-900 p-3 rounded-2xl mb-4">
         <div className="flex justify-between items-center mb-2">
           <button
             onClick={() => setIsScientific(!isScientific)}
-            className="text-sm bg-[#ADFF00] px-2 py-1 rounded-md"
+            className="text-sm bg-[#FFD700] dark:bg-[#ADFF00] px-2 py-1 rounded-md"
           >
             {isScientific ? 'Basic' : 'Scientific'}
           </button>
@@ -215,7 +215,7 @@ const CalculatorWidget = () => {
             <button
               key={btn.label}
               onClick={btn.action}
-              className="p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover:bg-[#ADFF00] transition-colors text-black dark:text-white text-sm font-medium"
+              className="p-2 bg-gray-100 dark:bg-gray-800 rounded-full hover-bg-[#FFD700] dark:hover:bg-[#ADFF00] transition-colors text-black dark:text-white text-sm font-medium"
             >
               {btn.label}
             </button>
@@ -234,24 +234,24 @@ const CalculatorWidget = () => {
           <button
             key={num}
             onClick={() => handleNumber(num)}
-            className="p-3 bg-white dark:bg-gray-900 rounded-full hover:bg-[#ADFF00] transition-colors text-black dark:text-white font-bold"
+            className="p-3 bg-white dark:bg-gray-900 rounded-full hover:bg-[#FFD700] dark:hover:bg-[#ADFF00] transition-colors text-black dark:text-white font-bold"
           >
             {num}
           </button>
         ))}
-        <button onClick={() => handleOperation('+')} className="p-3 bg-[#ADFF00] rounded-full">
+        <button onClick={() => handleOperation('+')} className="p-3 bg-[#FFD700] dark:bg-[#ADFF00] rounded-full">
           <Plus className="w-4 h-4 mx-auto" />
         </button>
-        <button onClick={() => handleOperation('-')} className="p-3 bg-[#ADFF00] rounded-full">
+        <button onClick={() => handleOperation('-')} className="p-3 bg-[#FFD700] dark:bg-[#ADFF00] rounded-full">
           <Minus className="w-4 h-4 mx-auto" />
         </button>
-        <button onClick={() => handleOperation('*')} className="p-3 bg-[#ADFF00] rounded-full">
+        <button onClick={() => handleOperation('*')} className="p-3 bg-[#FFD700] dark:bg-[#ADFF00] rounded-full">
           <X className="w-4 h-4 mx-auto" />
         </button>
-        <button onClick={() => handleOperation('/')} className="p-3 bg-[#ADFF00] rounded-full">
+        <button onClick={() => handleOperation('/')} className="p-3 bg-[#FFD700] dark:bg-[#ADFF00] rounded-full">
           <Divide className="w-4 h-4 mx-auto" />
         </button>
-        <button onClick={() => handleEqual()} className="p-3 cursor-pointer bg-[#ADFF00] rounded-full">
+        <button onClick={() => handleEqual()} className="p-3 cursor-pointer bg-[#FFD700] dark:bg-[#ADFF00] rounded-full">
           =
         </button>
       </div>
@@ -354,11 +354,11 @@ const MeditationWidget = () => {
         {/* Expanding and contracting breathing animation */}
         <div className="relative mb-6">
           <div 
-            className={`w-32 h-32 rounded-full bg-white/20 absolute 
+            className={`w-32 h-32 rounded-full bg-gray-100 absolute 
               ${breathPhase === 'out' ? 'animate-[ping_4s_ease-in-out_infinite]' : 'animate-[ping_4s_ease-in-out_infinite]'}`}
           />
           <div 
-            className={`w-32 h-32 rounded-full bg-white/40 flex items-center justify-center 
+            className={`w-32 h-32 rounded-full bg-gray-200 flex items-center justify-center 
               transition-transform duration-1000 transform
               ${breathPhase === 'in' ? 'scale-100' : 'scale-90'}`}
           >
@@ -376,7 +376,7 @@ const MeditationWidget = () => {
         {/* Start/Pause Button */}
         <button
           onClick={togglePlay}
-          className="px-6 py-2 bg-[#ADFF00] hover:bg-green-600 rounded-full text-black font-medium transition-colors"
+          className="px-6 py-2 bg-[#FFD700] dark:bg-[#ADFF00] rounded-full text-black font-medium transition-colors"
         >
           {isPlaying ? 'Pause' : timeLeft === 0 ? 'Restart' : 'Start'}
         </button>
@@ -465,8 +465,8 @@ const TimerWidget = () => {
             onClick={() => handlePresetClick(preset.seconds)}
             className={`p-2 rounded-full font-medium text-sm transition-colors ${
               selectedPreset === preset.seconds
-                ? 'bg-[#ADFF00]'
-                : 'bg-white dark:bg-gray-900 dark:text-white hover:bg-[#ADFF00]'
+                ? 'bg-[#FFD700] dark:bg-[#ADFF00]'
+                : 'bg-white dark:bg-gray-900 dark:text-white hover:bg-[#FFD700] dark:hover:bg-[#ADFF00]'
             }`}
           >
             {preset.label}
@@ -483,7 +483,7 @@ const TimerWidget = () => {
               ? 'bg-red-500 text-white' 
               : timeLeft === 0 
                 ? 'bg-gray-300 dark:bg-gray-700' 
-                : 'bg-[#ADFF00]'
+                : 'bg-[#FFD700] dark:bg-[#ADFF00]'
           } font-bold transition-colors`}
         >
           {isRunning ? 'Pause' : 'Start'}
