@@ -13,7 +13,7 @@ function NFTStore() {
     }, []);
 
     return (
-        <div className="bg-[#FEFCE8] dark:bg-gray-900 rounded-2xl shadow-lg p-6 md:p-8 h-fit lg:h-[63%] max-w-2xl mx-auto transform transition-all duration-500"
+        <div className="bg-gray-200 dark:bg-gray-900 rounded-2xl shadow-lg p-6 md:p-8 h-fit lg:h-[63%] max-w-2xl mx-auto transform transition-all duration-500"
             style={{
                 animation: animate ? 'slideDown 0.5s ease-out forwards' : 'none',
                 opacity: 0,

@@ -1,5 +1,6 @@
 import React from 'react'
 import Leaderboard from '../Leaderboard';
+import NFTStore from '../NFTStore';
 
 // const Leaderboard = () => {
 //   // Static leaderboard data
@@ -28,8 +29,11 @@ import Leaderboard from '../Leaderboard';
 
 const Sidebar = () => {
   return (
-    <div>
+    <div className=''>
       <Leaderboard/>
+      <div className='max-h-64'>
+      <NFTStore/>
+      </div>
     </div>
   )
 }

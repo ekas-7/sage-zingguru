@@ -40,7 +40,7 @@ export const Header = ({ onNavItemClick }) => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-[#50A8FF] dark:bg-gray-900 dark:text-white px-6 py-4">
+    <header className="sticky top-0 z-50 bg-[#50A8FF] dark:bg-gray-900 dark:text-white px-6 py-4 pb-2">
       <nav className="flex items-center justify-between max-w-7xl mx-auto">
         <img
           src={logo}

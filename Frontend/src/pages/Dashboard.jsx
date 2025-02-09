@@ -6,6 +6,7 @@ import { Header } from "../components/Dashboard/Header";
 import Home from '../components/Dashboard/Home';
 import AIAssistant from '../components/Dashboard/AIAssistant';
 import Notion from '../components/Dashboard/Notion';
+
 import VideoSummarizer from '../components/Dashboard/VideoSummarizer'
 import MilestonePage from '../components/Dashboard/Milestones/MilestonePage';
 import MainStudio from '../components/studio/MainStudio';
@@ -82,7 +83,7 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-[#50A8FF] dark:bg-gray-900">
       {/* Header (Fixed at the Top) with page change functionality */}
-      <nav className="fixed w-full top-0 z-50">
+      <nav className="fixed w-full top-0 z-50 ">
         <Header 
           onNavItemClick={(id) => dispatch(setActiveItem(id))} 
           // activePage={activePage} 
@@ -90,7 +91,7 @@ const Dashboard = () => {
       </nav>
 
       {/* Main Content Container */}
-      <div className="pt-18 w-full px-4 rounded-3xl">
+      <div className="pt-17 w-full px-4 rounded-3xl">
         {/* Scrollable content container */}
         <div className="h-[calc(100vh-80px)] overflow-y-auto scrollbar-hidden rounded-4xl bg-black dark:bg-gray-800">
           <div className="grid grid-cols-1 gap-8">

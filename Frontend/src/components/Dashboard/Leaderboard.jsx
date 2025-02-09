@@ -6,11 +6,11 @@ const Leaderboard = () => {
   const [hoveredId, setHoveredId] = useState(null);
 
   const leaderboardData = [
-    { id: 1, name: 'Alice Johnson', points: 1200 },
-    { id: 2, name: 'Bob Smith', points: 1100 },
-    { id: 3, name: 'Charlie Brown', points: 950 },
-    { id: 4, name: 'Diana Prince', points: 800 },
-    { id: 5, name: 'Evan Wright', points: 750 },
+    { id: 1, name: 'Ajay Bansal', points: 1200 },
+    { id: 2, name: 'Shreyan Sharma', points: 1100 },
+    { id: 3, name: 'Karan Chowdhary', points: 950 },
+    { id: 4, name: 'Stanzin Odzer', points: 800 },
+    { id: 5, name: 'Amisha Bhardwaj', points: 750 },
   ];
 
   useEffect(() => {
@@ -18,7 +18,7 @@ const Leaderboard = () => {
   }, []);
 
   return (
-    <div className="bg-white dark:bg-gray-900 rounded-3xl shadow-lg p-6 mb-6 overflow-hidden">
+    <div className="bg-gray-200 dark:bg-gray-900 rounded-3xl shadow-lg p-6 mb-6 overflow-hidden">
       <h2 className="text-xl font-bold text-gray-800 dark:text-white mb-4"
         style={{
           animation: animate ? 'fadeIn 0.5s ease-out forwards' : 'none',
@@ -34,7 +34,7 @@ const Leaderboard = () => {
         {leaderboardData.map((user, index) => (
           <div
             key={user.id}
-            className="flex items-center justify-between bg-gray-100 dark:bg-gray-800 
+            className="flex items-center justify-between bg-gray-50 dark:bg-gray-800 
               rounded-2xl p-3 transition-all duration-300 hover:shadow-md relative overflow-hidden"
             style={{
               animation: animate ? `slideIn 0.5s ease-out ${index * 0.1}s forwards` : 'none',
@@ -55,7 +55,7 @@ const Leaderboard = () => {
             {/* Position indicator and name */}
             <div className="flex items-center gap-3">
               <span
-                className="text-[#ADFF00] font-bold w-6"
+                className="dark:text-[#ADFF00] text-[#FFD700] font-bold w-6"
                 style={{
                   animation: animate ? `bounceIn 0.5s ease-out ${index * 0.1 + 0.3}s forwards` : 'none',
                   opacity: 0,
@@ -68,7 +68,7 @@ const Leaderboard = () => {
 
             {/* Points */}
             <span
-              className="text-[#ADFF00] font-semibold ml-4"
+              className="dark:text-[#ADFF00] text-[#FFD700] font-semibold ml-4"
               style={{
                 animation: animate ? `slideUp 0.5s ease-out ${index * 0.1 + 0.3}s forwards` : 'none',
                 opacity: 0,
