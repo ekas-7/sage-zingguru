@@ -1,8 +1,18 @@
 import { PlayIcon } from "./Decorations"
 import main from "../../assets/main.png"
 import { Stars, Curves } from './Decorations';
+import {useSelector,useDispatch} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
+import {setActiveItem} from '../../store/navigationSlice'
+import {useAuth0} from '@auth0/auth0-react'
 
 export default function Hero() {
+  const {loginWithRedirect} = useAuth0();
+
+  const handleLearningClick = () => {
+    loginWithRedirect()
+  }
+
   return (
     <div className="max-w-7xl mx-auto px-4 pt-24 pb-20 relative overflow-hidden">
       <div className='absolute top-0 right-80'>
@@ -27,7 +37,10 @@ export default function Hero() {
             interactive features. Join a community where accessibility meets innovation.
           </p>
           <div className="flex items-center gap-8">
-            <button className="bg-black text-white px-8 py-4 rounded-2xl hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-100">
+            <button 
+              className="bg-black cursor-pointer text-white px-8 py-4 rounded-2xl hover:bg-gray-800 dark:bg-white dark:text-black dark:hover:bg-gray-100"
+              onClick={() => handleLearningClick()}
+            >
               Start Learning
             </button>
             <button className="flex items-center gap-2 dark:text-white cursor-pointer hover:text-gray-600 dark:hover:text-gray-300">
