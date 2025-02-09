@@ -5,7 +5,7 @@ const Editor = ({ initialData, onSave }) => {
   const editorInstance = useRef(null);
 
   console.log(initialData);
-  
+
   useEffect(() => {
     const initEditor = async () => {
       const Header = (await import("@editorjs/header")).default;
@@ -45,17 +45,26 @@ const Editor = ({ initialData, onSave }) => {
 
   useEffect(() => {
     console.log("hello");
-    
-  },[initialData])
+
+  }, [initialData])
 
   const handleSave = async () => {
+    if (editorInstance.current) {
+      const data = await editorInstance.current.save();
+      console.log(data);
+
+      onSave(data);
+    }
+  };
+
+  const saveNote = async() => {
     if (editorInstance.current) {
       const data = await editorInstance.current.save();
       console.log(data);
       
       onSave(data);
     }
-  };
+  }
 
   return (
     <div className="w-full h-full p-8 bg-gray-200 dark:bg-gray-900 rounded-3xl shadow-lg flex flex-col overflow-hidden">
@@ -66,6 +75,9 @@ const Editor = ({ initialData, onSave }) => {
       ></div>
 
       {/* Save Button (Stays Inside the Box) */}
+      <button onClick={() => saveNote(initialData)} className="px-4 mt-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] text-black rounded-full hover:bg-[#c0d32a]">
+        Save
+      </button>
       <div className="p-2 flex justify-end">
       </div>
     </div>

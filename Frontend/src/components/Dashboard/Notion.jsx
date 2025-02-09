@@ -10,6 +10,11 @@ const Notion = () => {
   const [selectedFile, setSelectedFile] = useState(null);
   const [selectedFileId, setSelectedFileId] = useState(null);
   const [creatingFile, setCreatingFile] = useState(false);
+  const [currData,setCurrData] = useState({
+    time: Date.now(),
+    blocks: [{ type: "header", data: { text: "Start typing here...", level: 2 } }],
+    version: "2.11.10",
+  })
   const [initialData, setInitialData] = useState({
     time: Date.now(),
     blocks: [{ type: "header", data: { text: "Start typing here...", level: 2 } }],
@@ -35,13 +40,21 @@ const Notion = () => {
 
   /** 🔹 Save Note to Firestore **/
   const saveNote = async (data) => {
-    if (!selectedFileId) {
-      alert("Please select a file first.");
+    if (!selectedFile) {
+      alert("Please create or select a file first.");
       return;
     }
+    console.log(data);
+
     try {
+      // Update the document in the "notionFiles" collection with the selected file ID
       const noteRef = doc(db, "notionFiles", selectedFileId);
-      await updateDoc(noteRef, { data });
+
+      await updateDoc(noteRef, {
+        data:data  // Update the 'data' field with the new content
+      });
+
+      console.log("Saved Note:", data);
       alert("Note saved successfully!");
     } catch (error) {
       console.error("Error saving note:", error);
@@ -84,6 +97,23 @@ const Notion = () => {
     setSelectedFileId(file.id);
     setInitialData(file.data);
   };
+
+  const handleDeleteNotion = async(file) => {
+    console.log("i am clicked");
+    
+    try{
+      await deleteDoc(doc(db,'notionFiles',file.id));
+      console.log(`deleted the file with ${file.id} id successfully`);
+
+      const newNotes = notes.filter(note => note.id !== file.id)
+      setNotes(newNotes)
+      setSelectedFile('')
+      setSelectedFileId('');
+    }
+    catch(err){
+      console.log("Error in deleting the notion : ",err);
+    }
+  }
 
   return (
     <div className="w-full h-screen font-inter">
@@ -140,24 +170,31 @@ const Notion = () => {
               <h3 className="font-bold text-lg text-black dark:text-white mt-7 mb-3 flex items-center gap-2">
                 <Folder className="w-5 h-5" /> Saved Files
               </h3>
-              <AnimatePresence>
-                {notes.map((note, index) => (
-                  <motion.li
-                    key={note.id}
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: index * 0.1 }}
-                    exit={{ opacity: 0, y: -10 }}
-                    className={`group p-3 cursor-pointer m-2 rounded-lg flex items-center gap-3 transition-all
-                      ${selectedFileId === note.id ? "bg-black dark:bg-gray-950 shadow-lg text-[#FFD700] dark:text-[#ADFF00]" : "bg-white shadow-lg dark:bg-gray-800 "}`}
-                    onClick={() => handleNotionClick(note)}
-                  >
-                    <FileText className="w-5 h-5 text-[#FFD700] dark:text-[#ADFF00]" />
-                    <span className="truncate flex-1">{note.fileName}</span>
-                    <Edit className="w-4 h-4 text-[#FFD700] dark:text-white/50" />
-                  </motion.li>
-                ))}
-              </AnimatePresence>
+              {notes.length === 0 ? (
+                <div className="p-4 rounded-lg bg-black/10 text-center">
+                  <FileText className="w-8 h-8 mb-2 text-black/50" />
+                  <p className="text-black/60">No files created yet</p>
+                </div>
+              ) : (
+                <ul className="space-y-2">
+                  {notes.map((note) => (
+                    <motion.li
+                      key={note.id}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.98 }}
+                      className={`group p-3 cursor-pointer m-2 rounded-lg flex items-center gap-3 transition-all
+                        ${selectedFileId === note.id ? "bg-black dark:bg-gray-950 shadow-lg text-[#FFD700] dark:text-[#ADFF00]" : "bg-white shadow-lg dark:bg-gray-800 "}`}
+                      onClick={() => handleNotionClick(note)}
+                    >
+                      <FileText className={`w-5 h-5 ${selectedFileId === note.id ? "text-[#FFD700] dark:text-[#ADFF00]" : "text-black/60 dark:text-white/50"}`} />
+                      <span className="truncate flex-1">{note.fileName}</span>
+                      <Edit className="w-4 h-4 text-[#FFD700] dark:text-white/50" />
+                    </motion.li>
+                  ))}
+                </ul>
+              )}
             </div>
           </motion.div>
 
@@ -174,9 +211,9 @@ const Notion = () => {
               >
                 <div className="bg-gray-200 dark:bg-gray-900 px-5 py-3 rounded-3xl flex items-center justify-between">
                   <h3 className="font-semibold text-black dark:text-white">{selectedFile}</h3>
-                  <button onClick={() => saveNote(initialData)} className="px-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] text-black rounded-full">
+                  <button onClick={() => saveNote(initialData)} className="px-4 py-2 bg-[#FFD700] dark:bg-[#ADFF00] text-black rounded-full hover:bg-[#c0d32a]">
                     Save
-                  </button>
+                  </button> */}
                 </div>
                 <Editor initialData={initialData} onSave={saveNote} />
               </motion.div>
