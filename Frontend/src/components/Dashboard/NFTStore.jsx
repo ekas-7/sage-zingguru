@@ -69,7 +69,7 @@ function NFTStore() {
                     }}>
                     <div className="shine-effect" />
                     <h3 className="text-lg font-semibold text-gray-700 dark:text-gray-300 flex items-center justify-center gap-2">
-                        Total NFTs Spent
+                        Total NFTs Spent here
                     </h3>
                     <p className="text-xl font-bold text-red-600 dark:text-red-400 mt-2"
                         style={{
